@@ -24,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String colCantidad = "cantidad";
 	static final String colRepeticion = "repeticion";
 	static final String colDias = "dias";
+	static final String colEstado = "estado";
 	static final String viewDosisMedicamento = "viewDosisMedicamento";
 
 	public DatabaseHelper(Context context) {
