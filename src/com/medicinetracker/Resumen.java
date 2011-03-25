@@ -3,11 +3,20 @@ package com.medicinetracker;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class Resumen  extends Activity{
-
+public class Resumen extends Activity{
+	
+	DatabaseHelper dbHelper;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preferencias);
     }
+    
+    @Override
+	public void onStart()
+	{
+		super.onStart();
+		dbHelper=new DatabaseHelper(this);
+	}
 }

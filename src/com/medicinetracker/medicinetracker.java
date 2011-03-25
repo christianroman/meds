@@ -19,10 +19,10 @@ public class medicinetracker extends TabActivity {
     private TabHost mTabHost;
     private Resources mResources;
     
-    private static final String TAG_SCHEDULED = "Scheduled";
-    private static final String TAG_CREATE = "Create";
-    private static final String TAG_OPTIONS = "Options";
-    private static final String PREF_STICKY_TAB = "stickyTab";
+    private static final String TAG_RESUMEN = "resumen";
+    private static final String TAG_CONSULTAR = "consultar";
+    private static final String TAG_HISTORIAL = "historial";
+    private static final String TAG_PREFERENCIAS = "preferencias";
 	
     /** Called when the activity is first created. */
     @Override
@@ -39,8 +39,9 @@ public class medicinetracker extends TabActivity {
         añadirTab4(); 
         
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        int currentTab = prefs.getInt(PREF_STICKY_TAB, 0);
+        int currentTab = prefs.getInt(TAG_PREFERENCIAS, 0);
         mTabHost.setCurrentTab(currentTab);
+        
     }
     
     @Override
@@ -50,7 +51,7 @@ public class medicinetracker extends TabActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         int currentTab = mTabHost.getCurrentTab();
-        editor.putInt(PREF_STICKY_TAB, currentTab);
+        editor.putInt(TAG_PREFERENCIAS, currentTab);
         editor.commit();
     }
     
@@ -62,7 +63,7 @@ public class medicinetracker extends TabActivity {
     	
     	Intent intent = new Intent(this, Resumen.class);
     	
-        TabSpec spec = mTabHost.newTabSpec(TAG_SCHEDULED);
+        TabSpec spec = mTabHost.newTabSpec(TAG_RESUMEN);
         spec.setIndicator(mResources.getString(R.string.resumen));
         spec.setContent(intent);
 
@@ -78,7 +79,7 @@ public class medicinetracker extends TabActivity {
     	
     	Intent intent = new Intent(this, Consultar.class);
     	
-        TabSpec spec = mTabHost.newTabSpec(TAG_CREATE);
+        TabSpec spec = mTabHost.newTabSpec(TAG_CONSULTAR);
         spec.setIndicator(mResources.getString(R.string.consultar));
         spec.setContent(intent);
 
@@ -94,7 +95,7 @@ public class medicinetracker extends TabActivity {
     	
     	Intent intent = new Intent(this, Historial.class);
     	
-        TabSpec spec = mTabHost.newTabSpec(TAG_OPTIONS);
+        TabSpec spec = mTabHost.newTabSpec(TAG_HISTORIAL);
         spec.setIndicator(mResources.getString(R.string.historial));
         spec.setContent(intent);
 
@@ -110,7 +111,7 @@ public class medicinetracker extends TabActivity {
     	
     	Intent intent = new Intent(this, Preferencias.class);
     	
-        TabSpec spec = mTabHost.newTabSpec(TAG_OPTIONS);
+        TabSpec spec = mTabHost.newTabSpec(TAG_PREFERENCIAS);
         //spec.setIndicator(mResources.getString(R.string.preferencias), mResources.getDrawable(R.drawable.icon));
         spec.setIndicator(mResources.getString(R.string.preferencias));
         spec.setContent(intent);
