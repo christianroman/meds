@@ -1,31 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout
-android:id="@+id/widget47"
+<RelativeLayout
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"
-xmlns:android="http://schemas.android.com/apk/res/android"
->
-<Button
-android:id="@+id/widget40"
-android:layout_width="227px"
-android:layout_height="53px"
-android:text="Buscar"
-android:layout_y="242px"
->
-</Button>
+xmlns:android="http://schemas.android.com/apk/res/android">
 <TextView
-android:id="@+id/widget39"
+android:id="@+id/textPrincipal"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
-android:text="Seleccionar una fecha:"
-android:layout_y="22px"
->
+android:text="Tipo de busqueda:"
+android:layout_alignParentTop="true"
+android:layout_centerHorizontal="true"
+android:textSize="23sp" android:layout_marginTop="10dip">
 </TextView>
-<DatePicker
-android:id="@+id/widget38"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_y="62px"
->
-</DatePicker>
-</AbsoluteLayout>
+<Button android:id="@+id/searchByVia" android:layout_height="53px" android:text="Por Via" android:layout_centerInParent="true" android:layout_centerHorizontal="true" android:layout_width="match_parent"></Button>
+<Button android:text="Por Tipo" android:id="@+id/searchByType" android:layout_height="53px" android:layout_centerHorizontal="true" android:layout_above="@+id/searchByVia" android:layout_marginBottom="20dip" android:layout_width="match_parent"></Button>
+<Button android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:text="Por Fecha" android:id="@+id/searchByDate" android:layout_below="@+id/searchByVia" android:layout_marginTop="20dip"></Button>
+</RelativeLayout>

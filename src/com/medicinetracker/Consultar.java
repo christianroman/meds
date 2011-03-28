@@ -10,5 +10,6 @@ public class Consultar extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preferencias);
     }
+    
 }
 

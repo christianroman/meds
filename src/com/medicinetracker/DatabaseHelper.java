@@ -4,10 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-
-	static final String dbNombre = "database";
+	
+	SQLiteDatabase db = null;
+	
+	static final String dbNombre = "database.db";
 	static final String tablaMedicamento = "medicamento";
 	static final String colID = "idmedicamento";
 	static final String colNombre = "nombre";
@@ -23,9 +26,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	static final String tablaDosis = "dosis";
 	static final String colDosisID = "iddosis";
-	static final String colMedicamentoID = "idMedicamento";
-	static final String colFechaInicio = "fechaInicio";
-	static final String colFechaFin = "fechaFin";
+	static final String colMedicamentoID = "idmedicamento";
+	static final String colFechaInicio = "fechainicio";
+	static final String colFechaFin = "fechafin";
 	static final String colCantidad = "cantidad";
 	static final String colRepeticion = "repeticion";
 	static final String colDias = "dias";
@@ -47,68 +50,83 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String viewDosisMedicamento = "viewDosisMedicamento";
 
 	public DatabaseHelper(Context context) {
-		super(context, dbNombre, null, 33);
+		super(context, dbNombre, null, 1);
 		// TODO Auto-generated constructor stub
+		//context.deleteDatabase(dbNombre); // Esta linea se ocupa cuando se requiere eliminar la base de datos. Solo usarla una vez, una vez que se elimina, se comenta y se crea una base de datos nueva.
+		
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		
+		Log.i("onCreate", "Creating the database...");
 		// TODO Auto-generated method stub
 		db.execSQL("CREATE TABLE " + tablaMedicamento + " (" + colID
-				+ " INTEGER PRIMARY KEY , " + colNombre + " TEXT , " + colVia
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + colNombre + " TEXT , " + colVia
 				+ " TEXT , " + colTipo + " TEXT , " + colContenido + " TEXT , "
 				+ colPersona + " TEXT , " + colFarmacia + " TEXT , "
 				+ colDoctor + " TEXT , " + colNota + " TEXT)");
 
 		db.execSQL("CREATE TABLE " + tablaDosis + " (" + colDosisID
-				+ " INTEGER PRIMARY KEY , " + colMedicamentoID + " INTEGER , "
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + colMedicamentoID + " INTEGER , "
 				+ colFechaInicio + " DATETIME , " + colFechaFin
 				+ " DATETIME , " + colCantidad + " TEXT , " + colRepeticion
 				+ " TEXT , " + colDias + " INTEGER , " + colEstado
 				+ " INTEGER)");
 
 		db.execSQL("CREATE TABLE " + tablaTipos + " (" + colTiposID
-				+ " INTEGER PRIMARY KEY , " + colTiposNombre + " TEXT)");
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + colTiposNombre + " TEXT)");
 
 		db.execSQL("CREATE TABLE " + tablaVias + " (" + colViasID
-				+ " INTEGER PRIMARY KEY , " + colViasNombre + " TEXT)");
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + colViasNombre + " TEXT)");
 
 		insertarVias(db);
-		//insertarTipos();
+		insertarTipos(db);
+	}
 
+	private void insertarTipos(SQLiteDatabase db) {
+		
+		ContentValues cv = new ContentValues();
+		String tipos[] = {
+				"Pastilla", "Capsulas", "Jarabe", "Emulsion",
+				"Polvo", "Parche", "Supositorio", "Ovulo", "Gragea",
+				"Inyeccion", "Suspension", "Aerosol", "Solucion",
+				"Crema", "Pasta", "Liposoma", "Unguentos",
+				"Comprimido", "Pildora", "Loción", "Gel",
+				"Gotas", "Inhalador"};
+		
+		for(String v : tipos){
+			cv.put(colTiposNombre, v);
+			db.insert(tablaTipos, null, cv);
+		}
+		
 	}
 
 	private void insertarVias(SQLiteDatabase db) {
 		ContentValues cv = new ContentValues();
 		
-		String vias[] = {"Oral", "Oftálmica","Nasal", "Tópica", "Parental", "Vaginal", "Rectal"};
-		
-		int i = 0;
+		String vias[] = {
+				"Oral", "Sublingual", "Gastroentérica", "Oftálmica",
+				"Nasal", "Tópica", "Parental", "Rectal", "Vaginal",
+				"Subcutanea", "Transdermica", "Intramuscular", "Endevenosa"
+				};
 		
 		for(String v : vias){
-			cv.put(colViasID, i++);
 			cv.put(colViasNombre, v);
-			db.insert(tablaVias, colViasID, cv);
+			db.insert(tablaVias, null, cv);
 		}
 		
-		db.insert(tablaVias, colViasID, cv);
-		
-		/*cv.put(colDeptID, 1);
-		cv.put(colDeptName, "Sales");
-		db.insert(deptTable, colDeptID, cv);
-		cv.put(colDeptID, 2);
-		cv.put(colDeptName, "IT");
-		db.insert(deptTable, colDeptID, cv);
-		cv.put(colDeptID, 3);
-		cv.put(colDeptName, "HR");
-		db.insert(deptTable, colDeptID, cv);
-		db.insert(deptTable, colDeptID, cv);*/
-
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
+		db.execSQL("DROP TABLE IF EXISTS "+tablaMedicamento);
+		db.execSQL("DROP TABLE IF EXISTS "+tablaDosis);
+		db.execSQL("DROP TABLE IF EXISTS "+tablaTipos);
+		db.execSQL("DROP TABLE IF EXISTS "+tablaVias);
+		
+		onCreate(db);
 	}
 
 }

@@ -11,11 +11,13 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
-public class medicinetracker extends TabActivity {	
+public class medicinetracker extends TabActivity {
 	
+	DatabaseHelper dbHelper;
     private TabHost mTabHost;
     private Resources mResources;
     
@@ -29,6 +31,11 @@ public class medicinetracker extends TabActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        Log.i("onCreate", "iniciando...");
+        
+        dbHelper = new DatabaseHelper(this);
+        dbHelper.getWritableDatabase();
         
         mTabHost = getTabHost();       
         mResources = getResources();  
