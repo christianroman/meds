@@ -15,6 +15,7 @@
         <activity android:name=".Consultar" android:label="@string/consultar"></activity>
 	    <activity android:name=".Historial" android:label="@string/historial"></activity>
 	    <activity android:name=".Preferencias" android:label="@string/preferencias"></activity>
+	    <activity android:name=".HistorialTipo"></activity>
     </application>
 
 

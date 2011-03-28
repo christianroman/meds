@@ -21,6 +21,7 @@ public class medicinetracker extends TabActivity {
     private TabHost mTabHost;
     private Resources mResources;
     
+    
     private static final String TAG_RESUMEN = "resumen";
     private static final String TAG_CONSULTAR = "consultar";
     private static final String TAG_HISTORIAL = "historial";

@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,9 +16,9 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 public class Historial extends Activity implements OnClickListener {
-	
-	
-	
+
+	DatabaseHelper db;
+
 	private Button searchByType;
 	private Button searchByVia;
 	private Button searchByDate;
@@ -30,8 +31,6 @@ public class Historial extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.historial);
-		
-		
 
 		searchByDate = (Button) findViewById(R.id.searchByDate);
 		searchByDate.setOnClickListener(this);
@@ -42,8 +41,9 @@ public class Historial extends Activity implements OnClickListener {
 		searchByVia = (Button) findViewById(R.id.searchByVia);
 		searchByVia.setOnClickListener(this);
 
+		db = new DatabaseHelper(this);
+
 	}
-	
 
 	@Override
 	protected Dialog onCreateDialog(int id) {
@@ -53,7 +53,8 @@ public class Historial extends Activity implements OnClickListener {
 		int cday = c.get(Calendar.DAY_OF_MONTH);
 		switch (id) {
 		case DATE_DIALOG_ID:
-			return new DatePickerDialog(this, mDateSetListener, cyear, cmonth, cday);
+			return new DatePickerDialog(this, mDateSetListener, cyear, cmonth,
+					cday);
 		case TYPE_DIALOG_ID:
 			typeActions();
 			break;
@@ -86,10 +87,34 @@ public class Historial extends Activity implements OnClickListener {
 	}
 
 	public void typeActions() {
-		final CharSequence[] items = { "Red", "Green", "Blue" };
+		final CharSequence[] items = db.getAllTipos();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Pick a color");
+		builder.setTitle("Selecciona Tipo");
+		builder.setItems(items, new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int item) {
+				Toast.makeText(getApplicationContext(), items[item],
+						Toast.LENGTH_SHORT).show();
+				String tipo = (String) items[item];
+				
+				Intent intent = new Intent(Historial.this, HistorialTipo.class);
+				intent.putExtra("tipo_texto", tipo);
+				startActivity(intent);
+
+			}
+
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
+
+	}
+
+	public void viaActions() {
+		final CharSequence[] items = db.getAllVias();
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Selecciona Vía");
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int item) {
 				Toast.makeText(getApplicationContext(), items[item],
@@ -98,23 +123,7 @@ public class Historial extends Activity implements OnClickListener {
 		});
 		AlertDialog alert = builder.create();
 		alert.show();
-	}
 
-	public void viaActions() {
-		final CharSequence[] items = { "Red", "Green", "Blue" };
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Pick a color");
-		builder.setSingleChoiceItems(items, -1,
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int item) {
-						Toast.makeText(getApplicationContext(), items[item],
-								Toast.LENGTH_SHORT).show();
-					}
-				});
-		AlertDialog alert = builder.create();
-		alert.show();
-		
 	}
 
 }
