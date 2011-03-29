@@ -50,6 +50,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	static final String viewDosisMedicamento = "viewDosisMedicamento";
 
+	static final String queryResumen = "SELECT " + colNombre + ", " + colVia
+			+ ", " + colRepeticion + " FROM " + tablaMedicamento + ", "
+			+ tablaDosis + " WHERE " + tablaDosis + "." + colMedicamentoID
+			+ " = " + tablaMedicamento + "." + colMedicamentoID + " AND "
+			+ colEstado + "=?";
+
 	public DatabaseHelper(Context context) {
 		super(context, dbNombre, null, 1);
 		// TODO Auto-generated constructor stub
@@ -122,7 +128,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public String[] getAllVias() {
 		Cursor cursor = this.getReadableDatabase().query(tablaVias, null, null,
 				null, null, null, null);
-		
+
 		if (cursor.getCount() > 0) {
 			String[] str = new String[cursor.getCount()];
 			int i = 0;
@@ -159,6 +165,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		} else {
 			return new String[] {};
 		}
+	}
+
+	public Cursor getResumen() {
+		Cursor cursor = this
+				.getReadableDatabase()
+				.rawQuery(
+						"select nombre,via, repeticion from medicamento, dosis where dosis.idmedicamento=medicamento.idmedicamento and estado=?",
+						new String[] { "1" });
+		return cursor;
+	}
+
+	public void AgregaMedicina(Medicina m) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+
+		cv.put(colNombre, m.getNombre());
+		cv.put(colVia, m.getVia());
+		cv.put(colTipo, m.getTipo());
+		cv.put(colContenido, m.getContenido());
+		cv.put(colPersona, m.getPersona());
+		cv.put(colFarmacia, m.getFarmacia());
+		cv.put(colDoctor, m.getDoctor());
+		cv.put(colNota, m.getNota());
+
+		db.insert(tablaMedicamento, colNombre, cv);
+		db.close();
 	}
 
 	@Override

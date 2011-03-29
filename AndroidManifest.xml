@@ -16,6 +16,9 @@
 	    <activity android:name=".Historial" android:label="@string/historial"></activity>
 	    <activity android:name=".Preferencias" android:label="@string/preferencias"></activity>
 	    <activity android:name=".HistorialTipo"></activity>
+	    <activity android:name=".Agregar" android:label="agregar"></activity>
+        <activity android:name=".medicinetracker" android:label="medicinetracker"></activity>
+        <activity android:name=".AgregarMedicina" android:label="agregarMedicina"></activity>
     </application>
 
 
