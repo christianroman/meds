@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_height="wrap_content"
+	android:layout_width="fill_parent">
+	<ScrollView android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<LinearLayout android:orientation="vertical"
+			android:layout_width="match_parent" android:layout_height="match_parent">
+
+			<TextView android:text="Nombre:" android:id="@+id/TextViewNombre"
+				android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content"></TextView>
+			<EditText android:id="@+id/EditTextNombre"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+
+			<TextView android:text="Via:" android:id="@+id/TextViewVia"
+				android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content"></TextView>
+
+			<Spinner android:id="@+id/spinner1" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
+
+			<TextView android:text="Tipo:" android:id="@+id/TextViewTipo"
+				android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content"></TextView>
+			
+			<Spinner android:id="@+id/spinner2" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
+
+			<TextView android:text="Contenido:" android:id="@+id/TextViewContenido"
+				android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content"></TextView>
+			<EditText android:id="@+id/EditTextContenido"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+
+			<TextView android:text="Persona:" android:id="@+id/TextViewPersona"
+				android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content"></TextView>
+			<EditText android:id="@+id/EditTextPersona"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+
+			<TextView android:text="Farmacia:" android:id="@+id/TextViewFarmacia"
+				android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content"></TextView>
+			<EditText android:id="@+id/EditTextFarmacia"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+
+			<TextView android:text="Doctor:" android:id="@+id/TextViewDoctor"
+				android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content"></TextView>
+			<EditText android:id="@+id/EditTextDoctor"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+
+			<TextView android:text="Nota:" android:id="@+id/TextViewNota"
+				android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content"></TextView>
+			<EditText android:id="@+id/EditTextNota"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+			<LinearLayout android:orientation="horizontal"
+				android:layout_width="fill_parent" android:layout_height="wrap_content">
+				<Button android:id="@+id/Button01" android:text="Aceptar"
+					android:layout_width="wrap_content" android:layout_height="fill_parent"
+					android:layout_weight="1" android:onClick="Aceptar" />
+
+				<Button android:id="@+id/Button02" android:text="Cancelar"
+					android:layout_width="wrap_content" android:layout_height="fill_parent"
+					android:layout_weight="1" android:onClick="Cancelar" />
+			</LinearLayout>
+
+		</LinearLayout>
+	</ScrollView>
+
+</LinearLayout>
