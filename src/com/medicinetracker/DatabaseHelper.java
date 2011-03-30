@@ -168,11 +168,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	public Cursor getResumen() {
+		String args[] = new String[] { "1" };
 		Cursor cursor = this
 				.getReadableDatabase()
 				.rawQuery(
-						"select nombre,via, repeticion from medicamento, dosis where dosis.idmedicamento=medicamento.idmedicamento and estado=?",
-						new String[] { "1" });
+						"select nombre,via, repeticion from medicamento, dosis where dosis.idmedicamento=medicamento.idmedicamento and estado=?",args);
 		return cursor;
 	}
 

@@ -55,7 +55,7 @@
 				android:textSize="20px" android:layout_width="wrap_content"
 				android:layout_height="wrap_content"></TextView>
 			<EditText android:id="@+id/EditTextNota"
-				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+				android:layout_width="fill_parent" android:layout_height="60px"></EditText>
 			<LinearLayout android:orientation="horizontal"
 				android:layout_width="fill_parent" android:layout_height="wrap_content">
 				<Button android:id="@+id/Button01" android:text="Aceptar"

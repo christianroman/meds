@@ -2,7 +2,6 @@ package com.medicinetracker;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +10,9 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 public class AgregarMedicina extends Activity {
 
-	private String via_selected = null;
-	private String tipo_selected = null;
 	DatabaseHelper db;
 	String vias[];
 	String tipos[];
@@ -42,16 +38,6 @@ public class AgregarMedicina extends Activity {
 				android.R.layout.simple_spinner_item, vias);
 
 		s1.setAdapter(adapter);
-		s1.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				int index = s1.getSelectedItemPosition();
-				via_selected = vias[index];
-			}
-
-			public void onNothingSelected(AdapterView<?> arg0) {
-			}
-		});
 	}
 
 	public void SpinnerTipos() {
@@ -60,16 +46,6 @@ public class AgregarMedicina extends Activity {
 				android.R.layout.simple_spinner_item, tipos);
 
 		s2.setAdapter(adapter);
-		s2.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				int index = s1.getSelectedItemPosition();
-				tipo_selected = tipos[index];
-			}
-
-			public void onNothingSelected(AdapterView<?> arg0) {
-			}
-		});
 	}
 
 	public void Cancelar(View button) {
@@ -85,9 +61,9 @@ public class AgregarMedicina extends Activity {
 			String nombre = ((EditText) findViewById(R.id.EditTextNombre))
 					.getText().toString();
 			int via = (int) ((Spinner) findViewById(R.id.spinner1))
-					.getSelectedItemId();
+					.getSelectedItemId() + 1;
 			int tipo = (int) ((Spinner) findViewById(R.id.spinner2))
-					.getSelectedItemId();
+					.getSelectedItemId() + 1;
 			String contenido = ((EditText) findViewById(R.id.EditTextContenido))
 					.getText().toString();
 			String persona = ((EditText) findViewById(R.id.EditTextPersona))
@@ -108,37 +84,21 @@ public class AgregarMedicina extends Activity {
 
 		catch (Exception ex) {
 			agregado = false;
-			//CatchError(ex.toString());
-		}
-		finally{
-			if(agregado == true){
+			// CatchError(ex.toString());
+		} finally {
+			if (agregado == true) {
 				notificaAgregado();
 				Intent intent = new Intent(this, Agregar.class);
 				startActivity(intent);
 			}
 		}
+	}
 
-		/*AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	public void notificaAgregado() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Medicamento Añadido").setCancelable(false);
 		AlertDialog alertDialog = builder.create();
-		alertDialog.show();*/
+		alertDialog.show();
 	}
-	
-	public void notificaAgregado()
-	{
-		Dialog diag=new Dialog(this);
-		diag.setTitle("Agregar Medicina");
-		TextView txt=new TextView(this);
-		txt.setText("Medicina agregada con exito");
-		diag.setContentView(txt);
-		diag.show();
-		try {
-			diag.wait(1000);
-		} catch (InterruptedException e) {
-			//CatchError(e.toString());
-		}
-		diag.notify();
-		diag.dismiss();
-	}
-	
+
 }
