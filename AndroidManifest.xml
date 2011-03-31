@@ -3,7 +3,7 @@
       package="com.medicinetracker"
       android:versionCode="1"
       android:versionName="1.0">
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:icon="@drawable/icon" android:label="@string/app_name"  android:theme="@android:style/Theme.Light">
         <activity android:name=".medicinetracker"
                   android:label="@string/app_name">
             <intent-filter>
@@ -19,6 +19,7 @@
 	    <activity android:name=".Agregar" android:label="agregar"></activity>
         <activity android:name=".medicinetracker" android:label="medicinetracker"></activity>
         <activity android:name=".AgregarMedicina" android:label="agregarMedicina"></activity>
+        <activity android:name=".AgregarDosis" android:label="agregarDosis"></activity>
     </application>
 
 

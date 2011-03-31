@@ -6,4 +6,5 @@
     <string name="historial">Historial</string>
     <string name="preferencias">Preferencias</string>
     <string name="resumen">Resumen</string>
+    <color name="white">#FFFFFF</color>
 </resources>

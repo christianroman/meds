@@ -52,7 +52,7 @@ public class Resumen extends Activity {
 
 		db = new DatabaseHelper(this);
 
-		//if (db.getCantidadDosis() > 0) {
+		if (db.getCantidadDosis() > 0) {
 			Cursor c = db.getResumen();
 
 			AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
@@ -67,16 +67,13 @@ public class Resumen extends Activity {
 			}
 
 			lv1.setAdapter(adaptador);
-		//}
-		
-		//Log.i("onCreate", String.valueOf(db.getCantidadDosis()));
+		}
 		
 	}
 
 	public void Agregar(View button) {
 		Intent intent = new Intent(Resumen.this, Agregar.class);
 		startActivity(intent);
-
 	}
 
 	@SuppressWarnings("rawtypes")

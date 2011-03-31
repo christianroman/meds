@@ -1,13 +1,13 @@
 package com.medicinetracker;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class AgregarMedicina extends Activity {
 
@@ -93,10 +93,7 @@ public class AgregarMedicina extends Activity {
 	}
 
 	public void notificaAgregado() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Medicamento Añadido").setCancelable(false);
-		AlertDialog alertDialog = builder.create();
-		alertDialog.show();
+		Toast.makeText(this, "Medicina agregada", Toast.LENGTH_LONG).show();
 	}
 
 }
