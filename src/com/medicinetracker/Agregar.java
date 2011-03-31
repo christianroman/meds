@@ -23,8 +23,8 @@ public class Agregar extends Activity{
 		startActivity(intent);
     }
     
-    public void AgregarReceta(View button) {
-		Intent intent = new Intent(this, medicinetracker.class);
+    public void AgregarDosis(View button) {
+		Intent intent = new Intent(this, AgregarDosis.class);
 		startActivity(intent);
     }
 }

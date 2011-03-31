@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+	<ScrollView android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<LinearLayout android:orientation="vertical"
+			android:layout_width="match_parent" android:layout_height="match_parent">
+
+			<TextView android:text="Medicamento:" android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/TextViewMedicamento"></TextView>
+
+			<Spinner android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:drawSelectorOnTop="true" android:id="@+id/spinnerMedicamento"/>
+
+			<TextView android:text="Fecha Inicio:" android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/TextViewFechaInicio"></TextView>
+			<DatePicker android:id="@+id/datePickerFechaInicio" android:layout_width="wrap_content" android:layout_height="wrap_content"></DatePicker>
+
+			<TextView android:text="Hora inicio:" android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/TextViewHoraInicio"></TextView>
+			<TimePicker android:id="@+id/timePickerHoraInicio" android:layout_height="wrap_content" android:layout_width="wrap_content"></TimePicker>
+
+			<TextView android:text="Cantidad" android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/TextViewCantidad"></TextView>
+			<EditText android:id="@+id/EditTextCantidad"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+				
+			<TextView android:text="Dias" android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/TextViewDias"></TextView>
+			<EditText android:id="@+id/EditTextDias"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+				
+			<TextView android:text="Repetición (cada cuantas horas)" android:id="@+id/TextViewRepeticion"
+				android:textSize="20px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content"></TextView>
+			<EditText android:id="@+id/EditTextRepeticion"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+			<LinearLayout android:orientation="horizontal"
+				android:layout_width="fill_parent" android:layout_height="wrap_content">
+				<Button android:id="@+id/Button01" android:text="Aceptar"
+					android:layout_width="wrap_content" android:layout_height="fill_parent"
+					android:layout_weight="1" android:onClick="Aceptar" />
+
+				<Button android:id="@+id/Button02" android:text="Cancelar"
+					android:layout_width="wrap_content" android:layout_height="fill_parent"
+					android:layout_weight="1" android:onClick="Cancelar" />
+			</LinearLayout>
+
+		</LinearLayout>
+	</ScrollView>
+
+</LinearLayout>

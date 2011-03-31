@@ -76,7 +76,6 @@ public class Historial extends Activity implements OnClickListener {
 		}
 	};
 
-	@Override
 	public void onClick(View v) {
 		if (v == searchByDate)
 			showDialog(DATE_DIALOG_ID);
@@ -114,7 +113,7 @@ public class Historial extends Activity implements OnClickListener {
 		final CharSequence[] items = db.getAllVias();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Selecciona Vía");
+		builder.setTitle("Selecciona VÃ­a");
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int item) {
 				Toast.makeText(getApplicationContext(), items[item],

@@ -169,11 +169,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public Cursor getResumen() {
 		String args[] = new String[] { "1" };
-		Cursor cursor = this
-				.getReadableDatabase()
-				.rawQuery(
-						"select nombre,via, repeticion from medicamento, dosis where dosis.idmedicamento=medicamento.idmedicamento and estado=?",args);
+		Cursor cursor = this.getReadableDatabase()//.query(tablaDosis, null, null, null, null, null, null);	
+		.rawQuery(queryResumen,args);
+				//.rawQuery(
+					//	"select nombre,via, repeticion from medicamento, dosis where dosis.idmedicamento=medicamento.idmedicamento and estado=?",
+						//args);
 		return cursor;
+	}
+
+	public String[] getMedicamentos() {
+		Cursor cursor = this.getReadableDatabase().query(tablaMedicamento,
+				null, null, null, null, null, null);
+
+		if (cursor.getCount() > 0) {
+			String[] str = new String[cursor.getCount()];
+			int i = 0;
+
+			while (cursor.moveToNext()) {
+				str[i] = cursor.getString(cursor.getColumnIndex(colNombre));
+				i++;
+			}
+			return str;
+		} else {
+			return new String[] {};
+		}
+	}
+	
+	public int getCantidadMedicamentos(){
+		Cursor cursor = this.getReadableDatabase().query(tablaMedicamento,
+				null, null, null, null, null, null);
+		return cursor.getCount();
+	}
+	
+	public int getCantidadDosis(){
+		Cursor cursor = this.getReadableDatabase().query(tablaDosis,
+				null, null, null, null, null, null);
+		return cursor.getCount();
 	}
 
 	public void AgregaMedicina(Medicina m) {
@@ -190,6 +221,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		cv.put(colNota, m.getNota());
 
 		db.insert(tablaMedicamento, colNombre, cv);
+		db.close();
+	}
+	
+	public void AgregaDosis(Dosis dosis) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+
+		cv.put(colMedicamentoID, dosis.getIdmedicamento());
+		cv.put(colFechaInicio, dosis.getDatetime());
+		cv.put(colFechaFin, dosis.getFechaFin());
+		cv.put(colCantidad, dosis.getCantidad());
+		cv.put(colRepeticion, dosis.getRepeticion());
+		cv.put(colDias, dosis.getDias());
+		cv.put(colEstado, dosis.getEstado());
+
+		db.insert(tablaDosis, colMedicamentoID, cv);
 		db.close();
 	}
 

@@ -44,27 +44,33 @@ public class Resumen extends Activity {
 	private ListView lv1;
 	private ArrayList<Titular> datos = new ArrayList<Titular>();
 
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.resumen);
 
 		db = new DatabaseHelper(this);
+
+		//if (db.getCantidadDosis() > 0) {
+			Cursor c = db.getResumen();
+
+			AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
+
+			lv1 = (ListView) findViewById(R.id.LstOpciones);
+
+			if (c.moveToFirst()) {
+				do {
+					datos.add(new Titular(c.getString(0), c.getString(1), c
+							.getString(2)));
+				} while (c.moveToNext());
+			}
+
+			lv1.setAdapter(adaptador);
+		//}
 		
-		Cursor c = db.getResumen();
-
-		AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
-
-		lv1 = (ListView) findViewById(R.id.LstOpciones);
-
-		if (c.moveToFirst()) {
-			do {
-				datos.add(new Titular(c.getString(0), c.getString(1), c
-						.getString(2)));
-			} while (c.moveToNext());
-		}
-
-		lv1.setAdapter(adaptador);
+		//Log.i("onCreate", String.valueOf(db.getCantidadDosis()));
+		
 	}
 
 	public void Agregar(View button) {
