@@ -20,6 +20,9 @@
         <activity android:name=".medicinetracker" android:label="medicinetracker"></activity>
         <activity android:name=".AgregarMedicina" android:label="agregarMedicina"></activity>
         <activity android:name=".AgregarDosis" android:label="agregarDosis"></activity>
+        
+        <receiver android:name=".AlarmReceiver"/>
+        
     </application>
 
 
