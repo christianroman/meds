@@ -30,7 +30,6 @@ public class Dosis {
 		this.dias = dias;
 		this.cantidad = cantidad;
 		estado = 1;
-		fechaInicio = año + "-" + mes + "-" + dia + " " + hora + ":" + minuto;
 		CalcularFechaFin();
 	}
 
@@ -128,6 +127,7 @@ public class Dosis {
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(DATE_FORMAT);
 		Calendar c = Calendar.getInstance();
 		c.set(año, mes, dia, hora, minuto);
+		fechaInicio = sdf.format(c.getTime());
 		c.add(Calendar.DAY_OF_MONTH, +dias);
 		fechaFin = sdf.format(c.getTime());
 		
