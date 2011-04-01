@@ -47,7 +47,7 @@ public class AgregarMedicina extends Activity {
 	}
 
 	public void Cancelar(View button) {
-		Intent intent = new Intent(this, Agregar.class);
+		Intent intent = new Intent(this, Resumen.class);
 		startActivity(intent);
 	}
 
@@ -86,7 +86,7 @@ public class AgregarMedicina extends Activity {
 		} finally {
 			if (agregado == true) {
 				notificaAgregado();
-				Intent intent = new Intent(this, Agregar.class);
+				Intent intent = new Intent(this, Resumen.class);
 				startActivity(intent);
 			}
 		}

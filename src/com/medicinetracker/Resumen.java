@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 class Titular {
 	private String titulo;
@@ -44,7 +45,6 @@ public class Resumen extends Activity {
 	private ListView lv1;
 	private ArrayList<Titular> datos = new ArrayList<Titular>();
 
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,15 +65,29 @@ public class Resumen extends Activity {
 							.getString(2)));
 				} while (c.moveToNext());
 			}
+			c.close();
 
 			lv1.setAdapter(adaptador);
 		}
-		
+
 	}
 
-	public void Agregar(View button) {
-		Intent intent = new Intent(Resumen.this, Agregar.class);
+	public void AgregarMedicina(View button) {
+		Intent intent = new Intent(this, AgregarMedicina.class);
 		startActivity(intent);
+	}
+
+	public void AgregarDosis(View button) {
+		DatabaseHelper db = new DatabaseHelper(this);
+		if (db.getCantidadMedicamentos() > 0) {
+			db.close();
+			Intent intent = new Intent(this, AgregarDosis.class);
+			startActivity(intent);
+		} else {
+			db.close();
+			Toast.makeText(this, "No hay medicamentos agregados",
+					Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@SuppressWarnings("rawtypes")

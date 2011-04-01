@@ -8,13 +8,10 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -39,6 +36,7 @@ public class AgregarDosis extends Activity {
 		if (db.getCantidadMedicamentos() > 0) {
 			medicamentos = db.getMedicamentos();
 			SpinnerMedicamentos();
+			db.close();
 		}
 
 	}
@@ -52,7 +50,7 @@ public class AgregarDosis extends Activity {
 	}
 
 	public void Cancelar(View button) {
-		Intent intent = new Intent(this, Agregar.class);
+		Intent intent = new Intent(this, Resumen.class);
 		startActivity(intent);
 	}
 
@@ -64,6 +62,9 @@ public class AgregarDosis extends Activity {
 
 			int idMedicamento = (int) (((Spinner) findViewById(R.id.spinnerMedicamento))
 					.getSelectedItemId() + 1);
+
+			String medicina = (String) ((Spinner) findViewById(R.id.spinnerMedicamento))
+					.getSelectedItem();
 
 			int dia = ((DatePicker) findViewById(R.id.datePickerFechaInicio))
 					.getDayOfMonth();
@@ -93,7 +94,7 @@ public class AgregarDosis extends Activity {
 					repeticion, dias, cantidad);
 
 			db.AgregaDosis(dosis);
-			programarAlarmas(dosis.getFechaInicio(), dias, repeticion);
+			programarAlarmas(dosis.getFechaInicio(), dias, repeticion, medicina);
 			agregado = true;
 		}
 
@@ -103,14 +104,16 @@ public class AgregarDosis extends Activity {
 		} finally {
 			if (agregado == true) {
 				notificaAgregado();
-				Intent intent = new Intent(this, Agregar.class);
+				Intent intent = new Intent(this, Resumen.class);
 				startActivity(intent);
 			}
+			db.close();
 		}
 	}
 
-	private void programarAlarmas(String fechaInicio, int dias, int repeticion) {
-		
+	private void programarAlarmas(String fechaInicio, int dias, int repeticion,
+			String medicina) {
+
 		try {
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			Date fecha = (Date) df.parse(fechaInicio);
@@ -119,7 +122,7 @@ public class AgregarDosis extends Activity {
 
 			for (int i = 0; i < dias; i++) {
 				c.add(Calendar.MINUTE, 1);
-				setAlarma(c);
+				setAlarma(c, medicina);
 			}
 
 		} catch (ParseException e) {
@@ -128,11 +131,12 @@ public class AgregarDosis extends Activity {
 
 	}
 
-	public void setAlarma(Calendar c) {
+	public void setAlarma(Calendar c, String medicina) {
 
 		Intent intent = new Intent(AgregarDosis.this, AlarmReceiver.class);
 		final int id = (int) System.currentTimeMillis();
 		intent.putExtra("id", id);
+		intent.putExtra("medicina", medicina);
 		PendingIntent appIntent = PendingIntent.getBroadcast(AgregarDosis.this,
 				id, intent, PendingIntent.FLAG_ONE_SHOT);
 

@@ -4,11 +4,19 @@
 	android:layout_width="fill_parent">
 
 	<ListView android:id="@+id/LstOpciones" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:layout_above="@+id/Button01"
+		android:layout_height="fill_parent" android:layout_above="@+id/Botones"
 		android:layout_alignParentTop="true" />
 
-	<Button android:id="@+id/Button01" android:layout_height="wrap_content"
-		android:layout_width="fill_parent" android:text="Agregar"
-		android:onClick="Agregar" android:layout_alignParentBottom="true" />
+	<LinearLayout android:id="@+id/Botones" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+		<Button android:id="@+id/Button01" android:text="Agregar Medicina"
+			android:layout_width="wrap_content" android:layout_height="fill_parent"
+			android:layout_weight="1" android:onClick="AgregarMedicina" />
+
+		<Button android:id="@+id/Button02" android:text="Agregar Dosis"
+			android:layout_width="wrap_content" android:layout_height="fill_parent"
+			android:layout_weight="1" android:onClick="AgregarDosis" />
+	</LinearLayout>
+
+	
 
 </RelativeLayout>

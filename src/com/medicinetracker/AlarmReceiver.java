@@ -21,14 +21,15 @@ public class AlarmReceiver extends BroadcastReceiver {
 		Intent contentIntent = new Intent();
 
 		int id = intent.getExtras().getInt("id");
+		CharSequence medicina = intent.getExtras().getCharSequence("medicina");
 		PendingIntent theappIntent = PendingIntent.getBroadcast(context, id,
 				contentIntent, PendingIntent.FLAG_ONE_SHOT);
-		CharSequence text = "Alarm Manager";
-		CharSequence message = "Was Fired";
+		CharSequence message = "Tomar dosis pendiente";
 
-		Notification notification = new Notification(R.drawable.icon, text,
+		Notification notification = new Notification(R.drawable.icon, medicina,
 				System.currentTimeMillis());
-		notification.setLatestEventInfo(context, text, message, theappIntent);
+		notification.setLatestEventInfo(context, medicina, message,
+				theappIntent);
 		nm.notify(id, notification);
 
 	}

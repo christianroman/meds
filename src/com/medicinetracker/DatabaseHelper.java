@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -56,17 +55,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ " = " + tablaMedicamento + "." + colMedicamentoID + " AND "
 			+ colEstado + "=?";
 
+	static final String queryMedicinaDosis = "SELECT " + colNombre + " FROM "
+			+ tablaMedicamento + " WHERE " + colID + "=?";
+
 	public DatabaseHelper(Context context) {
 		super(context, dbNombre, null, 1);
-		// TODO Auto-generated constructor stub
-		// context.deleteDatabase(dbNombre); // Esta linea se ocupa cuando se
-		// requiere eliminar la base de datos. Solo usarla una vez, una vez que
-		// se elimina, se comenta y se crea una base de datos nueva.
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		Log.i("onCreate", "Creating the database...");
 		// TODO Auto-generated method stub
 		db.execSQL("CREATE TABLE " + tablaMedicamento + " (" + colID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + colNombre
@@ -137,6 +134,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				str[i] = cursor.getString(cursor.getColumnIndex(colViasNombre));
 				i++;
 			}
+			cursor.close();
 			return str;
 		} else {
 			return new String[] {};
@@ -161,6 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 						.getString(cursor.getColumnIndex(colTiposNombre));
 				i++;
 			}
+			cursor.close();
 			return str;
 		} else {
 			return new String[] {};
@@ -169,12 +168,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public Cursor getResumen() {
 		String args[] = new String[] { "1" };
-		Cursor cursor = this.getReadableDatabase()//.query(tablaDosis, null, null, null, null, null, null);	
-		.rawQuery(queryResumen,args);
-				//.rawQuery(
-					//	"select nombre,via, repeticion from medicamento, dosis where dosis.idmedicamento=medicamento.idmedicamento and estado=?",
-						//args);
-		return cursor;
+		return (Cursor)this.getReadableDatabase().rawQuery(queryResumen, args);
 	}
 
 	public String[] getMedicamentos() {
@@ -189,22 +183,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				str[i] = cursor.getString(cursor.getColumnIndex(colNombre));
 				i++;
 			}
+			cursor.close();
 			return str;
 		} else {
 			return new String[] {};
 		}
 	}
-	
-	public int getCantidadMedicamentos(){
+
+	public int getCantidadMedicamentos() {
 		Cursor cursor = this.getReadableDatabase().query(tablaMedicamento,
 				null, null, null, null, null, null);
-		return cursor.getCount();
+		
+		int count = cursor.getCount();
+		cursor.close();
+		return count;
+		
 	}
-	
-	public int getCantidadDosis(){
-		Cursor cursor = this.getReadableDatabase().query(tablaDosis,
-				null, null, null, null, null, null);
-		return cursor.getCount();
+
+	public int getCantidadDosis() {
+		Cursor cursor = this.getReadableDatabase().query(tablaDosis, null,
+				null, null, null, null, null);
+		int count = cursor.getCount();
+		cursor.close();
+		return count;
 	}
 
 	public void AgregaMedicina(Medicina m) {
@@ -223,7 +224,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.insert(tablaMedicamento, colNombre, cv);
 		db.close();
 	}
-	
+
 	public void AgregaDosis(Dosis dosis) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
@@ -238,6 +239,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		db.insert(tablaDosis, colMedicamentoID, cv);
 		db.close();
+
+		/*
+		 * String[] args = new String[] {
+		 * String.valueOf(dosis.getIdmedicamento()) }; Cursor cursor =
+		 * this.getReadableDatabase().rawQuery(queryMedicinaDosis, args);
+		 * 
+		 * String medicina = null; while (cursor.moveToNext()) { medicina =
+		 * cursor.getString(0); } return medicina;
+		 */
+
+	}
+
+	@Override
+	public synchronized void close() {
+		if (db != null) {
+			db.close();
+			super.close();
+		}
 	}
 
 	@Override
