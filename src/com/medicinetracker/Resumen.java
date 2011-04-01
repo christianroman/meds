@@ -1,6 +1,8 @@
 package com.medicinetracker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -61,15 +63,32 @@ public class Resumen extends Activity {
 
 			if (c.moveToFirst()) {
 				do {
-					datos.add(new Titular(c.getString(0), c.getString(1), c
-							.getString(2)));
+					datos.add(new Titular(c.getString(0),
+							CalcularSiguienteHora(c.getString(1),
+									c.getString(2)), c.getString(3)));
 				} while (c.moveToNext());
 			}
 			c.close();
 
 			lv1.setAdapter(adaptador);
 		}
+		db.close();
 
+	}
+
+	public String CalcularSiguienteHora(String hora, String fecha) {
+		/*Calendar proximafecha = Calendar.getInstance();
+		Date ahora = new Date();
+		proximafecha.set(Integer.parseInt(fecha.substring(0, 4)),
+				Integer.parseInt(fecha.substring(5, 7)),
+				Integer.parseInt(fecha.substring(8, 10)),
+				Integer.parseInt(fecha.substring(11, 13)),
+				Integer.parseInt(fecha.substring(14, 16)));
+		while (ahora.compareTo(proximafecha.getTime()) >= 0) {
+			proximafecha.add(Calendar.HOUR, +Integer.parseInt(hora));
+		}
+		return proximafecha.getTime().toGMTString();*/
+		return "";
 	}
 
 	public void AgregarMedicina(View button) {
@@ -84,10 +103,10 @@ public class Resumen extends Activity {
 			Intent intent = new Intent(this, AgregarDosis.class);
 			startActivity(intent);
 		} else {
-			db.close();
 			Toast.makeText(this, "No hay medicamentos agregados",
 					Toast.LENGTH_LONG).show();
 		}
+		db.close();
 	}
 
 	@SuppressWarnings("rawtypes")

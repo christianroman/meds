@@ -49,11 +49,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	static final String viewDosisMedicamento = "viewDosisMedicamento";
 
-	static final String queryResumen = "SELECT " + colNombre + ", " + colVia
-			+ ", " + colRepeticion + " FROM " + tablaMedicamento + ", "
-			+ tablaDosis + " WHERE " + tablaDosis + "." + colMedicamentoID
-			+ " = " + tablaMedicamento + "." + colMedicamentoID + " AND "
-			+ colEstado + "=?";
+	static final String queryResumen = "SELECT " + colNombre + ", "
+			+ colRepeticion + ", " + colFechaInicio + ", " + "strftime('%j',"
+			+ colFechaFin + ") - strftime('%j','now')" + " FROM "
+			+ tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis
+			+ "." + colMedicamentoID + " = " + tablaMedicamento + "."
+			+ colMedicamentoID + " AND " + colEstado + "=?";
+
+	/*
+	 * static final String queryResumen = "SELECT " + colNombre + ", " + colVia
+	 * + ", " + colRepeticion + " FROM " + tablaMedicamento + ", " + tablaDosis
+	 * + " WHERE " + tablaDosis + "." + colMedicamentoID + " = " +
+	 * tablaMedicamento + "." + colMedicamentoID + " AND " + colEstado + "=?";
+	 */
 
 	static final String queryMedicinaDosis = "SELECT " + colNombre + " FROM "
 			+ tablaMedicamento + " WHERE " + colID + "=?";
@@ -168,7 +176,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public Cursor getResumen() {
 		String args[] = new String[] { "1" };
-		return (Cursor)this.getReadableDatabase().rawQuery(queryResumen, args);
+		return (Cursor) this.getReadableDatabase().rawQuery(queryResumen, args);
 	}
 
 	public String[] getMedicamentos() {
@@ -193,11 +201,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public int getCantidadMedicamentos() {
 		Cursor cursor = this.getReadableDatabase().query(tablaMedicamento,
 				null, null, null, null, null, null);
-		
+
 		int count = cursor.getCount();
 		cursor.close();
 		return count;
-		
+
 	}
 
 	public int getCantidadDosis() {
@@ -239,15 +247,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		db.insert(tablaDosis, colMedicamentoID, cv);
 		db.close();
-
-		/*
-		 * String[] args = new String[] {
-		 * String.valueOf(dosis.getIdmedicamento()) }; Cursor cursor =
-		 * this.getReadableDatabase().rawQuery(queryMedicinaDosis, args);
-		 * 
-		 * String medicina = null; while (cursor.moveToNext()) { medicina =
-		 * cursor.getString(0); } return medicina;
-		 */
 
 	}
 

@@ -1,17 +1,11 @@
 package com.medicinetracker;
 
-import com.medicinetracker.R;
-import com.medicinetracker.Consultar;
-import com.medicinetracker.Historial;
-import com.medicinetracker.Preferencias;
-import com.medicinetracker.Resumen;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
@@ -32,18 +26,13 @@ public class medicinetracker extends TabActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		Log.i("onCreate", "iniciando...");
-
-		dbHelper = new DatabaseHelper(this);
-		dbHelper.getWritableDatabase();
-
 		mTabHost = getTabHost();
 		mResources = getResources();
 
-		añadirTab1();
-		añadirTab2();
-		añadirTab3();
-		añadirTab4();
+		agregarTab1();
+		agregarTab2();
+		agregarTab3();
+		agregarTab4();
 
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
@@ -62,14 +51,15 @@ public class medicinetracker extends TabActivity {
 		int currentTab = mTabHost.getCurrentTab();
 		editor.putInt(TAG_PREFERENCIAS, currentTab);
 		editor.commit();
+		
 	}
 
 	/*
 	 * Pestaña 1
 	 */
 
-	private void añadirTab1() {
-
+	private void agregarTab1() {
+		
 		Intent intent = new Intent(this, Resumen.class);
 
 		TabSpec spec = mTabHost.newTabSpec(TAG_RESUMEN);
@@ -84,7 +74,7 @@ public class medicinetracker extends TabActivity {
 	 * Pestaña 2
 	 */
 
-	private void añadirTab2() {
+	private void agregarTab2() {
 
 		Intent intent = new Intent(this, Consultar.class);
 
@@ -100,7 +90,7 @@ public class medicinetracker extends TabActivity {
 	 * Pestaña 3
 	 */
 
-	private void añadirTab3() {
+	private void agregarTab3() {
 
 		Intent intent = new Intent(this, Historial.class);
 
@@ -116,13 +106,11 @@ public class medicinetracker extends TabActivity {
 	 * Pestaña 4
 	 */
 
-	private void añadirTab4() {
+	private void agregarTab4() {
 
 		Intent intent = new Intent(this, Preferencias.class);
 
 		TabSpec spec = mTabHost.newTabSpec(TAG_PREFERENCIAS);
-		// spec.setIndicator(mResources.getString(R.string.preferencias),
-		// mResources.getDrawable(R.drawable.icon));
 		
 		spec.setIndicator(mResources.getString(R.string.preferencias),getResources().getDrawable(R.drawable.ic_menu_preferencias));
 		spec.setContent(intent);

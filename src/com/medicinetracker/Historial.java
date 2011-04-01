@@ -41,8 +41,6 @@ public class Historial extends Activity implements OnClickListener {
 		searchByVia = (Button) findViewById(R.id.searchByVia);
 		searchByVia.setOnClickListener(this);
 
-		db = new DatabaseHelper(this);
-
 	}
 
 	@Override
@@ -67,9 +65,9 @@ public class Historial extends Activity implements OnClickListener {
 
 	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
-		public void onDateSet(DatePicker view, int año, int mes, int dia) {
+		public void onDateSet(DatePicker view, int anio, int mes, int dia) {
 			String date_selected = String.valueOf(mes + 1) + " /"
-					+ String.valueOf(dia) + " /" + String.valueOf(año);
+					+ String.valueOf(dia) + " /" + String.valueOf(anio);
 			Toast.makeText(Historial.this,
 					"Selected Date is =" + date_selected, Toast.LENGTH_SHORT)
 					.show();

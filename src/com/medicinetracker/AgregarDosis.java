@@ -36,9 +36,8 @@ public class AgregarDosis extends Activity {
 		if (db.getCantidadMedicamentos() > 0) {
 			medicamentos = db.getMedicamentos();
 			SpinnerMedicamentos();
-			db.close();
 		}
-
+		db.close();
 	}
 
 	public void SpinnerMedicamentos() {
@@ -50,7 +49,7 @@ public class AgregarDosis extends Activity {
 	}
 
 	public void Cancelar(View button) {
-		Intent intent = new Intent(this, Resumen.class);
+		Intent intent = new Intent(this, medicinetracker.class);
 		startActivity(intent);
 	}
 
@@ -70,7 +69,7 @@ public class AgregarDosis extends Activity {
 					.getDayOfMonth();
 			int mes = ((DatePicker) findViewById(R.id.datePickerFechaInicio))
 					.getMonth();
-			int año = ((DatePicker) findViewById(R.id.datePickerFechaInicio))
+			int anio = ((DatePicker) findViewById(R.id.datePickerFechaInicio))
 					.getYear();
 
 			int cantidad = Integer
@@ -90,9 +89,9 @@ public class AgregarDosis extends Activity {
 			int min = ((TimePicker) findViewById(R.id.timePickerHoraInicio))
 					.getCurrentMinute();
 
-			Dosis dosis = new Dosis(idMedicamento, dia, mes, año, hora, min,
+			Dosis dosis = new Dosis(idMedicamento, dia, mes, anio, hora, min,
 					repeticion, dias, cantidad);
-
+			
 			db.AgregaDosis(dosis);
 			programarAlarmas(dosis.getFechaInicio(), dias, repeticion, medicina);
 			agregado = true;
@@ -104,7 +103,7 @@ public class AgregarDosis extends Activity {
 		} finally {
 			if (agregado == true) {
 				notificaAgregado();
-				Intent intent = new Intent(this, Resumen.class);
+				Intent intent = new Intent(this, medicinetracker.class);
 				startActivity(intent);
 			}
 			db.close();

@@ -27,6 +27,8 @@ public class AgregarMedicina extends Activity {
 
 		SpinnerVias();
 		SpinnerTipos();
+		
+		db.close();
 
 	}
 
@@ -47,7 +49,7 @@ public class AgregarMedicina extends Activity {
 	}
 
 	public void Cancelar(View button) {
-		Intent intent = new Intent(this, Resumen.class);
+		Intent intent = new Intent(this, medicinetracker.class);
 		startActivity(intent);
 	}
 
@@ -86,7 +88,7 @@ public class AgregarMedicina extends Activity {
 		} finally {
 			if (agregado == true) {
 				notificaAgregado();
-				Intent intent = new Intent(this, Resumen.class);
+				Intent intent = new Intent(this, medicinetracker.class);
 				startActivity(intent);
 			}
 		}
