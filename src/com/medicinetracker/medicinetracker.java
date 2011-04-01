@@ -73,7 +73,7 @@ public class medicinetracker extends TabActivity {
 		Intent intent = new Intent(this, Resumen.class);
 
 		TabSpec spec = mTabHost.newTabSpec(TAG_RESUMEN);
-		spec.setIndicator(mResources.getString(R.string.resumen));
+		spec.setIndicator(mResources.getString(R.string.resumen),getResources().getDrawable(R.drawable.ic_menu_resumen));
 		spec.setContent(intent);
 
 		mTabHost.addTab(spec);
@@ -89,7 +89,7 @@ public class medicinetracker extends TabActivity {
 		Intent intent = new Intent(this, Consultar.class);
 
 		TabSpec spec = mTabHost.newTabSpec(TAG_CONSULTAR);
-		spec.setIndicator(mResources.getString(R.string.consultar));
+		spec.setIndicator(mResources.getString(R.string.consultar),getResources().getDrawable(R.drawable.ic_menu_consultar));
 		spec.setContent(intent);
 
 		mTabHost.addTab(spec);
@@ -105,7 +105,7 @@ public class medicinetracker extends TabActivity {
 		Intent intent = new Intent(this, Historial.class);
 
 		TabSpec spec = mTabHost.newTabSpec(TAG_HISTORIAL);
-		spec.setIndicator(mResources.getString(R.string.historial));
+		spec.setIndicator(mResources.getString(R.string.historial),getResources().getDrawable(R.drawable.ic_menu_historial));
 		spec.setContent(intent);
 
 		mTabHost.addTab(spec);
@@ -123,7 +123,8 @@ public class medicinetracker extends TabActivity {
 		TabSpec spec = mTabHost.newTabSpec(TAG_PREFERENCIAS);
 		// spec.setIndicator(mResources.getString(R.string.preferencias),
 		// mResources.getDrawable(R.drawable.icon));
-		spec.setIndicator(mResources.getString(R.string.preferencias));
+		
+		spec.setIndicator(mResources.getString(R.string.preferencias),getResources().getDrawable(R.drawable.ic_menu_preferencias));
 		spec.setContent(intent);
 
 		mTabHost.addTab(spec);

@@ -229,7 +229,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		ContentValues cv = new ContentValues();
 
 		cv.put(colMedicamentoID, dosis.getIdmedicamento());
-		cv.put(colFechaInicio, dosis.getDatetime());
+		cv.put(colFechaInicio, dosis.getFechaInicio());
 		cv.put(colFechaFin, dosis.getFechaFin());
 		cv.put(colCantidad, dosis.getCantidad());
 		cv.put(colRepeticion, dosis.getRepeticion());

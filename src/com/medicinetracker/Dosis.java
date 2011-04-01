@@ -10,23 +10,12 @@ public class Dosis {
 	private int año;
 	private int hora;
 	private int minuto;
-	private String datetime;
+	private String fechaInicio;
 	private int repeticion;
 	private int dias;
 	private int cantidad;
 	private int estado;
 	private String fechaFin;
-
-	public Dosis(int idmedicamento, String datetime, int repeticion, int dias,
-			int cantidad) {
-		super();
-		this.idmedicamento = idmedicamento;
-		this.datetime = datetime;
-		this.repeticion = repeticion;
-		this.dias = dias;
-		this.cantidad = cantidad;
-		estado = 1;
-	}
 
 	public Dosis(int idmedicamento, int dia, int mes, int año, int hora,
 			int minuto, int repeticion, int dias, int cantidad) {
@@ -41,6 +30,7 @@ public class Dosis {
 		this.dias = dias;
 		this.cantidad = cantidad;
 		estado = 1;
+		fechaInicio = año + "-" + mes + "-" + dia + " " + hora + ":" + minuto;
 		CalcularFechaFin();
 	}
 
@@ -92,14 +82,6 @@ public class Dosis {
 		this.idmedicamento = idmedicamento;
 	}
 
-	public String getDatetime() {
-		return datetime;
-	}
-
-	public void setDatetime(String datetime) {
-		this.datetime = datetime;
-	}
-
 	public int getRepeticion() {
 		return repeticion;
 	}
@@ -130,6 +112,10 @@ public class Dosis {
 
 	public void setEstado(int estado) {
 		this.estado = estado;
+	}
+	
+	public String getFechaInicio(){
+		return fechaInicio;
 	}
 
 	public String getFechaFin() {
