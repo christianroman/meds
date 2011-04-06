@@ -6,9 +6,8 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 		
-		<TextView
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:text="Contenido"
-		/>			
+		<ListView android:id="@+id/LstOpciones" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:layout_below="@+id/resumen"
+		android:layout_alignParentBottom="true" android:padding="5dp"/>
+					
 	</LinearLayout>

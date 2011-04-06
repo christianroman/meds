@@ -4,4 +4,9 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
     <TextView android:layout_width="wrap_content" android:text="Hola" android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:layout_marginTop="15dip" android:textSize="20sp" android:id="@+id/tipoTextView"></TextView>
+    
+  <ListView android:id="@+id/LstOpciones" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:layout_below="@+id/tipoTextView"
+		android:layout_alignParentBottom="true" android:padding="5dp"/>
+    
 </RelativeLayout>

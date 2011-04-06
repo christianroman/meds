@@ -120,7 +120,7 @@ public class AgregarDosis extends Activity {
 			c.setTime(fecha);
 
 			for (int i = 0; i < dias; i++) {
-				c.add(Calendar.MINUTE, 1);
+				c.add(Calendar.MINUTE, repeticion);
 				setAlarma(c, medicina);
 			}
 

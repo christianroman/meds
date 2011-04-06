@@ -3,7 +3,6 @@ package com.medicinetracker;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,39 +10,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-class Titular {
-	private String titulo;
-	private String subtitulo;
-	private String Hora;
-
-	public Titular(String tit, String sub, String hora) {
-		titulo = tit;
-		subtitulo = sub;
-		Hora = hora;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public String getSubtitulo() {
-		return subtitulo;
-	}
-
-	public String getHora() {
-		return Hora;
-	}
-}
-
 public class Resumen extends Activity {
 
 	DatabaseHelper db;
-
+	AdaptadorTitulares adaptador;
 	private ListView lv1;
 	private ArrayList<Titular> datos = new ArrayList<Titular>();
 
@@ -54,10 +32,15 @@ public class Resumen extends Activity {
 
 		db = new DatabaseHelper(this);
 
+		((TextView) findViewById(R.id.TextViewDosisActivas))
+				.setText("Dosis Activas: " + db.getCantidadDosis());
+		((TextView) findViewById(R.id.TextViewMedicamentos))
+				.setText("Medicamentos: " + db.getCantidadMedicamentos());
+
 		if (db.getCantidadDosis() > 0) {
 			Cursor c = db.getResumen();
 
-			AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
+			adaptador = new AdaptadorTitulares(this);
 
 			lv1 = (ListView) findViewById(R.id.LstOpciones);
 
@@ -65,19 +48,30 @@ public class Resumen extends Activity {
 				do {
 					datos.add(new Titular(c.getString(0),
 							CalcularSiguienteHora(c.getString(1),
-									c.getString(2)), c.getString(3)));
+									c.getString(2)), c.getString(3), c
+									.getString(4), c.getString(5), c
+									.getString(6), c.getString(7), c
+									.getString(8), false));
 				} while (c.moveToNext());
 			}
-			c.close();
 
 			lv1.setAdapter(adaptador);
+			lv1.setClickable(true);
+			lv1.setOnItemClickListener(funcionClick);
 		}
-		db.close();
 
 	}
 
+	private OnItemClickListener funcionClick = new OnItemClickListener() {
+		public void onItemClick(AdapterView parent, View v, int position,
+				long id) {
+			datos.get(position).setVisible(!datos.get(position).getVisible());
+			lv1.setAdapter(adaptador);
+		}
+	};
+
 	public String CalcularSiguienteHora(String hora, String fecha) {
-		/*Calendar proximafecha = Calendar.getInstance();
+		Calendar proximafecha = Calendar.getInstance();
 		Date ahora = new Date();
 		proximafecha.set(Integer.parseInt(fecha.substring(0, 4)),
 				Integer.parseInt(fecha.substring(5, 7)),
@@ -87,8 +81,8 @@ public class Resumen extends Activity {
 		while (ahora.compareTo(proximafecha.getTime()) >= 0) {
 			proximafecha.add(Calendar.HOUR, +Integer.parseInt(hora));
 		}
-		return proximafecha.getTime().toGMTString();*/
-		return "";
+		return proximafecha.getTime().toLocaleString();
+		// return "dfsdf";
 	}
 
 	public void AgregarMedicina(View button) {
@@ -111,7 +105,7 @@ public class Resumen extends Activity {
 
 	@SuppressWarnings("rawtypes")
 	class AdaptadorTitulares extends ArrayAdapter {
-
+		LinearLayout LLExpandir;
 		Activity context;
 
 		@SuppressWarnings("unchecked")
@@ -120,6 +114,7 @@ public class Resumen extends Activity {
 			this.context = context;
 		}
 
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = context.getLayoutInflater();
 			View item = inflater.inflate(R.layout.listitem_titular, null);
@@ -134,7 +129,28 @@ public class Resumen extends Activity {
 			TextView lblHora = (TextView) item.findViewById(R.id.LblHora);
 			lblHora.setText(datos.get(position).getHora());
 
+			TextView tipo = (TextView) item.findViewById(R.id.tipo);
+			tipo.setText(datos.get(position).getTipo());
+
+			TextView via = (TextView) item.findViewById(R.id.via);
+			via.setText(datos.get(position).getVia());
+
+			TextView fecha = (TextView) item.findViewById(R.id.fechaIni);
+			fecha.setText(datos.get(position).getFecha());
+
+			TextView doctor = (TextView) item.findViewById(R.id.doctor);
+			doctor.setText(datos.get(position).getDoctor());
+
+			TextView farmacia = (TextView) item.findViewById(R.id.farmacia);
+			farmacia.setText(datos.get(position).getFarmacia());
+
+			LLExpandir = (LinearLayout) item.findViewById(R.id.LLExpandir);
+			LLExpandir
+					.setVisibility(datos.get(position).getVisible() ? View.VISIBLE
+							: View.GONE);
+
 			return (item);
 		}
+
 	}
 }

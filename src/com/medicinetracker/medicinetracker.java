@@ -25,19 +25,20 @@ public class medicinetracker extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		
 		mTabHost = getTabHost();
 		mResources = getResources();
 
 		agregarTab1();
 		agregarTab2();
 		agregarTab3();
-		agregarTab4();
+		//agregarTab4();
 
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		int currentTab = prefs.getInt(TAG_PREFERENCIAS, 0);
 		mTabHost.setCurrentTab(currentTab);
+	    
 
 	}
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -51,12 +52,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	static final String queryResumen = "SELECT " + colNombre + ", "
 			+ colRepeticion + ", " + colFechaInicio + ", " + "strftime('%j',"
-			+ colFechaFin + ") - strftime('%j','now')" + " FROM "
-			+ tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis
-			+ "." + colMedicamentoID + " = " + tablaMedicamento + "."
-			+ colMedicamentoID + " AND " + colEstado + "=?";
+			+ colFechaFin + ") - strftime('%j','now')" + ", " + "(SELECT "
+			+ colTiposNombre + " from " + tablaTipos + " where " + colTiposID
+			+ "=" + colTipo + ")" + ", " + "(SELECT " + colViasNombre
+			+ " from " + tablaVias + " where " + colViasID + "=" + colVia + ")"
+			+ ", " + colFechaInicio + ", " + colDoctor + ", " + colFarmacia
+			+ " FROM " + tablaMedicamento + ", " + tablaDosis + " WHERE "
+			+ tablaDosis + "." + colMedicamentoID + " = " + tablaMedicamento
+			+ "." + colID + " AND " + colEstado + "=?";
+
+	static final String queryTipo =  "SELECT " + colNombre + ", "
+	+ colRepeticion + ", " + colFechaInicio + ", " + "strftime('%j',"
+	+ colFechaFin + ") - strftime('%j','now')" + ", " + "(SELECT "
+	+ colTiposNombre + " from " + tablaTipos + " where " + colTiposID
+	+ "=" + colTipo + ")" + ", " + "(SELECT " + colViasNombre
+	+ " from " + tablaVias + " where " + colViasID + "=" + colVia + ")"
+	+ ", " + colFechaInicio + ", " + colDoctor + ", " + colFarmacia
+	+ " FROM " + tablaMedicamento + ", " + tablaDosis + " WHERE "
+	+ tablaDosis + "." + colMedicamentoID + " = " + tablaMedicamento
+	+ "." + colID + " AND " + colEstado + "=?";
 
 	/*
+	 * static final String queryResumen = "SELECT " + colNombre + ", " +
+	 * colRepeticion + ", " + colFechaInicio + ", " + "strftime('%j'," +
+	 * colFechaFin + ") - strftime('%j','now')" + " FROM " + tablaMedicamento +
+	 * ", " + tablaDosis + " WHERE " + tablaDosis + "." + colMedicamentoID +
+	 * " = " + tablaMedicamento + "." + colMedicamentoID + " AND " + colEstado +
+	 * "=? ORDER BY " + colDosisID + " DESC LIMIT 4";
+	 * 
+	 * 
 	 * static final String queryResumen = "SELECT " + colNombre + ", " + colVia
 	 * + ", " + colRepeticion + " FROM " + tablaMedicamento + ", " + tablaDosis
 	 * + " WHERE " + tablaDosis + "." + colMedicamentoID + " = " +
@@ -142,7 +166,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				str[i] = cursor.getString(cursor.getColumnIndex(colViasNombre));
 				i++;
 			}
-			cursor.close();
+			// cursor.close();
 			return str;
 		} else {
 			return new String[] {};
@@ -167,7 +191,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 						.getString(cursor.getColumnIndex(colTiposNombre));
 				i++;
 			}
-			cursor.close();
+			// cursor.close();
 			return str;
 		} else {
 			return new String[] {};
@@ -177,6 +201,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public Cursor getResumen() {
 		String args[] = new String[] { "1" };
 		return (Cursor) this.getReadableDatabase().rawQuery(queryResumen, args);
+	}
+
+	public Cursor getByTipo(String tipo) {
+		Log.i("getByTipo", queryTipo);
+		String args[] = new String[] { tipo };
+		return (Cursor) this.getReadableDatabase().rawQuery(queryTipo, args);
 	}
 
 	public String[] getMedicamentos() {

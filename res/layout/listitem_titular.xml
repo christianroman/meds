@@ -1,41 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
 
-  <LinearLayout
-      android:orientation="horizontal"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content">
-      <TextView
-          android:id="@+id/LblTitulo"
-          android:textSize="20px"
-          android:gravity="fill_vertical"
-          android:layout_width="wrap_content"
-          android:layout_height="fill_parent"
-          android:layout_weight="1"/>
-      
-      <TextView
-          android:id="@+id/LblHora"
-          android:text="8:00"
-          android:textSize="36px"
-          android:gravity="right"
-          android:layout_width="wrap_content"
-          android:layout_height="fill_parent"
-          android:layout_weight="1"/>
-  </LinearLayout>
-        
-  <LinearLayout
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/LblSubTitulo"
-        android:gravity="top"
-        android:textSize="13px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-  </LinearLayout>
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<TextView android:id="@+id/LblTitulo" android:textSize="20px"
+
+			android:gravity="fill_vertical" android:layout_width="wrap_content"
+			android:layout_height="fill_parent" android:layout_weight="1" />
+		<TextView android:text="Días restantes: " android:textSize="12px"
+			android:gravity="right" android:layout_width="wrap_content"
+			android:layout_height="fill_parent" android:layout_weight="1" />
+		<TextView android:id="@+id/LblHora" android:text="0"
+			android:textSize="12px" android:gravity="left" android:layout_width="wrap_content"
+			android:layout_height="fill_parent" />
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="wrap_content" android:layout_height="wrap_content">
+		<TextView android:text="Proxima dosis: " android:gravity="top"
+			android:textSize="13px" android:layout_width="wrap_content"
+			android:layout_height="fill_parent" android:layout_weight="1" />
+		<TextView android:id="@+id/LblSubTitulo" android:gravity="top"
+			android:textSize="13px" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LLExpandir"
+		android:orientation="vertical" android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+			<TextView android:text="Tipo: " android:gravity="top"
+				android:textSize="13px" android:layout_width="wrap_content"
+				android:layout_height="fill_parent" android:layout_weight="1" />
+			<TextView android:id="@+id/tipo" android:text="contenido"
+				android:gravity="top" android:textSize="13px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+			<TextView android:text="Via: " android:gravity="top"
+				android:textSize="13px" android:layout_width="wrap_content"
+				android:layout_height="fill_parent" android:layout_weight="1" />
+			<TextView android:id="@+id/via" android:text="contenido"
+				android:gravity="top" android:textSize="13px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+			<TextView android:text="Fecha de Inicio: " android:gravity="top"
+				android:textSize="13px" android:layout_width="wrap_content"
+				android:layout_height="fill_parent" android:layout_weight="1" />
+			<TextView android:id="@+id/fechaIni" android:text="contenido"
+				android:gravity="top" android:textSize="13px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+			<TextView android:text="Doctor: " android:gravity="top"
+				android:textSize="13px" android:layout_width="wrap_content"
+				android:layout_height="fill_parent" android:layout_weight="1" />
+			<TextView android:id="@+id/doctor" android:text="contenido"
+				android:gravity="top" android:textSize="13px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+			<TextView android:text="Farmacia: " android:gravity="top"
+				android:textSize="13px" android:layout_width="wrap_content"
+				android:layout_height="fill_parent" android:layout_weight="1" />
+			<TextView android:id="@+id/farmacia" android:text="contenido"
+				android:gravity="top" android:textSize="13px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+
+	</LinearLayout>
 
 </LinearLayout>

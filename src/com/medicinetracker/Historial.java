@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.LightingColorFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,6 +34,7 @@ public class Historial extends Activity implements OnClickListener {
 		setContentView(R.layout.historial);
 
 		searchByDate = (Button) findViewById(R.id.searchByDate);
+		//searchByDate.getBackground().setColorFilter(new LightingColorFilter(0xFFFFFFFF, 0xFFAA0000));
 		searchByDate.setOnClickListener(this);
 
 		searchByType = (Button) findViewById(R.id.searchByType);
@@ -40,6 +42,8 @@ public class Historial extends Activity implements OnClickListener {
 
 		searchByVia = (Button) findViewById(R.id.searchByVia);
 		searchByVia.setOnClickListener(this);
+
+		db = new DatabaseHelper(this);
 
 	}
 
@@ -60,6 +64,7 @@ public class Historial extends Activity implements OnClickListener {
 			viaActions();
 			break;
 		}
+		db.close();
 		return null;
 	}
 
@@ -94,7 +99,7 @@ public class Historial extends Activity implements OnClickListener {
 				Toast.makeText(getApplicationContext(), items[item],
 						Toast.LENGTH_SHORT).show();
 				String tipo = (String) items[item];
-				
+
 				Intent intent = new Intent(Historial.this, HistorialTipo.class);
 				intent.putExtra("tipo_texto", tipo);
 				startActivity(intent);
@@ -104,14 +109,13 @@ public class Historial extends Activity implements OnClickListener {
 		});
 		AlertDialog alert = builder.create();
 		alert.show();
-
 	}
 
 	public void viaActions() {
 		final CharSequence[] items = db.getAllVias();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Selecciona VÃ­a");
+		builder.setTitle("Selecciona Vía");
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int item) {
 				Toast.makeText(getApplicationContext(), items[item],
@@ -120,7 +124,6 @@ public class Historial extends Activity implements OnClickListener {
 		});
 		AlertDialog alert = builder.create();
 		alert.show();
-
 	}
 
 }
