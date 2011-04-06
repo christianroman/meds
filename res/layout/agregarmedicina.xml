@@ -1,67 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="wrap_content" android:paddingTop="5dip">
+
 	<ScrollView android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 		<LinearLayout android:orientation="vertical"
-			android:layout_width="match_parent" android:layout_height="match_parent" android:padding="7dip">
+			android:layout_width="match_parent" android:layout_height="match_parent"
+			android:padding="7dip">
+
+			<TextView android:id="@+id/textPrincipal" android:textStyle="bold"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:text="Nuevo medicamento:" android:gravity="center_horizontal"
+				android:textSize="23sp" android:textColor="@color/titlecolor">
+			</TextView>
 
 			<TextView android:text="Nombre:" android:id="@+id/TextViewNombre"
-				android:textSize="20sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content"></TextView>
+				android:textColor="@color/titlecolor" android:textSize="20sp"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 			<EditText android:id="@+id/EditTextNombre"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
 			<TextView android:text="Vía:" android:id="@+id/TextViewVia"
-				android:textSize="20sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content"></TextView>
+				android:textColor="@color/titlecolor" android:textSize="20sp"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 
 			<Spinner android:id="@+id/spinner1" android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
 
 			<TextView android:text="Tipo:" android:id="@+id/TextViewTipo"
-				android:textSize="20sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content"></TextView>
-			
+				android:textColor="@color/titlecolor" android:textSize="20sp"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+
 			<Spinner android:id="@+id/spinner2" android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
 
-			<TextView android:text="Contenido: (Neto)" android:id="@+id/TextViewContenido"
-				android:textSize="20sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content"></TextView>
-			<EditText android:id="@+id/EditTextContenido"
-				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
-
 			<TextView android:text="Persona: (Para quien)" android:id="@+id/TextViewPersona"
-				android:textSize="20sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content"></TextView>
+				android:textColor="@color/titlecolor" android:textSize="20sp"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 			<EditText android:id="@+id/EditTextPersona"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
-			<TextView android:text="Farmacia: (Donde se compro)" android:id="@+id/TextViewFarmacia"
-				android:textSize="20sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content"></TextView>
+			<TextView android:text="Farmacia: (Opcional)" android:id="@+id/TextViewFarmacia"
+				android:textColor="@color/titlecolor" android:textSize="20sp"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 			<EditText android:id="@+id/EditTextFarmacia"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
-			<TextView android:text="Doctor:" android:id="@+id/TextViewDoctor"
-				android:textSize="20sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content"></TextView>
+			<TextView android:text="Doctor: (Opcional)" android:id="@+id/TextViewDoctor"
+				android:textColor="@color/titlecolor" android:textSize="20sp"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 			<EditText android:id="@+id/EditTextDoctor"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
 			<TextView android:text="Nota: (Opcional)" android:id="@+id/TextViewNota"
-				android:textSize="20sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content"></TextView>
+				android:textColor="@color/titlecolor" android:textSize="20sp"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 			<EditText android:id="@+id/EditTextNota"
-				android:layout_width="fill_parent" android:layout_height="60px" android:height="20dip"></EditText>
+				android:layout_width="fill_parent" android:layout_height="60px"
+				android:height="20dip"></EditText>
 			<LinearLayout android:orientation="horizontal"
 				android:layout_width="fill_parent" android:layout_height="wrap_content">
 				<Button android:id="@+id/Button01" android:text="Agregar"
+					android:textStyle="bold" android:textColor="@color/titlecolor"
 					android:layout_width="wrap_content" android:layout_height="fill_parent"
 					android:layout_weight="1" android:onClick="Aceptar" />
 
 				<Button android:id="@+id/Button02" android:text="Cancelar"
+					android:textStyle="bold" android:textColor="@color/titlecolor"
 					android:layout_width="wrap_content" android:layout_height="fill_parent"
 					android:layout_weight="1" android:onClick="Cancelar" />
 			</LinearLayout>

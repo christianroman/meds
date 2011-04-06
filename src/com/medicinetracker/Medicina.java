@@ -5,20 +5,17 @@ public class Medicina {
 	private String nombre;
 	private int via;
 	private int tipo;
-	private String contenido;
 	private String persona;
 	private String farmacia;
 	private String doctor;
 	private String nota;
 
-	public Medicina(String nombre, int via, int tipo,
-			String contenido, String persona, String farmacia, String doctor,
+	public Medicina(String nombre, int via, int tipo, String persona, String farmacia, String doctor,
 			String nota) {
 		super();
 		this.nombre = nombre;
 		this.via = via;
 		this.tipo = tipo;
-		this.contenido = contenido;
 		this.persona = persona;
 		this.farmacia = farmacia;
 		this.doctor = doctor;
@@ -47,14 +44,6 @@ public class Medicina {
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
-	}
-
-	public String getContenido() {
-		return contenido;
-	}
-
-	public void setContenido(String contenido) {
-		this.contenido = contenido;
 	}
 
 	public String getPersona() {

@@ -17,7 +17,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String colNombre = "nombre";
 	static final String colVia = "via";
 	static final String colTipo = "tipo";
-	static final String colContenido = "contenido";
 	static final String colPersona = "persona";
 	static final String colFarmacia = "farmacia";
 	static final String colDoctor = "doctor";
@@ -61,16 +60,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ tablaDosis + "." + colMedicamentoID + " = " + tablaMedicamento
 			+ "." + colID + " AND " + colEstado + "=? LIMIT 4";
 
-	static final String queryTipo =  "SELECT " + colNombre + ", "
-	+ colRepeticion + ", " + colFechaInicio + ", " + "strftime('%j',"
-	+ colFechaFin + ") - strftime('%j','now')" + ", " + "(SELECT "
-	+ colTiposNombre + " from " + tablaTipos + " where " + colTiposID
-	+ "=" + colTipo + ")" + ", " + "(SELECT " + colViasNombre
-	+ " from " + tablaVias + " where " + colViasID + "=" + colVia + ")"
-	+ ", " + colFechaInicio + ", " + colDoctor + ", " + colFarmacia
-	+ " FROM " + tablaMedicamento + ", " + tablaDosis + " WHERE "
-	+ tablaDosis + "." + colMedicamentoID + " = " + tablaMedicamento
-	+ "." + colID + " AND " + colEstado + "=?";
+	static final String queryTipo = "SELECT " + colNombre + ", "
+			+ colRepeticion + ", " + colFechaInicio + ", " + "strftime('%j',"
+			+ colFechaFin + ") - strftime('%j','now')" + ", " + "(SELECT "
+			+ colTiposNombre + " from " + tablaTipos + " where " + colTiposID
+			+ "=" + colTipo + ")" + ", " + "(SELECT " + colViasNombre
+			+ " from " + tablaVias + " where " + colViasID + "=" + colVia + ")"
+			+ ", " + colFechaInicio + ", " + colDoctor + ", " + colFarmacia
+			+ " FROM " + tablaMedicamento + ", " + tablaDosis + " WHERE "
+			+ tablaDosis + "." + colMedicamentoID + " = " + tablaMedicamento
+			+ "." + colID + " AND " + colEstado + "=?";
 
 	/*
 	 * static final String queryResumen = "SELECT " + colNombre + ", " +
@@ -100,9 +99,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE " + tablaMedicamento + " (" + colID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + colNombre
 				+ " TEXT , " + colVia + " TEXT , " + colTipo + " TEXT , "
-				+ colContenido + " TEXT , " + colPersona + " TEXT , "
-				+ colFarmacia + " TEXT , " + colDoctor + " TEXT , " + colNota
-				+ " TEXT)");
+				+ colPersona + " TEXT , " + colFarmacia + " TEXT , "
+				+ colDoctor + " TEXT , " + colNota + " TEXT)");
 
 		db.execSQL("CREATE TABLE " + tablaDosis + " (" + colDosisID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + colMedicamentoID
@@ -253,7 +251,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		cv.put(colNombre, m.getNombre());
 		cv.put(colVia, m.getVia());
 		cv.put(colTipo, m.getTipo());
-		cv.put(colContenido, m.getContenido());
 		cv.put(colPersona, m.getPersona());
 		cv.put(colFarmacia, m.getFarmacia());
 		cv.put(colDoctor, m.getDoctor());

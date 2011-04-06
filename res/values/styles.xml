@@ -8,7 +8,7 @@
 	<color name="textcolor">#999999</color>
 	<color name="hr">#d0d0d0</color>
 	<color name="yellow">#ffc73e</color>
-
+	
 	<style name="Blue">
 		<item name="android:windowBackground">@color/gray</item>
 		<item name="android:colorBackground">@color/gray</item>

@@ -2,9 +2,11 @@ package com.medicinetracker;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -20,7 +22,10 @@ public class AgregarMedicina extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.agregarmedicina);
-
+		
+		((Button)findViewById(R.id.Button01)).getBackground().setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
+		((Button)findViewById(R.id.Button02)).getBackground().setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
+		
 		db = new DatabaseHelper(this);
 		vias = db.getAllVias();
 		tipos = db.getAllTipos();
@@ -64,8 +69,6 @@ public class AgregarMedicina extends Activity {
 					.getSelectedItemId() + 1;
 			int tipo = (int) ((Spinner) findViewById(R.id.spinner2))
 					.getSelectedItemId() + 1;
-			String contenido = ((EditText) findViewById(R.id.EditTextContenido))
-					.getText().toString();
 			String persona = ((EditText) findViewById(R.id.EditTextPersona))
 					.getText().toString();
 			String farmacia = ((EditText) findViewById(R.id.EditTextFarmacia))
@@ -75,7 +78,7 @@ public class AgregarMedicina extends Activity {
 			String nota = ((EditText) findViewById(R.id.EditTextNota))
 					.getText().toString();
 
-			Medicina m = new Medicina(nombre, via, tipo, contenido, persona,
+			Medicina m = new Medicina(nombre, via, tipo, persona,
 					farmacia, doctor, nota);
 
 			db.AgregaMedicina(m);

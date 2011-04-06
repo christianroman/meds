@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,14 +35,16 @@ public class Historial extends Activity implements OnClickListener {
 		setContentView(R.layout.historial);
 
 		searchByDate = (Button) findViewById(R.id.searchByDate);
-		//searchByDate.getBackground().setColorFilter(new LightingColorFilter(0xFFFFFFFF, 0xFFAA0000));
 		searchByDate.setOnClickListener(this);
+		searchByDate.getBackground().setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
 
 		searchByType = (Button) findViewById(R.id.searchByType);
 		searchByType.setOnClickListener(this);
+		searchByType.getBackground().setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
 
 		searchByVia = (Button) findViewById(R.id.searchByVia);
 		searchByVia.setOnClickListener(this);
+		searchByVia.getBackground().setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
 
 		db = new DatabaseHelper(this);
 
