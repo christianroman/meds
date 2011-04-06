@@ -4,12 +4,15 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 
-public class medicinetracker extends TabActivity {
+public class medicinetracker extends TabActivity implements OnTabChangeListener {
 
 	DatabaseHelper dbHelper;
 	private TabHost mTabHost;
@@ -25,21 +28,61 @@ public class medicinetracker extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		mTabHost = getTabHost();
 		mResources = getResources();
+
+		mTabHost.setOnTabChangedListener(this);
 
 		agregarTab1();
 		agregarTab2();
 		agregarTab3();
-		//agregarTab4();
+		// agregarTab4();
 
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		int currentTab = prefs.getInt(TAG_PREFERENCIAS, 0);
 		mTabHost.setCurrentTab(currentTab);
-	    
 
+		for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
+			mTabHost.getTabWidget().getChildAt(i)
+					.setBackgroundColor(R.color.titlecolor);
+			mTabHost.getTabWidget().getChildAt(i).getLayoutParams().height = 50;
+		}
+
+		// mTabHost.getTabWidget().setCurrentTab(1);
+		mTabHost.getTabWidget().getChildAt(0)
+				.setBackgroundColor(Color.parseColor("#00abd7"));
+		
+		((TextView) mTabHost.getTabWidget()
+				.getChildAt(mTabHost.getCurrentTab())
+				.findViewById(android.R.id.title)).setTextColor(this
+				.getResources().getColorStateList(R.color.yellow));
+
+	}
+
+	public void onTabChanged(String tabId) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
+			mTabHost.getTabWidget().getChildAt(i)
+					.setBackgroundColor(R.color.titlecolor);
+			
+			((TextView) mTabHost.getTabWidget()
+					.getChildAt(i)
+					.findViewById(android.R.id.title)).setTextColor(this
+					.getResources().getColorStateList(R.color.white));
+			
+		}
+
+		mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab())
+				.setBackgroundColor(Color.parseColor("#00abd7"));
+
+		((TextView) mTabHost.getTabWidget()
+				.getChildAt(mTabHost.getCurrentTab())
+				.findViewById(android.R.id.title)).setTextColor(this
+				.getResources().getColorStateList(R.color.yellow));
+		
+		
 	}
 
 	@Override
@@ -52,7 +95,7 @@ public class medicinetracker extends TabActivity {
 		int currentTab = mTabHost.getCurrentTab();
 		editor.putInt(TAG_PREFERENCIAS, currentTab);
 		editor.commit();
-		
+
 	}
 
 	/*
@@ -60,11 +103,12 @@ public class medicinetracker extends TabActivity {
 	 */
 
 	private void agregarTab1() {
-		
+
 		Intent intent = new Intent(this, Resumen.class);
 
 		TabSpec spec = mTabHost.newTabSpec(TAG_RESUMEN);
-		spec.setIndicator(mResources.getString(R.string.resumen),getResources().getDrawable(R.drawable.ic_menu_resumen));
+		spec.setIndicator(mResources.getString(R.string.resumen),
+				getResources().getDrawable(R.drawable.ic_menu_resumen));
 		spec.setContent(intent);
 
 		mTabHost.addTab(spec);
@@ -80,7 +124,8 @@ public class medicinetracker extends TabActivity {
 		Intent intent = new Intent(this, Consultar.class);
 
 		TabSpec spec = mTabHost.newTabSpec(TAG_CONSULTAR);
-		spec.setIndicator(mResources.getString(R.string.consultar),getResources().getDrawable(R.drawable.ic_menu_consultar));
+		spec.setIndicator(mResources.getString(R.string.consultar),
+				getResources().getDrawable(R.drawable.ic_menu_consultar));
 		spec.setContent(intent);
 
 		mTabHost.addTab(spec);
@@ -96,7 +141,8 @@ public class medicinetracker extends TabActivity {
 		Intent intent = new Intent(this, Historial.class);
 
 		TabSpec spec = mTabHost.newTabSpec(TAG_HISTORIAL);
-		spec.setIndicator(mResources.getString(R.string.historial),getResources().getDrawable(R.drawable.ic_menu_historial));
+		spec.setIndicator(mResources.getString(R.string.historial),
+				getResources().getDrawable(R.drawable.ic_menu_historial));
 		spec.setContent(intent);
 
 		mTabHost.addTab(spec);
@@ -112,8 +158,9 @@ public class medicinetracker extends TabActivity {
 		Intent intent = new Intent(this, Preferencias.class);
 
 		TabSpec spec = mTabHost.newTabSpec(TAG_PREFERENCIAS);
-		
-		spec.setIndicator(mResources.getString(R.string.preferencias),getResources().getDrawable(R.drawable.ic_menu_preferencias));
+
+		spec.setIndicator(mResources.getString(R.string.preferencias),
+				getResources().getDrawable(R.drawable.ic_menu_preferencias));
 		spec.setContent(intent);
 
 		mTabHost.addTab(spec);

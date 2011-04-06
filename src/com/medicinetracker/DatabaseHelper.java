@@ -59,7 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ ", " + colFechaInicio + ", " + colDoctor + ", " + colFarmacia
 			+ " FROM " + tablaMedicamento + ", " + tablaDosis + " WHERE "
 			+ tablaDosis + "." + colMedicamentoID + " = " + tablaMedicamento
-			+ "." + colID + " AND " + colEstado + "=?";
+			+ "." + colID + " AND " + colEstado + "=? LIMIT 4";
 
 	static final String queryTipo =  "SELECT " + colNombre + ", "
 	+ colRepeticion + ", " + colFechaInicio + ", " + "strftime('%j',"

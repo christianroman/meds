@@ -2,34 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="wrap_content" android:layout_width="fill_parent">
 
-	<LinearLayout android:id="@+id/resumen"
-		android:orientation="vertical" android:layout_width="fill_parent"
-		android:padding="5dip" android:layout_marginTop="3dip"
-		android:layout_height="wrap_content" android:layout_alignParentTop="true"
-		android:layout_marginBottom="5dip">
+	<LinearLayout android:layout_alignParentTop="true"
+		android:layout_weight="1" android:orientation="vertical"
+		android:padding="5dip" android:id="@+id/resumen_proximas"
+		android:layout_width="fill_parent" android:layout_height="230dip">
 
 		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="Resumen:" style="@style/header" />
+			android:layout_height="wrap_content" android:text="Próximas dosis:"
+			style="@style/header" />
 
-		<RelativeLayout android:id="@+id/resumen_datos"
-			android:layout_width="fill_parent" android:layout_height="fill_parent"
-			android:padding="5dp">
-			
-			<TextView android:id="@+id/TextViewMedicamentos"
-				android:text="Medicamentos: 0" android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignParentLeft="true" />
-
-			<TextView android:id="@+id/TextViewDosisActivas"
-				android:text="Dosis Activas: 0" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:layout_alignParentRight="true" />
+		<ListView android:id="@+id/LstOpciones" android:layout_width="fill_parent"
+			android:layout_height="fill_parent" android:padding="5dp"
+			android:dividerHeight="1px" android:divider="#FFFFFF" />
 
 
-		</RelativeLayout>
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/resumen"
+		android:layout_alignParentBottom="true" android:layout_above="@+id/resumen_proximas"
+		android:orientation="vertical" android:layout_width="fill_parent"
+		android:padding="5dip" android:layout_marginTop="3dip"
+		android:layout_height="wrap_content">
+
+		<View android:background="@color/hr" android:layout_width="fill_parent"
+			android:layout_height="1dp" android:layout_below="@+id/botones"
+			android:layout_marginTop="5dp" />
 
 		<RelativeLayout android:id="@+id/botones"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
-			android:paddingLeft="30dp" android:paddingRight="30dp">
+			android:paddingLeft="50dp" android:paddingRight="50dp"
+			android:paddingTop="10dp">
 
 			<Button android:layout_width="32px" android:layout_height="wrap_content"
 				android:background="@drawable/add1" android:id="@+id/ButtonAgregarMedicina"
@@ -40,19 +42,43 @@
 				android:onClick="AgregarDosis" android:layout_alignParentRight="true" />
 
 		</RelativeLayout>
-		
+
+		<RelativeLayout android:id="@+id/botones_texto"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:paddingLeft="15dp" android:paddingRight="30dp">
+
+			<TextView android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:id="@+id/NMTextView"
+				android:layout_alignParentLeft="true" android:text="Nuevo Medicamento" />
+
+			<TextView android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:id="@+id/NDTextView"
+				android:layout_alignParentRight="true" android:text="Nueva Dosis" />
+
+		</RelativeLayout>
+
 		<View android:background="@color/hr" android:layout_width="fill_parent"
-			android:layout_height="1dp" android:layout_above="@id/resumen_datos"
+			android:layout_height="1dp" android:layout_above="@id/botones_texto"
 			android:layout_margin="5dp" />
 
 		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="Próximas dosis a tomar:"
-			style="@style/header" />
+			android:layout_height="wrap_content" android:text="Resumen:" style="@style/header" />
+
+		<RelativeLayout android:id="@+id/resumen_datos"
+			android:paddingLeft="10dip" android:paddingRight="10dip"
+			android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+			<TextView android:id="@+id/TextViewMedicamentos"
+				android:text="Medicamentos: 0" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_alignParentLeft="true" />
+
+			<TextView android:id="@+id/TextViewDosisActivas"
+				android:text="Dosis Activas: 0" android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentRight="true" />
+
+		</RelativeLayout>
 
 	</LinearLayout>
-
-	<ListView android:id="@+id/LstOpciones" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:layout_below="@+id/resumen"
-		android:layout_alignParentBottom="true" android:padding="5dp"/>
 
 </RelativeLayout>
