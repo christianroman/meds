@@ -171,10 +171,10 @@ public class Resumen extends Activity {
 			TextView lblSubtitulo = (TextView) item
 					.findViewById(R.id.LblSubTitulo);
 			lblSubtitulo.setText(datos.get(position).getSubtitulo());
-			
+
 			TextView lblHora = (TextView) item.findViewById(R.id.LblHora);
 			lblHora.setText(datos.get(position).getHora());
-			
+
 			TextView tipo = (TextView) item.findViewById(R.id.tipo);
 			tipo.setText(datos.get(position).getTipo());
 
@@ -183,27 +183,27 @@ public class Resumen extends Activity {
 
 			TextView fecha = (TextView) item.findViewById(R.id.fechaIni);
 			fecha.setText(datos.get(position).getFecha());
-			
-			
+
 			String doctor = datos.get(position).getDoctor();
-			if(!doctor.equals("")){
-				((LinearLayout) item.findViewById(R.id.doctorLayout)).setVisibility(View.VISIBLE);
+			if (!doctor.equals("")) {
+				((LinearLayout) item.findViewById(R.id.doctorLayout))
+						.setVisibility(View.VISIBLE);
 				((TextView) item.findViewById(R.id.doctor)).setText(doctor);
 			}
-			
 
 			String farmacia = datos.get(position).getFarmacia();
-			if(!farmacia.equals("")){
-				((LinearLayout) item.findViewById(R.id.farmaciaLayout)).setVisibility(View.VISIBLE);
+			if (!farmacia.equals("")) {
+				((LinearLayout) item.findViewById(R.id.farmaciaLayout))
+						.setVisibility(View.VISIBLE);
 				((TextView) item.findViewById(R.id.farmacia)).setText(farmacia);
 			}
-			
+
 			String nota = datos.get(position).getNota();
-			if(!nota.equals("")){
-				((LinearLayout) item.findViewById(R.id.notaLayout)).setVisibility(View.VISIBLE);
+			if (!nota.equals("")) {
+				((LinearLayout) item.findViewById(R.id.notaLayout))
+						.setVisibility(View.VISIBLE);
 				((TextView) item.findViewById(R.id.nota)).setText(nota);
 			}
-			
 
 			LLExpandir = (LinearLayout) item.findViewById(R.id.LLExpandir);
 			LLExpandir

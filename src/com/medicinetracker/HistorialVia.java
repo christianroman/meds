@@ -136,14 +136,26 @@ public class HistorialVia extends Activity{
 			TextView fecha = (TextView) item.findViewById(R.id.fechaIni);
 			fecha.setText(datos.get(position).getFecha());
 
-			TextView doctor = (TextView) item.findViewById(R.id.doctor);
-			doctor.setText(datos.get(position).getDoctor());
+			String doctor = datos.get(position).getDoctor();
+			if (!doctor.equals("")) {
+				((LinearLayout) item.findViewById(R.id.doctorLayout))
+						.setVisibility(View.VISIBLE);
+				((TextView) item.findViewById(R.id.doctor)).setText(doctor);
+			}
 
-			TextView farmacia = (TextView) item.findViewById(R.id.farmacia);
-			farmacia.setText(datos.get(position).getFarmacia());
-			
-			TextView nota = (TextView) item.findViewById(R.id.nota);
-			nota.setText(datos.get(position).getNota());
+			String farmacia = datos.get(position).getFarmacia();
+			if (!farmacia.equals("")) {
+				((LinearLayout) item.findViewById(R.id.farmaciaLayout))
+						.setVisibility(View.VISIBLE);
+				((TextView) item.findViewById(R.id.farmacia)).setText(farmacia);
+			}
+
+			String nota = datos.get(position).getNota();
+			if (!nota.equals("")) {
+				((LinearLayout) item.findViewById(R.id.notaLayout))
+						.setVisibility(View.VISIBLE);
+				((TextView) item.findViewById(R.id.nota)).setText(nota);
+			}
 
 			LLExpandir = (LinearLayout) item.findViewById(R.id.LLExpandir);
 			LLExpandir
