@@ -29,7 +29,7 @@ public class HistorialTipo extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.historialtipo);
+		setContentView(R.layout.historialvista);
 		
 		TextView t = (TextView) findViewById(R.id.tipoTextView);
 		String tipo = this.getIntent().getExtras().getString("tipo_texto");
@@ -38,9 +38,8 @@ public class HistorialTipo extends Activity {
 		db = new DatabaseHelper(this);
 		
 		if (db.getCantidadDosis() > 0) {
-			//Cursor c = db.getByTipo(tipo);
-			Cursor c = db.getResumen();
-
+			Cursor c = db.getByTipo(tipo);
+			
 			adaptador = new AdaptadorTitulares(this);
 
 			lv1 = (ListView) findViewById(R.id.LstOpciones);
@@ -149,7 +148,6 @@ public class HistorialTipo extends Activity {
 			LLExpandir
 					.setVisibility(datos.get(position).getVisible() ? View.VISIBLE
 							: View.GONE);
-
 			return (item);
 		}
 

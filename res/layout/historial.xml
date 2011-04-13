@@ -1,34 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:padding="10dip"
+<LinearLayout android:layout_width="fill_parent" android:orientation="vertical"
+	android:layout_height="fill_parent" android:padding="10dp"
 	xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<TextView android:id="@+id/textPrincipal"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:text="Tipo de busqueda:" android:layout_alignParentTop="true"
-		android:layout_centerHorizontal="true" android:textSize="23sp"
-		android:textColor="@color/titlecolor" >
+	<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:text="Tipo de busqueda:" android:textSize="23sp"
+		android:textColor="@color/titlecolor">
 	</TextView>
 
-	<ImageView android:layout_width="fill_parent" android:layout_centerInParent="true"
-		android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-		android:src="@drawable/historial_icon" android:layout_below="@+id/textPrincipal" android:layout_marginTop="5dip" />
-
-	<Button android:id="@+id/searchByVia" android:layout_height="wrap_content"
-	android:textStyle="bold" android:text="Por Via" android:layout_marginBottom="15dip"
-	android:layout_centerInParent="true" android:textColor="@color/titlecolor"
-	android:layout_centerHorizontal="true" android:layout_width="fill_parent"></Button>
+	<ImageView android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:src="@drawable/historial_icon"
+		android:layout_below="@+id/textPrincipal" android:layout_margin="10dp" />
 
 	<Button android:text="Por Tipo" android:id="@+id/searchByType"
 		android:textStyle="bold" android:textColor="@color/titlecolor"
-		android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-		android:layout_above="@+id/searchByVia" android:layout_marginBottom="15dip"
+		android:layout_height="wrap_content" android:layout_marginBottom="15dp"
+		android:layout_width="fill_parent"></Button>
+
+	<Button android:id="@+id/searchByVia" android:layout_height="wrap_content"
+		android:textStyle="bold" android:text="Por Via"
+		android:layout_marginBottom="15dp" android:textColor="@color/titlecolor"
 		android:layout_width="fill_parent"></Button>
 
 	<Button android:layout_width="fill_parent" android:textColor="@color/titlecolor"
 		android:textStyle="bold" android:layout_height="wrap_content"
-		android:layout_alignParentLeft="true" android:text="Por Fecha"
-		android:id="@+id/searchByDate" android:layout_below="@+id/searchByVia"
-		></Button>
+		android:text="Por Fecha" android:id="@+id/searchByDate"></Button>
 
-</RelativeLayout>
+</LinearLayout>

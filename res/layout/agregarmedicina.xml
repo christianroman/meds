@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="wrap_content" android:paddingTop="5dip">
+	android:layout_height="wrap_content" android:paddingTop="5dp">
 
 	<ScrollView android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 		<LinearLayout android:orientation="vertical"
 			android:layout_width="match_parent" android:layout_height="match_parent"
-			android:padding="7dip">
+			android:padding="7dp">
 
 			<TextView android:id="@+id/textPrincipal" android:textStyle="bold"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
@@ -25,14 +25,14 @@
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 
-			<Spinner android:id="@+id/spinner1" android:layout_width="wrap_content"
+			<Spinner android:id="@+id/spinner1" android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
 
 			<TextView android:text="Tipo:" android:id="@+id/TextViewTipo"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 
-			<Spinner android:id="@+id/spinner2" android:layout_width="wrap_content"
+			<Spinner android:id="@+id/spinner2" android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
 
 			<TextView android:text="Persona: (Para quien)" android:id="@+id/TextViewPersona"
@@ -58,7 +58,7 @@
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 			<EditText android:id="@+id/EditTextNota"
 				android:layout_width="fill_parent" android:layout_height="60px"
-				android:height="20dip"></EditText>
+				android:height="20dp"></EditText>
 			<LinearLayout android:orientation="horizontal"
 				android:layout_width="fill_parent" android:layout_height="wrap_content">
 				<Button android:id="@+id/Button01" android:text="Agregar"

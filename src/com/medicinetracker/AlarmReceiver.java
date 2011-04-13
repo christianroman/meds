@@ -30,6 +30,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 				System.currentTimeMillis());
 		notification.setLatestEventInfo(context, medicina, message,
 				theappIntent);
+		
+		notification.defaults |= Notification.DEFAULT_SOUND;
+		notification.defaults |= Notification.DEFAULT_VIBRATE;
+		//notification.defaults |= Notification.DEFAULT_LIGHTS;
+		
 		nm.notify(id, notification);
 
 	}

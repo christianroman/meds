@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.medicinetracker"
-      android:versionCode="1"
-      android:versionName="1.0">
-    <application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@style/Blue">
-        <activity android:name=".medicinetracker"
-                  android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Resumen" android:label="@string/resumen"></activity>
-        <activity android:name=".Consultar" android:label="@string/consultar"></activity>
-	    <activity android:name=".Historial" android:label="@string/historial"></activity>
-	    <activity android:name=".Preferencias" android:label="@string/preferencias"></activity>
-	    <activity android:name=".HistorialTipo"></activity>
-        <activity android:name=".medicinetracker" android:label="medicinetracker"></activity>
-        <activity android:name=".AgregarMedicina" android:label="agregarMedicina"></activity>
-        <activity android:name=".AgregarDosis" android:label="agregarDosis"></activity>
-        
-        <receiver android:name=".AlarmReceiver"/>
-        
-    </application>
+	package="com.medicinetracker" android:versionCode="1"
+	android:versionName="1.0">
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<application android:icon="@drawable/icon" android:label="@string/app_name"
+		android:theme="@style/Blue">
+		<activity android:name=".medicinetracker" android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".Resumen" android:label="@string/resumen"></activity>
+		<activity android:name=".Consultar" android:label="@string/consultar"></activity>
+		<activity android:name=".Historial" android:label="@string/historial"></activity>
+		<activity android:name=".Preferencias" android:label="@string/preferencias"></activity>
+		<activity android:name=".HistorialTipo"></activity>
+		<activity android:name=".HistorialVia"></activity>
+		<activity android:name=".HistorialFecha"></activity>
+
+		<activity android:name=".AgregarMedicina" android:label="agregarMedicina"></activity>
+		<activity android:name=".AgregarDosis" android:label="agregarDosis"></activity>
+
+		<receiver android:name=".AlarmReceiver" />
+
+	</application>
 
 
 </manifest> 

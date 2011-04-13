@@ -37,7 +37,7 @@ public class medicinetracker extends TabActivity implements OnTabChangeListener 
 		agregarTab1();
 		agregarTab2();
 		agregarTab3();
-		// agregarTab4();
+		agregarTab4();
 
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
@@ -51,9 +51,9 @@ public class medicinetracker extends TabActivity implements OnTabChangeListener 
 		}
 
 		// mTabHost.getTabWidget().setCurrentTab(1);
-		mTabHost.getTabWidget().getChildAt(0)
+		mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab())
 				.setBackgroundColor(Color.parseColor("#00abd7"));
-		
+
 		((TextView) mTabHost.getTabWidget()
 				.getChildAt(mTabHost.getCurrentTab())
 				.findViewById(android.R.id.title)).setTextColor(this
@@ -66,12 +66,11 @@ public class medicinetracker extends TabActivity implements OnTabChangeListener 
 		for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
 			mTabHost.getTabWidget().getChildAt(i)
 					.setBackgroundColor(R.color.titlecolor);
-			
-			((TextView) mTabHost.getTabWidget()
-					.getChildAt(i)
+
+			((TextView) mTabHost.getTabWidget().getChildAt(i)
 					.findViewById(android.R.id.title)).setTextColor(this
 					.getResources().getColorStateList(R.color.white));
-			
+
 		}
 
 		mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab())
@@ -81,8 +80,7 @@ public class medicinetracker extends TabActivity implements OnTabChangeListener 
 				.getChildAt(mTabHost.getCurrentTab())
 				.findViewById(android.R.id.title)).setTextColor(this
 				.getResources().getColorStateList(R.color.yellow));
-		
-		
+
 	}
 
 	@Override
@@ -106,6 +104,8 @@ public class medicinetracker extends TabActivity implements OnTabChangeListener 
 
 		Intent intent = new Intent(this, Resumen.class);
 
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
 		TabSpec spec = mTabHost.newTabSpec(TAG_RESUMEN);
 		spec.setIndicator(mResources.getString(R.string.resumen),
 				getResources().getDrawable(R.drawable.ic_menu_resumen));
@@ -122,6 +122,8 @@ public class medicinetracker extends TabActivity implements OnTabChangeListener 
 	private void agregarTab2() {
 
 		Intent intent = new Intent(this, Consultar.class);
+
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 		TabSpec spec = mTabHost.newTabSpec(TAG_CONSULTAR);
 		spec.setIndicator(mResources.getString(R.string.consultar),
@@ -162,7 +164,6 @@ public class medicinetracker extends TabActivity implements OnTabChangeListener 
 		spec.setIndicator(mResources.getString(R.string.preferencias),
 				getResources().getDrawable(R.drawable.ic_menu_preferencias));
 		spec.setContent(intent);
-
 		mTabHost.addTab(spec);
 
 	}

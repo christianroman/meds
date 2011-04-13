@@ -11,9 +11,11 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -30,6 +32,11 @@ public class AgregarDosis extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.agregardosis);
+
+		((Button) findViewById(R.id.Button01)).getBackground().setColorFilter(
+				0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
+		((Button) findViewById(R.id.Button02)).getBackground().setColorFilter(
+				0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
 
 		db = new DatabaseHelper(this);
 
@@ -89,12 +96,23 @@ public class AgregarDosis extends Activity {
 			int min = ((TimePicker) findViewById(R.id.timePickerHoraInicio))
 					.getCurrentMinute();
 
-			Dosis dosis = new Dosis(idMedicamento, dia, mes, anio, hora, min,
-					repeticion, dias, cantidad);
-			
-			db.AgregaDosis(dosis);
-			programarAlarmas(dosis.getFechaInicio(), dias, repeticion, medicina);
-			agregado = true;
+			Calendar fechaComprueba = Calendar.getInstance();
+			fechaComprueba.set(anio, mes, dia, hora, min);
+
+			if (fechaComprueba.getTime().compareTo(new Date()) > 0) {
+				Dosis dosis = new Dosis(idMedicamento, dia, mes, anio, hora,
+						min, repeticion, dias, cantidad);
+
+				db.AgregaDosis(dosis);
+				programarAlarmas(dosis.getFechaInicio(), dias, repeticion,
+						medicina);
+				agregado = true;
+			} else {
+				agregado = false;
+				Toast.makeText(this, "La fecha debe de ser mayor a la actual",
+						Toast.LENGTH_LONG).show();
+			}
+
 		}
 
 		catch (Exception ex) {
@@ -118,8 +136,19 @@ public class AgregarDosis extends Activity {
 			Date fecha = (Date) df.parse(fechaInicio);
 			Calendar c = Calendar.getInstance();
 			c.setTime(fecha);
-
-			for (int i = 0; i < dias; i++) {
+			
+			setAlarma(c, medicina);
+			Calendar hasta = c;
+			//hasta.add(Calendar.DAY_OF_MONTH, dias);
+			hasta.add(Calendar.HOUR, dias);
+			
+			/*while(c.getTime().compareTo(hasta.getTime()) < 0) {
+				c.add(Calendar.HOUR_OF_DAY, repeticion);
+				setAlarma(c, medicina);
+				
+			}*/
+			
+			for(int i=0;i<dias;i++) {
 				c.add(Calendar.MINUTE, repeticion);
 				setAlarma(c, medicina);
 			}

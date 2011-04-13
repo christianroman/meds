@@ -46,51 +46,84 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String tablaVias = "vias";
 	static final String colViasID = "idvias";
 	static final String colViasNombre = "nombre";
+	
+	/* Tabla alarmas */
+	
+	static final String tablaAlarmas = "alarmas";
+	static final String colAlarmasID = "idalarmas";
+	static final String colAlarmasDosisID = "iddosis";
+	static final String colAlarmaID = "idalarma";
+	static final String colAlarmaFecha = "alarmafecha";
 
-	static final String viewDosisMedicamento = "viewDosisMedicamento";
+	static final String queryResumen = "SELECT " + tablaMedicamento + "."
+			+ colNombre + ", " + colRepeticion + ", " + colFechaInicio + ", "
+			+ "strftime('%j'," + colFechaFin + ") - strftime('%j','now')"
+			+ ", " + tablaTipos + "." + colTiposNombre + ", " + tablaVias + "."
+			+ colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", "
+			+ colFarmacia + " FROM " + tablaVias + ", " + tablaTipos + ", "
+			+ tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis
+			+ "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID
+			+ " AND " + tablaVias + "." + colViasID + "=" + tablaMedicamento
+			+ "." + colVia + " AND " + tablaTipos + "." + colTiposID + "="
+			+ tablaMedicamento + "." + colTipo + " AND " + colEstado + "=?";
 
-	static final String queryResumen = "SELECT " + colNombre + ", "
-			+ colRepeticion + ", " + colFechaInicio + ", " + "strftime('%j',"
-			+ colFechaFin + ") - strftime('%j','now')" + ", " + "(SELECT "
-			+ colTiposNombre + " from " + tablaTipos + " where " + colTiposID
-			+ "=" + colTipo + ")" + ", " + "(SELECT " + colViasNombre
-			+ " from " + tablaVias + " where " + colViasID + "=" + colVia + ")"
-			+ ", " + colFechaInicio + ", " + colDoctor + ", " + colFarmacia
-			+ " FROM " + tablaMedicamento + ", " + tablaDosis + " WHERE "
-			+ tablaDosis + "." + colMedicamentoID + " = " + tablaMedicamento
-			+ "." + colID + " AND " + colEstado + "=? LIMIT 4";
+	static final String queryTipo = "SELECT " + tablaMedicamento + "."
+			+ colNombre + ", " + colRepeticion + ", " + colFechaInicio + ", "
+			+ "strftime('%j'," + colFechaFin + ") - strftime('%j','now')"
+			+ ", " + tablaTipos + "." + colTiposNombre + ", " + tablaVias + "."
+			+ colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", "
+			+ colFarmacia + " FROM " + tablaVias + ", " + tablaTipos + ", "
+			+ tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis
+			+ "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID
+			+ " AND " + tablaVias + "." + colViasID + "=" + tablaMedicamento
+			+ "." + colVia + " AND " + tablaTipos + "." + colTiposID + "="
+			+ tablaMedicamento + "." + colTipo + " AND " + colEstado + "=1"
+			+ " AND " + tablaTipos + "." + colTiposNombre + "=?";
 
-	static final String queryTipo = "SELECT " + colNombre + ", "
-			+ colRepeticion + ", " + colFechaInicio + ", " + "strftime('%j',"
-			+ colFechaFin + ") - strftime('%j','now')" + ", " + "(SELECT "
-			+ colTiposNombre + " from " + tablaTipos + " where " + colTiposID
-			+ "=" + colTipo + ")" + ", " + "(SELECT " + colViasNombre
-			+ " from " + tablaVias + " where " + colViasID + "=" + colVia + ")"
-			+ ", " + colFechaInicio + ", " + colDoctor + ", " + colFarmacia
-			+ " FROM " + tablaMedicamento + ", " + tablaDosis + " WHERE "
-			+ tablaDosis + "." + colMedicamentoID + " = " + tablaMedicamento
-			+ "." + colID + " AND " + colEstado + "=?";
+	static final String queryVia = "SELECT " + tablaMedicamento + "."
+			+ colNombre + ", " + colRepeticion + ", " + colFechaInicio + ", "
+			+ "strftime('%j'," + colFechaFin + ") - strftime('%j','now')"
+			+ ", " + tablaTipos + "." + colTiposNombre + ", " + tablaVias + "."
+			+ colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", "
+			+ colFarmacia + " FROM " + tablaVias + ", " + tablaTipos + ", "
+			+ tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis
+			+ "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID
+			+ " AND " + tablaVias + "." + colViasID + "=" + tablaMedicamento
+			+ "." + colVia + " AND " + tablaTipos + "." + colTiposID + "="
+			+ tablaMedicamento + "." + colTipo + " AND " + colEstado + "=1"
+			+ " AND " + tablaVias + "." + colViasNombre + "=?";
 
-	/*
-	 * static final String queryResumen = "SELECT " + colNombre + ", " +
-	 * colRepeticion + ", " + colFechaInicio + ", " + "strftime('%j'," +
-	 * colFechaFin + ") - strftime('%j','now')" + " FROM " + tablaMedicamento +
-	 * ", " + tablaDosis + " WHERE " + tablaDosis + "." + colMedicamentoID +
-	 * " = " + tablaMedicamento + "." + colMedicamentoID + " AND " + colEstado +
-	 * "=? ORDER BY " + colDosisID + " DESC LIMIT 4";
-	 * 
-	 * 
-	 * static final String queryResumen = "SELECT " + colNombre + ", " + colVia
-	 * + ", " + colRepeticion + " FROM " + tablaMedicamento + ", " + tablaDosis
-	 * + " WHERE " + tablaDosis + "." + colMedicamentoID + " = " +
-	 * tablaMedicamento + "." + colMedicamentoID + " AND " + colEstado + "=?";
-	 */
+	static final String queryFecha = "SELECT " + tablaMedicamento + "."
+			+ colNombre + ", " + colRepeticion + ", " + colFechaInicio + ", "
+			+ "strftime('%j'," + colFechaFin + ") - strftime('%j','now')"
+			+ ", " + tablaTipos + "." + colTiposNombre + ", " + tablaVias + "."
+			+ colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", "
+			+ colFarmacia + " FROM " + tablaVias + ", " + tablaTipos + ", "
+			+ tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis
+			+ "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID
+			+ " AND " + tablaVias + "." + colViasID + "=" + tablaMedicamento
+			+ "." + colVia + " AND " + tablaTipos + "." + colTiposID + "="
+			+ tablaMedicamento + "." + colTipo + " AND " + colEstado + "=1"
+			+ " AND date(" + tablaDosis + "." + colFechaFin + ")<=date(?)";
 
 	static final String queryMedicinaDosis = "SELECT " + colNombre + " FROM "
 			+ tablaMedicamento + " WHERE " + colID + "=?";
 
 	public DatabaseHelper(Context context) {
 		super(context, dbNombre, null, 1);
+	}
+
+	public void eliminarDB() {
+		this.getWritableDatabase().execSQL(
+				"DROP TABLE IF EXISTS " + tablaMedicamento);
+		this.getWritableDatabase()
+				.execSQL("DROP TABLE IF EXISTS " + tablaDosis);
+		this.getWritableDatabase()
+				.execSQL("DROP TABLE IF EXISTS " + tablaTipos);
+		this.getWritableDatabase().execSQL("DROP TABLE IF EXISTS " + tablaVias);
+		SQLiteDatabase db = this.getReadableDatabase();
+		onCreate(db);
+
 	}
 
 	@Override
@@ -116,6 +149,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE " + tablaVias + " (" + colViasID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + colViasNombre
 				+ " TEXT)");
+		
+		/*db.execSQL("CREATE TABLE " + tablaAlarmas + " (" + colAlarmasID
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + colAlarmasDosisID
+				+ " INTEGER , " + colAlarmaID + " INTEGER , " + colAlarmaFecha
+				+ " DATETIME)");*/
 
 		insertarVias(db);
 		insertarTipos(db);
@@ -202,9 +240,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	public Cursor getByTipo(String tipo) {
-		Log.i("getByTipo", queryTipo);
 		String args[] = new String[] { tipo };
 		return (Cursor) this.getReadableDatabase().rawQuery(queryTipo, args);
+	}
+
+	public Cursor getByVia(String via) {
+		Log.i("getByVia", queryVia);
+		String args[] = new String[] { via };
+		return (Cursor) this.getReadableDatabase().rawQuery(queryVia, args);
+	}
+
+	public Cursor getByFecha(String fecha) {
+		Log.i("getByFecha", queryFecha);
+		String args[] = new String[] { fecha };
+		return (Cursor) this.getReadableDatabase().rawQuery(queryFecha, args);
 	}
 
 	public String[] getMedicamentos() {

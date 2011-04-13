@@ -1,7 +1,5 @@
 package com.medicinetracker;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,94 +12,52 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class Resumen extends Activity {
-
+public class HistorialVia extends Activity{
 	DatabaseHelper db;
 	AdaptadorTitulares adaptador;
 	private ListView lv1;
 	private ArrayList<Titular> datos = new ArrayList<Titular>();
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.resumen);
-
+		setContentView(R.layout.historialvista);
+		
+		TextView t = (TextView) findViewById(R.id.tipoTextView);
+		String via = this.getIntent().getExtras().getString("via_texto");
+		t.setText(via);
+		
 		db = new DatabaseHelper(this);
-
-		((TextView) findViewById(R.id.TextViewDosisActivas))
-				.setText("Dosis Activas: " + db.getCantidadDosis());
-		((TextView) findViewById(R.id.TextViewMedicamentos))
-				.setText("Medicamentos: " + db.getCantidadMedicamentos());
-
+		
 		if (db.getCantidadDosis() > 0) {
-			
-			Boolean dosisSiguientes = false;
-			
-			Cursor c = db.getResumen();
+			Cursor c = db.getByVia(via);
 
 			adaptador = new AdaptadorTitulares(this);
 
 			lv1 = (ListView) findViewById(R.id.LstOpciones);
-
-			long actual = System.currentTimeMillis();
-
+			
 			if (c.moveToFirst()) {
-
 				do {
-
-					String siguiente = CalcularSiguienteHora(c.getString(1),
-							c.getString(2));
-
-					SimpleDateFormat actformat = new SimpleDateFormat(
-							"MMMM d, yyyy hh:mm:ss a");
-
-					long sig;
-					try {
-						sig = ((Date) actformat.parse(siguiente)).getTime();
-
-						if (sig > actual) {
-
-							datos.add(new Titular(c.getString(0), siguiente, c
-									.getString(3), c.getString(4), c
-									.getString(5), c.getString(6), c
-									.getString(7), c.getString(8), false));
-							dosisSiguientes = true;
-
-						}
-
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
+					datos.add(new Titular(c.getString(0),
+							CalcularSiguienteHora(c.getString(1),
+									c.getString(2)), c.getString(3), c
+									.getString(4), c.getString(5), c
+									.getString(6), c.getString(7), c
+									.getString(8), false));
 				} while (c.moveToNext());
-
 			}
-			c.close();
 
 			lv1.setAdapter(adaptador);
 			lv1.setClickable(true);
 			lv1.setOnItemClickListener(funcionClick);
-			
-			if(!dosisSiguientes){
-				((ListView)findViewById(R.id.LstOpciones)).setVisibility(View.GONE);
-				((LinearLayout)findViewById(R.id.avisoDosis)).setVisibility(View.VISIBLE);
-			}
-			
 		}
-		else
-		{
-			((ListView)findViewById(R.id.LstOpciones)).setVisibility(View.GONE);
-			((LinearLayout)findViewById(R.id.avisoDosis)).setVisibility(View.VISIBLE);
-		}
-		db.close();
 
 	}
 
@@ -121,10 +77,9 @@ public class Resumen extends Activity {
 				Integer.parseInt(fecha.substring(8, 10)),
 				Integer.parseInt(fecha.substring(11, 13)),
 				Integer.parseInt(fecha.substring(14, 16)));
-		while (ahora.compareTo(proximafecha.getTime()) > 0) {
-			proximafecha.add(Calendar.HOUR, Integer.parseInt(hora));
+		while (ahora.compareTo(proximafecha.getTime()) >= 0) {
+			proximafecha.add(Calendar.HOUR, +Integer.parseInt(hora));
 		}
-		proximafecha.add(Calendar.MONTH, -1);
 		return proximafecha.getTime().toLocaleString();
 	}
 
@@ -196,4 +151,5 @@ public class Resumen extends Activity {
 		}
 
 	}
+
 }

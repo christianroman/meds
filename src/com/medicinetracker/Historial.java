@@ -8,7 +8,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
@@ -49,7 +48,7 @@ public class Historial extends Activity implements OnClickListener {
 		db = new DatabaseHelper(this);
 
 	}
-
+	
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		Calendar c = Calendar.getInstance();
@@ -74,11 +73,28 @@ public class Historial extends Activity implements OnClickListener {
 	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
 		public void onDateSet(DatePicker view, int anio, int mes, int dia) {
+			String cmes, cdia;
 			String date_selected = String.valueOf(mes + 1) + " /"
 					+ String.valueOf(dia) + " /" + String.valueOf(anio);
 			Toast.makeText(Historial.this,
-					"Selected Date is =" + date_selected, Toast.LENGTH_SHORT)
+					"Fecha Seleccionada: =" + date_selected, Toast.LENGTH_SHORT)
 					.show();
+			///////
+			if(mes<10){
+				cmes="0"+String.valueOf(mes+1);
+			}
+			else{
+				cmes=String.valueOf(mes+1);
+			}
+			if(dia<10){
+				cdia="0"+String.valueOf(dia);
+			}
+			else{
+				cdia=String.valueOf(dia);
+			}
+			Intent intent = new Intent(Historial.this, HistorialFecha.class);
+			intent.putExtra("fecha_texto", String.valueOf(anio)+"-"+cmes+"-"+cdia);
+			startActivity(intent);
 		}
 	};
 
@@ -123,6 +139,11 @@ public class Historial extends Activity implements OnClickListener {
 			public void onClick(DialogInterface dialog, int item) {
 				Toast.makeText(getApplicationContext(), items[item],
 						Toast.LENGTH_SHORT).show();
+				String via = (String) items[item];
+
+				Intent intent = new Intent(Historial.this, HistorialVia.class);
+				intent.putExtra("via_texto", via);
+				startActivity(intent);
 			}
 		});
 		AlertDialog alert = builder.create();

@@ -50,6 +50,8 @@ public class Consultar extends Activity {
 									.getString(8), false));
 				} while (c.moveToNext());
 			}
+			
+			db.close();
 
 			lv1.setAdapter(adaptador);
 			lv1.setClickable(true);

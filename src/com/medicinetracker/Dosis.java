@@ -2,6 +2,8 @@ package com.medicinetracker;
 
 import java.util.Calendar;
 
+import android.util.Log;
+
 public class Dosis {
 
 	private int idmedicamento;
@@ -112,8 +114,8 @@ public class Dosis {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	
-	public String getFechaInicio(){
+
+	public String getFechaInicio() {
 		return fechaInicio;
 	}
 
@@ -122,14 +124,17 @@ public class Dosis {
 	}
 
 	public void CalcularFechaFin() {
-		
+
 		String DATE_FORMAT = "yyyy-MM-dd HH:mm";
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(DATE_FORMAT);
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
+				DATE_FORMAT);
 		Calendar c = Calendar.getInstance();
 		c.set(anio, mes, dia, hora, minuto);
 		fechaInicio = sdf.format(c.getTime());
 		c.add(Calendar.DAY_OF_MONTH, +dias);
 		fechaFin = sdf.format(c.getTime());
 		
+		Log.i("CalcularFechaFin", "fi : " + fechaInicio + "fin: " + fechaFin);
+
 	}
 }
