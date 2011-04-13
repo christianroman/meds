@@ -50,7 +50,7 @@ public class HistorialFecha  extends Activity{
 									c.getString(2)), c.getString(3), c
 									.getString(4), c.getString(5), c
 									.getString(6), c.getString(7), c
-									.getString(8), false));
+									.getString(8), c.getString(9), false));
 				} while (c.moveToNext());
 			}
 
@@ -141,6 +141,9 @@ public class HistorialFecha  extends Activity{
 
 			TextView farmacia = (TextView) item.findViewById(R.id.farmacia);
 			farmacia.setText(datos.get(position).getFarmacia());
+			
+			TextView nota = (TextView) item.findViewById(R.id.nota);
+			nota.setText(datos.get(position).getNota());
 
 			LLExpandir = (LinearLayout) item.findViewById(R.id.LLExpandir);
 			LLExpandir

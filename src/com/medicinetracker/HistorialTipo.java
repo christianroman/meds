@@ -51,7 +51,7 @@ public class HistorialTipo extends Activity {
 									c.getString(2)), c.getString(3), c
 									.getString(4), c.getString(5), c
 									.getString(6), c.getString(7), c
-									.getString(8), false));
+									.getString(8), c.getString(9), false));
 				} while (c.moveToNext());
 			}
 
@@ -82,7 +82,6 @@ public class HistorialTipo extends Activity {
 			proximafecha.add(Calendar.HOUR, +Integer.parseInt(hora));
 		}
 		return proximafecha.getTime().toLocaleString();
-		//return "dfsdf";
 	}
 
 	public void AgregarMedicina(View button) {
@@ -143,6 +142,9 @@ public class HistorialTipo extends Activity {
 
 			TextView farmacia = (TextView) item.findViewById(R.id.farmacia);
 			farmacia.setText(datos.get(position).getFarmacia());
+			
+			TextView nota = (TextView) item.findViewById(R.id.nota);
+			nota.setText(datos.get(position).getNota());
 
 			LLExpandir = (LinearLayout) item.findViewById(R.id.LLExpandir);
 			LLExpandir

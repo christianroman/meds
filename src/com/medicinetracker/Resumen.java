@@ -41,9 +41,9 @@ public class Resumen extends Activity {
 				.setText("Medicamentos: " + db.getCantidadMedicamentos());
 
 		if (db.getCantidadDosis() > 0) {
-			
+
 			Boolean dosisSiguientes = false;
-			
+
 			Cursor c = db.getResumen();
 
 			adaptador = new AdaptadorTitulares(this);
@@ -71,7 +71,8 @@ public class Resumen extends Activity {
 							datos.add(new Titular(c.getString(0), siguiente, c
 									.getString(3), c.getString(4), c
 									.getString(5), c.getString(6), c
-									.getString(7), c.getString(8), false));
+									.getString(7), c.getString(8), c
+									.getString(9), false));
 							dosisSiguientes = true;
 
 						}
@@ -89,17 +90,19 @@ public class Resumen extends Activity {
 			lv1.setAdapter(adaptador);
 			lv1.setClickable(true);
 			lv1.setOnItemClickListener(funcionClick);
-			
-			if(!dosisSiguientes){
-				((ListView)findViewById(R.id.LstOpciones)).setVisibility(View.GONE);
-				((LinearLayout)findViewById(R.id.avisoDosis)).setVisibility(View.VISIBLE);
+
+			if (!dosisSiguientes) {
+				((ListView) findViewById(R.id.LstOpciones))
+						.setVisibility(View.GONE);
+				((LinearLayout) findViewById(R.id.avisoDosis))
+						.setVisibility(View.VISIBLE);
 			}
-			
-		}
-		else
-		{
-			((ListView)findViewById(R.id.LstOpciones)).setVisibility(View.GONE);
-			((LinearLayout)findViewById(R.id.avisoDosis)).setVisibility(View.VISIBLE);
+
+		} else {
+			((ListView) findViewById(R.id.LstOpciones))
+					.setVisibility(View.GONE);
+			((LinearLayout) findViewById(R.id.avisoDosis))
+					.setVisibility(View.VISIBLE);
 		}
 		db.close();
 
@@ -168,10 +171,10 @@ public class Resumen extends Activity {
 			TextView lblSubtitulo = (TextView) item
 					.findViewById(R.id.LblSubTitulo);
 			lblSubtitulo.setText(datos.get(position).getSubtitulo());
-
+			
 			TextView lblHora = (TextView) item.findViewById(R.id.LblHora);
 			lblHora.setText(datos.get(position).getHora());
-
+			
 			TextView tipo = (TextView) item.findViewById(R.id.tipo);
 			tipo.setText(datos.get(position).getTipo());
 
@@ -180,12 +183,27 @@ public class Resumen extends Activity {
 
 			TextView fecha = (TextView) item.findViewById(R.id.fechaIni);
 			fecha.setText(datos.get(position).getFecha());
+			
+			
+			String doctor = datos.get(position).getDoctor();
+			if(!doctor.equals(null)){
+				((LinearLayout) item.findViewById(R.id.doctorLayout)).setVisibility(View.VISIBLE);
+				((TextView) item.findViewById(R.id.doctor)).setText(doctor);
+			}
+			
 
-			TextView doctor = (TextView) item.findViewById(R.id.doctor);
-			doctor.setText(datos.get(position).getDoctor());
-
-			TextView farmacia = (TextView) item.findViewById(R.id.farmacia);
-			farmacia.setText(datos.get(position).getFarmacia());
+			String farmacia = datos.get(position).getFarmacia();
+			if(!farmacia.equals(null)){
+				((LinearLayout) item.findViewById(R.id.farmaciaLayout)).setVisibility(View.VISIBLE);
+				((TextView) item.findViewById(R.id.farmacia)).setText(farmacia);
+			}
+			
+			String nota = datos.get(position).getNota();
+			if(!nota.equals(null)){
+				((LinearLayout) item.findViewById(R.id.notaLayout)).setVisibility(View.VISIBLE);
+				((TextView) item.findViewById(R.id.nota)).setText(nota);
+			}
+			
 
 			LLExpandir = (LinearLayout) item.findViewById(R.id.LLExpandir);
 			LLExpandir

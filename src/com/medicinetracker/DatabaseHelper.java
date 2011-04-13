@@ -60,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ "strftime('%j'," + colFechaFin + ") - strftime('%j','now')"
 			+ ", " + tablaTipos + "." + colTiposNombre + ", " + tablaVias + "."
 			+ colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", "
-			+ colFarmacia + " FROM " + tablaVias + ", " + tablaTipos + ", "
+			+ colFarmacia + ", " + colNota + " FROM " + tablaVias + ", " + tablaTipos + ", "
 			+ tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis
 			+ "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID
 			+ " AND " + tablaVias + "." + colViasID + "=" + tablaMedicamento
@@ -72,7 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ "strftime('%j'," + colFechaFin + ") - strftime('%j','now')"
 			+ ", " + tablaTipos + "." + colTiposNombre + ", " + tablaVias + "."
 			+ colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", "
-			+ colFarmacia + " FROM " + tablaVias + ", " + tablaTipos + ", "
+			+ colFarmacia + ", " + colNota + " FROM " + tablaVias + ", " + tablaTipos + ", "
 			+ tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis
 			+ "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID
 			+ " AND " + tablaVias + "." + colViasID + "=" + tablaMedicamento
@@ -85,7 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ "strftime('%j'," + colFechaFin + ") - strftime('%j','now')"
 			+ ", " + tablaTipos + "." + colTiposNombre + ", " + tablaVias + "."
 			+ colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", "
-			+ colFarmacia + " FROM " + tablaVias + ", " + tablaTipos + ", "
+			+ colFarmacia + ", " + colNota + " FROM " + tablaVias + ", " + tablaTipos + ", "
 			+ tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis
 			+ "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID
 			+ " AND " + tablaVias + "." + colViasID + "=" + tablaMedicamento
@@ -98,7 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ "strftime('%j'," + colFechaFin + ") - strftime('%j','now')"
 			+ ", " + tablaTipos + "." + colTiposNombre + ", " + tablaVias + "."
 			+ colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", "
-			+ colFarmacia + " FROM " + tablaVias + ", " + tablaTipos + ", "
+			+ colFarmacia + ", " + colNota + " FROM " + tablaVias + ", " + tablaTipos + ", "
 			+ tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis
 			+ "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID
 			+ " AND " + tablaVias + "." + colViasID + "=" + tablaMedicamento
