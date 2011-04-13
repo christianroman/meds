@@ -77,10 +77,10 @@
 				android:layout_height="wrap_content" />
 		</LinearLayout>
 
-		<LinearLayout android:orientation="horizontal"
+		<LinearLayout android:orientation="horizontal" android:id="@+id/farmaciaLayout" android:visibility="gone"
 			android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-			<TextView android:text="Farmacia: " android:gravity="top" android:id="@+id/farmaciaLayout" android:visibility="gone"
+			<TextView android:text="Farmacia: " android:gravity="top"
 				android:textSize="13sp" android:layout_width="wrap_content"
 				android:layout_height="fill_parent" android:layout_weight="1" />
 			<TextView android:id="@+id/farmacia" android:text="contenido"

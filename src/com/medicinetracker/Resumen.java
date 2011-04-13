@@ -186,20 +186,20 @@ public class Resumen extends Activity {
 			
 			
 			String doctor = datos.get(position).getDoctor();
-			if(!doctor.equals(null)){
+			if(!doctor.equals("")){
 				((LinearLayout) item.findViewById(R.id.doctorLayout)).setVisibility(View.VISIBLE);
 				((TextView) item.findViewById(R.id.doctor)).setText(doctor);
 			}
 			
 
 			String farmacia = datos.get(position).getFarmacia();
-			if(!farmacia.equals(null)){
+			if(!farmacia.equals("")){
 				((LinearLayout) item.findViewById(R.id.farmaciaLayout)).setVisibility(View.VISIBLE);
 				((TextView) item.findViewById(R.id.farmacia)).setText(farmacia);
 			}
 			
 			String nota = datos.get(position).getNota();
-			if(!nota.equals(null)){
+			if(!nota.equals("")){
 				((LinearLayout) item.findViewById(R.id.notaLayout)).setVisibility(View.VISIBLE);
 				((TextView) item.findViewById(R.id.nota)).setText(nota);
 			}
