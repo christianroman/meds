@@ -12,12 +12,12 @@ public class Dosis {
 	private int anio;
 	private int hora;
 	private int minuto;
-	private String fechaInicio;
+	private long fechaInicio;
 	private int repeticion;
 	private int dias;
 	private int cantidad;
 	private int estado;
-	private String fechaFin;
+	private long fechaFin;
 
 	public Dosis(int idmedicamento, int dia, int mes, int anio, int hora,
 			int minuto, int repeticion, int dias, int cantidad) {
@@ -115,26 +115,21 @@ public class Dosis {
 		this.estado = estado;
 	}
 
-	public String getFechaInicio() {
+	public long getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public String getFechaFin() {
+	public long getFechaFin() {
 		return fechaFin;
 	}
 
 	public void CalcularFechaFin() {
 
-		String DATE_FORMAT = "yyyy-MM-dd HH:mm";
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
-				DATE_FORMAT);
 		Calendar c = Calendar.getInstance();
 		c.set(anio, mes, dia, hora, minuto);
-		fechaInicio = sdf.format(c.getTime());
+		fechaInicio = c.getTimeInMillis();
 		c.add(Calendar.DAY_OF_MONTH, +dias);
-		fechaFin = sdf.format(c.getTime());
-		
-		Log.i("CalcularFechaFin", "fi : " + fechaInicio + "fin: " + fechaFin);
+		fechaFin = c.getTimeInMillis();
 
 	}
 }

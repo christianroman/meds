@@ -33,7 +33,7 @@ public class Consultar extends Activity {
 		
 		db = new DatabaseHelper(this);
 		
-		if (db.getCantidadDosis() > 0) {
+		/*if (db.getCantidadDosis() > 0) {
 			Cursor c = db.getResumen();
 
 			adaptador = new AdaptadorTitulares(this);
@@ -56,7 +56,7 @@ public class Consultar extends Activity {
 			lv1.setAdapter(adaptador);
 			lv1.setClickable(true);
 			lv1.setOnItemClickListener(funcionClick);
-		}
+		}*/
 
 	}
 
@@ -67,20 +67,6 @@ public class Consultar extends Activity {
 			lv1.setAdapter(adaptador);
 		}
 	};
-
-	public String CalcularSiguienteHora(String hora, String fecha) {
-		Calendar proximafecha = Calendar.getInstance();
-		Date ahora = new Date();
-		proximafecha.set(Integer.parseInt(fecha.substring(0, 4)),
-				Integer.parseInt(fecha.substring(5, 7)),
-				Integer.parseInt(fecha.substring(8, 10)),
-				Integer.parseInt(fecha.substring(11, 13)),
-				Integer.parseInt(fecha.substring(14, 16)));
-		while (ahora.compareTo(proximafecha.getTime()) >= 0) {
-			proximafecha.add(Calendar.HOUR, +Integer.parseInt(hora));
-		}
-		return proximafecha.getTime().toLocaleString();
-	}
 
 	public void AgregarMedicina(View button) {
 		Intent intent = new Intent(this, AgregarMedicina.class);

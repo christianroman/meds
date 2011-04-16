@@ -1,10 +1,7 @@
 package com.medicinetracker;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -44,45 +41,37 @@ public class Resumen extends Activity {
 
 			Boolean dosisSiguientes = false;
 
-			Cursor c = db.getResumen();
-
 			adaptador = new AdaptadorTitulares(this);
 
 			lv1 = (ListView) findViewById(R.id.LstOpciones);
 
 			long actual = System.currentTimeMillis();
 
-			if (c.moveToFirst()) {
+			Cursor c = db.getResumen();
+			while (c.moveToNext()) {
 
-				do {
+				long sig = c.getLong(1);
 
-					String siguiente = CalcularSiguienteHora(c.getString(1),
-							c.getString(2));
+				if (sig > actual) {
 
-					SimpleDateFormat actformat = new SimpleDateFormat(
-							"MMMM d, yyyy hh:mm:ss a");
+					Calendar ca = Calendar.getInstance();
+					ca.setTimeInMillis(c.getLong(1));
 
-					long sig;
-					try {
-						sig = ((Date) actformat.parse(siguiente)).getTime();
+					Calendar c_horas = Calendar.getInstance();
+					c_horas.setTimeInMillis(c.getLong(2));
+					int dias = (int) (c_horas.getTimeInMillis() - actual)
+							/ (24 * 60 * 60 * 1000);
+					
+					Calendar c_inicio = Calendar.getInstance();
+					c_inicio.setTimeInMillis(c.getLong(5));
 
-						if (sig > actual) {
-
-							datos.add(new Titular(c.getString(0), siguiente, c
-									.getString(3), c.getString(4), c
-									.getString(5), c.getString(6), c
-									.getString(7), c.getString(8), c
-									.getString(9), false));
-							dosisSiguientes = true;
-
-						}
-
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-				} while (c.moveToNext());
+					datos.add(new Titular(c.getString(0), ca.getTime()
+							.toLocaleString(), String.valueOf(dias), c
+							.getString(3), c.getString(4), c_inicio.getTime().toLocaleString(), c
+							.getString(6), c.getString(7), c.getString(8),
+							false));
+					dosisSiguientes = true;
+				}
 
 			}
 			c.close();
@@ -115,21 +104,6 @@ public class Resumen extends Activity {
 			lv1.setAdapter(adaptador);
 		}
 	};
-
-	public String CalcularSiguienteHora(String hora, String fecha) {
-		Calendar proximafecha = Calendar.getInstance();
-		Date ahora = new Date();
-		proximafecha.set(Integer.parseInt(fecha.substring(0, 4)),
-				Integer.parseInt(fecha.substring(5, 7)),
-				Integer.parseInt(fecha.substring(8, 10)),
-				Integer.parseInt(fecha.substring(11, 13)),
-				Integer.parseInt(fecha.substring(14, 16)));
-		while (ahora.compareTo(proximafecha.getTime()) > 0) {
-			proximafecha.add(Calendar.HOUR, Integer.parseInt(hora));
-		}
-		proximafecha.add(Calendar.MONTH, -1);
-		return proximafecha.getTime().toLocaleString();
-	}
 
 	public void AgregarMedicina(View button) {
 		Intent intent = new Intent(this, AgregarMedicina.class);

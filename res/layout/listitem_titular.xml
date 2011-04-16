@@ -7,7 +7,6 @@
 		android:layout_width="fill_parent" android:layout_height="wrap_content">
 		<TextView android:id="@+id/LblTitulo" android:textSize="20sp"
 			android:textStyle="bold" android:textColor="@color/titlecolor"
-
 			android:gravity="fill_vertical" android:layout_width="wrap_content"
 			android:layout_height="fill_parent" android:layout_weight="1" />
 		<TextView android:text="Días restantes: " android:textSize="12sp"
@@ -33,71 +32,74 @@
 		android:orientation="vertical" android:layout_width="wrap_content"
 		android:layout_height="wrap_content">
 
-		<LinearLayout android:orientation="horizontal"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<LinearLayout android:orientation="horizontal"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-			<TextView android:text="Tipo: " android:gravity="top"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/tipo" android:text="contenido"
-				android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-		</LinearLayout>
+				<TextView android:text="Tipo: " android:gravity="top"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/tipo" android:text="contenido"
+					android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+			</LinearLayout>
 
-		<LinearLayout android:orientation="horizontal"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<LinearLayout android:orientation="horizontal"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-			<TextView android:text="Via: " android:gravity="top"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/via" android:text="contenido"
-				android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-		</LinearLayout>
+				<TextView android:text="Via: " android:gravity="top"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/via" android:text="contenido"
+					android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+			</LinearLayout>
 
-		<LinearLayout android:orientation="horizontal"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<LinearLayout android:orientation="horizontal"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-			<TextView android:text="Fecha de Inicio: " android:gravity="top"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/fechaIni" android:text="contenido"
-				android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-		</LinearLayout>
+				<TextView android:text="Fecha de Inicio: " android:gravity="top"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/fechaIni" android:text="contenido"
+					android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+			</LinearLayout>
 
-		<LinearLayout android:orientation="horizontal" android:id="@+id/doctorLayout" android:visibility="gone"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<LinearLayout android:orientation="horizontal"
+				android:id="@+id/doctorLayout" android:visibility="gone"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-			<TextView android:text="Doctor: " android:gravity="top"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/doctor" android:text="contenido"
-				android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-		</LinearLayout>
+				<TextView android:text="Doctor: " android:gravity="top"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/doctor" android:text="contenido"
+					android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+			</LinearLayout>
 
-		<LinearLayout android:orientation="horizontal" android:id="@+id/farmaciaLayout" android:visibility="gone"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<LinearLayout android:orientation="horizontal"
+				android:id="@+id/farmaciaLayout" android:visibility="gone"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-			<TextView android:text="Farmacia: " android:gravity="top"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/farmacia" android:text="contenido"
-				android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-		</LinearLayout>
-		
-		<LinearLayout android:orientation="horizontal" android:id="@+id/notaLayout" android:visibility="gone"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
+				<TextView android:text="Farmacia: " android:gravity="top"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/farmacia" android:text="contenido"
+					android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+			</LinearLayout>
 
-			<TextView android:text="Nota: " android:gravity="top"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/nota" android:text="contenido"
-				android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-		</LinearLayout>
+			<LinearLayout android:orientation="horizontal"
+				android:id="@+id/notaLayout" android:visibility="gone"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+				<TextView android:text="Nota: " android:gravity="top"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/nota" android:text="contenido"
+					android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+			</LinearLayout>
 
 	</LinearLayout>
 

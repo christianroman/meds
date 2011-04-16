@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -124,38 +125,31 @@ public class AgregarDosis extends Activity {
 				Intent intent = new Intent(this, medicinetracker.class);
 				startActivity(intent);
 			}
-			db.close();
 		}
 	}
 
-	private void programarAlarmas(String fechaInicio, int dias, int repeticion,
+	private void programarAlarmas(long fechaInicio, int dias, int repeticion,
 			String medicina) {
 
-		try {
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			Date fecha = (Date) df.parse(fechaInicio);
-			Calendar c = Calendar.getInstance();
-			c.setTime(fecha);
-			
-			setAlarma(c, medicina);
-			Calendar hasta = c;
-			//hasta.add(Calendar.DAY_OF_MONTH, dias);
-			hasta.add(Calendar.HOUR, dias);
-			
-			/*while(c.getTime().compareTo(hasta.getTime()) < 0) {
-				c.add(Calendar.HOUR_OF_DAY, repeticion);
-				setAlarma(c, medicina);
-				
-			}*/
-			
-			for(int i=0;i<dias;i++) {
-				c.add(Calendar.MINUTE, repeticion);
-				setAlarma(c, medicina);
-			}
+		Calendar c = Calendar.getInstance();
+		c.setTimeInMillis(fechaInicio);
 
-		} catch (ParseException e) {
-			e.printStackTrace();
+		setAlarma(c, medicina);
+		Calendar hasta = Calendar.getInstance();
+		hasta.setTimeInMillis(fechaInicio);
+
+		hasta.add(Calendar.DAY_OF_MONTH, dias);
+		while (c.getTime().compareTo(hasta.getTime()) < 0) {
+			c.add(Calendar.HOUR, repeticion);
+			setAlarma(c, medicina);
+			Log.i("programarAlarmas", c.getTime().toLocaleString());
 		}
+
+		/*hasta.add(Calendar.HOUR, dias);
+		for (int i = 0; i < dias; i++) {
+			c.add(Calendar.MINUTE, repeticion);
+			setAlarma(c, medicina);
+		}*/
 
 	}
 
@@ -163,6 +157,9 @@ public class AgregarDosis extends Activity {
 
 		Intent intent = new Intent(AgregarDosis.this, AlarmReceiver.class);
 		final int id = (int) System.currentTimeMillis();
+
+		db.AgregarAlarma(db.getLastDosis(), id, c.getTimeInMillis());
+
 		intent.putExtra("id", id);
 		intent.putExtra("medicina", medicina);
 		PendingIntent appIntent = PendingIntent.getBroadcast(AgregarDosis.this,
