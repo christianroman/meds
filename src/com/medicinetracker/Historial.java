@@ -73,38 +73,40 @@ public class Historial extends Activity implements OnClickListener {
 	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
 		public void onDateSet(DatePicker view, int anio, int mes, int dia) {
-			String cmes, cdia;
-			String date_selected = String.valueOf(mes + 1) + " /"
-					+ String.valueOf(dia) + " /" + String.valueOf(anio);
-			Toast.makeText(Historial.this,
-					"Fecha Seleccionada: =" + date_selected, Toast.LENGTH_SHORT)
-					.show();
-			///////
-			if(mes<10){
-				cmes="0"+String.valueOf(mes+1);
-			}
-			else{
-				cmes=String.valueOf(mes+1);
-			}
-			if(dia<10){
-				cdia="0"+String.valueOf(dia);
-			}
-			else{
-				cdia=String.valueOf(dia);
-			}
+			Calendar c = Calendar.getInstance();
+			c.set(anio, mes, dia);
+			
 			Intent intent = new Intent(Historial.this, HistorialFecha.class);
-			intent.putExtra("fecha_texto", String.valueOf(anio)+"-"+cmes+"-"+cdia);
+			intent.putExtra("fecha_texto", c.getTimeInMillis());
 			startActivity(intent);
 		}
 	};
 
 	public void onClick(View v) {
-		if (v == searchByDate)
-			showDialog(DATE_DIALOG_ID);
-		if (v == searchByType)
-			showDialog(TYPE_DIALOG_ID);
-		if (v == searchByVia)
+		if (v == searchByDate){
+			if (db.getCantidadDosis() > 0)
+				showDialog(DATE_DIALOG_ID);
+			else
+				Toast.makeText(this, "No hay dosis en el historial",
+						Toast.LENGTH_LONG).show();
+			db.close();
+		}
+		if (v == searchByType){
+			if (db.getCantidadDosis() > 0)
+				showDialog(TYPE_DIALOG_ID);
+			else
+				Toast.makeText(this, "No hay dosis en el historial",
+						Toast.LENGTH_LONG).show();
+			db.close();
+		}
+		if (v == searchByVia){
+			if (db.getCantidadDosis() > 0)
 			showDialog(VIA_DIALOG_ID);
+			else
+				Toast.makeText(this, "No hay dosis en el historial",
+						Toast.LENGTH_LONG).show();
+			db.close();
+		}
 	}
 
 	public void typeActions() {

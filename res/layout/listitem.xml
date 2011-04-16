@@ -5,25 +5,23 @@
 
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="wrap_content">
-		<TextView android:id="@+id/LblTitulo" android:textSize="20sp"
+		<TextView android:id="@+id/tvNombre" android:textSize="20sp"
 			android:textStyle="bold" android:textColor="@color/titlecolor"
 			android:gravity="fill_vertical" android:layout_width="wrap_content"
 			android:layout_height="fill_parent" android:layout_weight="1" />
-		<TextView android:text="Días restantes: " android:textSize="12sp"
-			android:gravity="right" android:layout_width="wrap_content"
-			android:layout_height="fill_parent" android:layout_weight="1" />
-		<TextView android:id="@+id/LblHora" android:text="0"
-			android:textSize="12sp" android:gravity="left" android:layout_width="wrap_content"
+
+		<TextView android:id="@+id/tvRepeticion" android:text="0"
+			android:textSize="12sp" android:gravity="right" android:layout_width="wrap_content"
 			android:layout_height="fill_parent" />
 	</LinearLayout>
 
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<TextView android:text="Proxima dosis:  " android:gravity="top"
+		<TextView android:text="Fecha de inicio:  " android:gravity="top"
 			android:textSize="13sp" android:layout_width="wrap_content"
 			android:textStyle="italic" android:textColor="@color/titlecolor"
 			android:layout_height="fill_parent" android:layout_weight="1" />
-		<TextView android:id="@+id/LblSubTitulo" android:gravity="top"
+		<TextView android:id="@+id/tvFechaInicio" android:gravity="top"
 			android:textSize="13sp" android:layout_width="wrap_content"
 			android:textStyle="italic" android:layout_height="wrap_content" />
 
@@ -39,7 +37,7 @@
 				android:textStyle="italic" android:textColor="@color/titlecolor"
 				android:textSize="13sp" android:layout_width="wrap_content"
 				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/tipo" android:text="contenido"
+			<TextView android:id="@+id/tvTipo" android:text="contenido"
 				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		</LinearLayout>
@@ -51,7 +49,7 @@
 				android:textStyle="italic" android:textColor="@color/titlecolor"
 				android:textSize="13sp" android:layout_width="wrap_content"
 				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/via" android:text="contenido"
+			<TextView android:id="@+id/tvVia" android:text="contenido"
 				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		</LinearLayout>
@@ -59,11 +57,24 @@
 		<LinearLayout android:orientation="horizontal"
 			android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-			<TextView android:text="Fecha de Inicio: " android:gravity="top"
+			<TextView android:text="Finalización: " android:gravity="top"
 				android:textStyle="italic" android:textColor="@color/titlecolor"
 				android:textSize="13sp" android:layout_width="wrap_content"
 				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/fechaIni" android:text="contenido"
+			<TextView android:id="@+id/tvFechafin" android:text="contenido"
+				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
+				android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		</LinearLayout>
+
+		<LinearLayout android:orientation="horizontal"
+			android:id="@+id/personaLayout" android:visibility="gone"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+			<TextView android:text="Persona: " android:gravity="top"
+				android:textStyle="italic" android:textColor="@color/titlecolor"
+				android:textSize="13sp" android:layout_width="wrap_content"
+				android:layout_height="fill_parent" android:layout_weight="1" />
+			<TextView android:id="@+id/tvPersona" android:text="contenido"
 				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		</LinearLayout>
@@ -76,7 +87,7 @@
 				android:textStyle="italic" android:textColor="@color/titlecolor"
 				android:textSize="13sp" android:layout_width="wrap_content"
 				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/doctor" android:text="contenido"
+			<TextView android:id="@+id/tvDoctor" android:text="contenido"
 				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		</LinearLayout>
@@ -89,7 +100,7 @@
 				android:textStyle="italic" android:textColor="@color/titlecolor"
 				android:textSize="13sp" android:layout_width="wrap_content"
 				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/farmacia" android:text="contenido"
+			<TextView android:id="@+id/tvFarmacia" android:text="contenido"
 				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		</LinearLayout>
@@ -102,7 +113,7 @@
 				android:textStyle="italic" android:textColor="@color/titlecolor"
 				android:textSize="13sp" android:layout_width="wrap_content"
 				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/nota" android:text="contenido"
+			<TextView android:id="@+id/tvNota" android:text="contenido"
 				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		</LinearLayout>

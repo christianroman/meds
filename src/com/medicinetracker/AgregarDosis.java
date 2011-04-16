@@ -1,8 +1,5 @@
 package com.medicinetracker;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -66,7 +63,6 @@ public class AgregarDosis extends Activity {
 		Boolean agregado = false;
 
 		try {
-
 			int idMedicamento = (int) (((Spinner) findViewById(R.id.spinnerMedicamento))
 					.getSelectedItemId() + 1);
 
@@ -80,17 +76,14 @@ public class AgregarDosis extends Activity {
 			int anio = ((DatePicker) findViewById(R.id.datePickerFechaInicio))
 					.getYear();
 
-			int cantidad = Integer
-					.valueOf(((EditText) findViewById(R.id.EditTextCantidad))
-							.getText().toString());
+			String cantidad = ((EditText) findViewById(R.id.EditTextCantidad))
+					.getText().toString();
 
-			int dias = Integer
-					.valueOf(((EditText) findViewById(R.id.EditTextDias))
-							.getText().toString());
+			String dias = ((EditText) findViewById(R.id.EditTextDias))
+					.getText().toString();
 
-			int repeticion = Integer
-					.valueOf(((EditText) findViewById(R.id.EditTextRepeticion))
-							.getText().toString());
+			String repeticion = ((EditText) findViewById(R.id.EditTextRepeticion))
+					.getText().toString();
 
 			int hora = ((TimePicker) findViewById(R.id.timePickerHoraInicio))
 					.getCurrentHour();
@@ -101,13 +94,18 @@ public class AgregarDosis extends Activity {
 			fechaComprueba.set(anio, mes, dia, hora, min);
 
 			if (fechaComprueba.getTime().compareTo(new Date()) > 0) {
-				Dosis dosis = new Dosis(idMedicamento, dia, mes, anio, hora,
-						min, repeticion, dias, cantidad);
+				if (!cantidad.equals("") && !dias.equals("") && !repeticion.equals("")) {
+					Dosis dosis = new Dosis(idMedicamento, dia, mes, anio,
+							hora, min, Integer.valueOf(repeticion), Integer.valueOf(dias), Integer.valueOf(cantidad));
+					db.AgregaDosis(dosis);
+					programarAlarmas(dosis.getFechaInicio(), Integer.valueOf(dias), Integer.valueOf(repeticion),
+							medicina);
+					agregado = true;
+				} else
+					Toast.makeText(this,
+							"Es necesario llenar todos los campos",
+							Toast.LENGTH_LONG).show();
 
-				db.AgregaDosis(dosis);
-				programarAlarmas(dosis.getFechaInicio(), dias, repeticion,
-						medicina);
-				agregado = true;
 			} else {
 				agregado = false;
 				Toast.makeText(this, "La fecha debe de ser mayor a la actual",
@@ -145,11 +143,10 @@ public class AgregarDosis extends Activity {
 			Log.i("programarAlarmas", c.getTime().toLocaleString());
 		}
 
-		/*hasta.add(Calendar.HOUR, dias);
-		for (int i = 0; i < dias; i++) {
-			c.add(Calendar.MINUTE, repeticion);
-			setAlarma(c, medicina);
-		}*/
+		/*
+		 * hasta.add(Calendar.HOUR, dias); for (int i = 0; i < dias; i++) {
+		 * c.add(Calendar.MINUTE, repeticion); setAlarma(c, medicina); }
+		 */
 
 	}
 

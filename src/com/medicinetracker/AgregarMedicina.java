@@ -77,12 +77,16 @@ public class AgregarMedicina extends Activity {
 					.getText().toString();
 			String nota = ((EditText) findViewById(R.id.EditTextNota))
 					.getText().toString();
-
-			Medicina m = new Medicina(nombre, via, tipo, persona,
-					farmacia, doctor, nota);
-
-			db.AgregaMedicina(m);
-			agregado = true;
+			
+			if(!nombre.equals("")){
+				Medicina m = new Medicina(nombre, via, tipo, persona,
+						farmacia, doctor, nota);
+				db.AgregaMedicina(m);
+				agregado = true;
+			}
+			else
+				Toast.makeText(this, "El nombre no puede estar vacio", Toast.LENGTH_LONG).show();
+			
 		}
 
 		catch (Exception ex) {
