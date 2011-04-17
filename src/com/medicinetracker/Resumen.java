@@ -33,11 +33,11 @@ public class Resumen extends Activity {
 		db = new DatabaseHelper(this);
 
 		((TextView) findViewById(R.id.TextViewDosisActivas))
-				.setText("Dosis Activas: " + db.getCantidadDosis());
+				.setText("Dosis Activas: " + db.getCantidadDosisActivas());
 		((TextView) findViewById(R.id.TextViewMedicamentos))
 				.setText("Medicamentos: " + db.getCantidadMedicamentos());
 
-		if (db.getCantidadDosis() > 0) {
+		if (db.getCantidadDosisActivas() > 0) {
 
 			Boolean dosisSiguientes = false;
 
@@ -61,15 +61,15 @@ public class Resumen extends Activity {
 					c_horas.setTimeInMillis(c.getLong(2));
 					int dias = (int) (c_horas.getTimeInMillis() - actual)
 							/ (24 * 60 * 60 * 1000);
-					
+
 					Calendar c_inicio = Calendar.getInstance();
 					c_inicio.setTimeInMillis(c.getLong(5));
 
 					datos.add(new Titular(c.getString(0), ca.getTime()
 							.toLocaleString(), String.valueOf(dias), c
-							.getString(3), c.getString(4), c_inicio.getTime().toLocaleString(), c
-							.getString(6), c.getString(7), c.getString(8),
-							false));
+							.getString(3), c.getString(4), c_inicio.getTime()
+							.toLocaleString(), c.getString(6), c.getString(7),
+							c.getString(8), false));
 					dosisSiguientes = true;
 				}
 

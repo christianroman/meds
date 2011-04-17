@@ -22,17 +22,19 @@ public class AgregarMedicina extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.agregarmedicina);
-		
-		((Button)findViewById(R.id.Button01)).getBackground().setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
-		((Button)findViewById(R.id.Button02)).getBackground().setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
-		
+
+		((Button) findViewById(R.id.Button01)).getBackground().setColorFilter(
+				0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
+		((Button) findViewById(R.id.Button02)).getBackground().setColorFilter(
+				0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
+
 		db = new DatabaseHelper(this);
 		vias = db.getAllVias();
 		tipos = db.getAllTipos();
 
 		SpinnerVias();
 		SpinnerTipos();
-		
+
 		db.close();
 
 	}
@@ -77,16 +79,16 @@ public class AgregarMedicina extends Activity {
 					.getText().toString();
 			String nota = ((EditText) findViewById(R.id.EditTextNota))
 					.getText().toString();
-			
-			if(!nombre.equals("")){
-				Medicina m = new Medicina(nombre, via, tipo, persona,
-						farmacia, doctor, nota);
+
+			if (!nombre.equals("")) {
+				Medicina m = new Medicina(nombre, via, tipo, persona, farmacia,
+						doctor, nota);
 				db.AgregaMedicina(m);
 				agregado = true;
-			}
-			else
-				Toast.makeText(this, "El nombre no puede estar vacio", Toast.LENGTH_LONG).show();
-			
+			} else
+				Toast.makeText(this, "El nombre no puede estar vacio",
+						Toast.LENGTH_LONG).show();
+
 		}
 
 		catch (Exception ex) {

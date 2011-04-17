@@ -10,8 +10,8 @@ public class Medicina {
 	private String doctor;
 	private String nota;
 
-	public Medicina(String nombre, int via, int tipo, String persona, String farmacia, String doctor,
-			String nota) {
+	public Medicina(String nombre, int via, int tipo, String persona,
+			String farmacia, String doctor, String nota) {
 		super();
 		this.nombre = nombre;
 		this.via = via;

@@ -63,89 +63,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	static final String queryTipo = "SELECT medicamento.nombre, fechainicio, "
 			+ " repeticion, dosis.cantidad, tipos.nombre, vias.nombre, fechafin, persona, doctor, "
-			+ "farmacia, nota FROM dosis, medicamento, vias, tipos where"
+			+ "farmacia, nota, dosis.iddosis FROM dosis, medicamento, vias, tipos where"
 			+ " dosis.idmedicamento = medicamento.idmedicamento AND medicamento.via = vias.idvias"
-			+ " AND medicamento.tipo = tipos.idtipos AND tipos.nombre = ? ORDER BY fechainicio DESC";
+			+ " AND medicamento.tipo = tipos.idtipos AND tipos.nombre = ? AND dosis.estado = 0 ORDER BY fechainicio DESC";
 
 	static final String queryVia = "SELECT medicamento.nombre, fechainicio, "
 			+ " repeticion, dosis.cantidad, tipos.nombre, vias.nombre, fechafin, persona, doctor, "
-			+ "farmacia, nota FROM dosis, medicamento, vias, tipos where"
+			+ "farmacia, nota, dosis.iddosis FROM dosis, medicamento, vias, tipos where"
 			+ " dosis.idmedicamento = medicamento.idmedicamento AND medicamento.via = vias.idvias"
-			+ " AND medicamento.tipo = tipos.idtipos AND vias.nombre = ? ORDER BY fechainicio DESC";
+			+ " AND medicamento.tipo = tipos.idtipos AND vias.nombre = ? AND dosis.estado = 0 ORDER BY fechainicio DESC";
 
 	static final String queryFecha = "SELECT medicamento.nombre, fechainicio, "
 			+ " repeticion, dosis.cantidad, tipos.nombre, vias.nombre, fechafin, persona, doctor, "
-			+ "farmacia, nota FROM dosis, medicamento, vias, tipos where"
+			+ "farmacia, nota, dosis.iddosis FROM dosis, medicamento, vias, tipos where"
 			+ " dosis.idmedicamento = medicamento.idmedicamento AND medicamento.via = vias.idvias"
-			+ " AND medicamento.tipo = tipos.idtipos AND dosis.fechainicio <= ? ORDER BY fechainicio DESC";
+			+ " AND medicamento.tipo = tipos.idtipos AND dosis.fechainicio <= ? AND dosis.estado = 0 ORDER BY fechainicio DESC";
 
 	static final String queryConsulta = "SELECT medicamento.nombre, fechainicio, "
 			+ " repeticion, dosis.cantidad, tipos.nombre, vias.nombre, fechafin, persona, doctor, "
-			+ "farmacia, nota FROM dosis, medicamento, vias, tipos where"
+			+ "farmacia, nota, dosis.iddosis FROM dosis, medicamento, vias, tipos where"
 			+ " dosis.idmedicamento = medicamento.idmedicamento AND medicamento.via = vias.idvias"
-			+ " AND medicamento.tipo = tipos.idtipos";
+			+ " AND medicamento.tipo = tipos.idtipos AND dosis.estado = ?";
+
+	static final String queryAlarmas = "SELECT idalarma FROM dosis, alarmas WHERE dosis.iddosis = alarmas.iddosis AND estado = 1 AND dosis.iddosis = ?";
 
 	static final String queryMedicinaDosis = "SELECT " + colNombre + " FROM "
 			+ tablaMedicamento + " WHERE " + colID + "=?";
-
-	/*
-	 * static final String queryResumen = "SELECT " + tablaMedicamento + "." +
-	 * colNombre + ", " + colRepeticion + ", " + colFechaInicio + ", " +
-	 * "strftime('%j'," + colFechaFin + ") - strftime('%j','now')" + ", " +
-	 * tablaTipos + "." + colTiposNombre + ", " + tablaVias + "." +
-	 * colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", " +
-	 * colFarmacia + ", " + colNota + " FROM " + tablaVias + ", " + tablaTipos +
-	 * ", " + tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis +
-	 * "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID + " AND "
-	 * + tablaVias + "." + colViasID + "=" + tablaMedicamento + "." + colVia +
-	 * " AND " + tablaTipos + "." + colTiposID + "=" + tablaMedicamento + "." +
-	 * colTipo + " AND " + colEstado + "=?";
-	 */
-
-	/*
-	 * static final String queryTipo = "SELECT " + tablaMedicamento + "." +
-	 * colNombre + ", " + colRepeticion + ", " + colFechaInicio + ", " +
-	 * "strftime('%j'," + colFechaFin + ") - strftime('%j','now')" + ", " +
-	 * tablaTipos + "." + colTiposNombre + ", " + tablaVias + "." +
-	 * colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", " +
-	 * colFarmacia + ", " + colNota + " FROM " + tablaVias + ", " + tablaTipos +
-	 * ", " + tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis +
-	 * "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID + " AND "
-	 * + tablaVias + "." + colViasID + "=" + tablaMedicamento + "." + colVia +
-	 * " AND " + tablaTipos + "." + colTiposID + "=" + tablaMedicamento + "." +
-	 * colTipo + " AND " + colEstado + "=1" + " AND " + tablaTipos + "." +
-	 * colTiposNombre + "=?";
-	 */
-
-	/*
-	 * static final String queryVia = "SELECT " + tablaMedicamento + "." +
-	 * colNombre + ", " + colRepeticion + ", " + colFechaInicio + ", " +
-	 * "strftime('%j'," + colFechaFin + ") - strftime('%j','now')" + ", " +
-	 * tablaTipos + "." + colTiposNombre + ", " + tablaVias + "." +
-	 * colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", " +
-	 * colFarmacia + ", " + colNota + " FROM " + tablaVias + ", " + tablaTipos +
-	 * ", " + tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis +
-	 * "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID + " AND "
-	 * + tablaVias + "." + colViasID + "=" + tablaMedicamento + "." + colVia +
-	 * " AND " + tablaTipos + "." + colTiposID + "=" + tablaMedicamento + "." +
-	 * colTipo + " AND " + colEstado + "=1" + " AND " + tablaVias + "." +
-	 * colViasNombre + "=?";
-	 */
-
-	/*
-	 * static final String queryFecha = "SELECT " + tablaMedicamento + "." +
-	 * colNombre + ", " + colRepeticion + ", " + colFechaInicio + ", " +
-	 * "strftime('%j'," + colFechaFin + ") - strftime('%j','now')" + ", " +
-	 * tablaTipos + "." + colTiposNombre + ", " + tablaVias + "." +
-	 * colViasNombre + ", " + colFechaInicio + ", " + colDoctor + ", " +
-	 * colFarmacia + ", " + colNota + " FROM " + tablaVias + ", " + tablaTipos +
-	 * ", " + tablaMedicamento + ", " + tablaDosis + " WHERE " + tablaDosis +
-	 * "." + colMedicamentoID + " = " + tablaMedicamento + "." + colID + " AND "
-	 * + tablaVias + "." + colViasID + "=" + tablaMedicamento + "." + colVia +
-	 * " AND " + tablaTipos + "." + colTiposID + "=" + tablaMedicamento + "." +
-	 * colTipo + " AND " + colEstado + "=1" + " AND date(" + tablaDosis + "." +
-	 * colFechaFin + ")<=date(?)";
-	 */
 
 	public DatabaseHelper(Context context) {
 		super(context, dbNombre, null, 3);
@@ -163,6 +106,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				"DROP TABLE IF EXISTS " + tablaAlarmas);
 		SQLiteDatabase db = this.getReadableDatabase();
 		onCreate(db);
+		this.getReadableDatabase().close();
+		db.close();
 	}
 
 	@Override
@@ -241,7 +186,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				str[i] = cursor.getString(cursor.getColumnIndex(colViasNombre));
 				i++;
 			}
-			// cursor.close();
+			cursor.close();
 			return str;
 		} else {
 			return new String[] {};
@@ -266,7 +211,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 						.getString(cursor.getColumnIndex(colTiposNombre));
 				i++;
 			}
-			// cursor.close();
+			cursor.close();
 			return str;
 		} else {
 			return new String[] {};
@@ -281,7 +226,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public Cursor getConsulta() {
 		String args[] = new String[] { "1" };
 		return (Cursor) this.getReadableDatabase()
-				.rawQuery(queryConsulta, null);
+				.rawQuery(queryConsulta, args);
 	}
 
 	public Cursor getByTipo(String tipo) {
@@ -302,6 +247,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public Cursor getDosis() {
 		Cursor cursor = this.getReadableDatabase().query(tablaDosis,
 				new String[] { colDosisID }, null, null, null, null, null);
+		return cursor;
+	}
+
+	public Cursor getAlarmas(int id) {
+		Cursor cursor = this.getReadableDatabase().rawQuery(queryAlarmas,
+				new String[] { String.valueOf(id) });
 		return cursor;
 	}
 
@@ -330,6 +281,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		int count = cursor.getCount();
 		cursor.close();
+		this.getReadableDatabase().close();
 		return count;
 
 	}
@@ -339,6 +291,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				null, null, null, null, null);
 		int count = cursor.getCount();
 		cursor.close();
+		this.getReadableDatabase().close();
+		return count;
+	}
+
+	public int getCantidadDosisActivas() {
+		Cursor cursor = this.getReadableDatabase().rawQuery(
+				"SELECT * FROM dosis WHERE estado = ?", new String[] { "1" });
+		int count = cursor.getCount();
+		cursor.close();
+		this.getReadableDatabase().close();
 		return count;
 	}
 
@@ -396,6 +358,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		int id = cursor.getInt(0);
 		cursor.close();
 		return id;
+	}
+
+	public void desactivaDosis(int id) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+		cv.put(colEstado, "0");
+		db.update(tablaDosis, cv, colDosisID + "= ? ",
+				new String[] { String.valueOf(id) });
+		db.close();
+	}
+
+	public void eliminaAlarmas(int id) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(tablaAlarmas, "iddosis = ?",
+				new String[] { String.valueOf(id) });
+		db.close();
+	}
+
+	public void eliminaMedicamento(int iddosis) {
+		String args[] = new String[] { String.valueOf(iddosis) };
+		Cursor cursor = this.getReadableDatabase().rawQuery(
+				"SELECT idmedicamento FROM dosis WHERE iddosis = ?", args);
+		cursor.moveToFirst();
+		int idmedicamento = cursor.getInt(0);
+		cursor.close();
+
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(tablaMedicamento, colID + "=?",
+				new String[] { String.valueOf(idmedicamento) });
+		db.close();
 	}
 
 	@Override

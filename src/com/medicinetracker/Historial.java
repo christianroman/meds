@@ -35,20 +35,23 @@ public class Historial extends Activity implements OnClickListener {
 
 		searchByDate = (Button) findViewById(R.id.searchByDate);
 		searchByDate.setOnClickListener(this);
-		searchByDate.getBackground().setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
+		searchByDate.getBackground().setColorFilter(0xFFFFE25B,
+				PorterDuff.Mode.MULTIPLY);
 
 		searchByType = (Button) findViewById(R.id.searchByType);
 		searchByType.setOnClickListener(this);
-		searchByType.getBackground().setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
+		searchByType.getBackground().setColorFilter(0xFFFFE25B,
+				PorterDuff.Mode.MULTIPLY);
 
 		searchByVia = (Button) findViewById(R.id.searchByVia);
 		searchByVia.setOnClickListener(this);
-		searchByVia.getBackground().setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
+		searchByVia.getBackground().setColorFilter(0xFFFFE25B,
+				PorterDuff.Mode.MULTIPLY);
 
 		db = new DatabaseHelper(this);
 
 	}
-	
+
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		Calendar c = Calendar.getInstance();
@@ -75,7 +78,7 @@ public class Historial extends Activity implements OnClickListener {
 		public void onDateSet(DatePicker view, int anio, int mes, int dia) {
 			Calendar c = Calendar.getInstance();
 			c.set(anio, mes, dia);
-			
+
 			Intent intent = new Intent(Historial.this, HistorialFecha.class);
 			intent.putExtra("fecha_texto", c.getTimeInMillis());
 			startActivity(intent);
@@ -83,7 +86,7 @@ public class Historial extends Activity implements OnClickListener {
 	};
 
 	public void onClick(View v) {
-		if (v == searchByDate){
+		if (v == searchByDate) {
 			if (db.getCantidadDosis() > 0)
 				showDialog(DATE_DIALOG_ID);
 			else
@@ -91,7 +94,7 @@ public class Historial extends Activity implements OnClickListener {
 						Toast.LENGTH_LONG).show();
 			db.close();
 		}
-		if (v == searchByType){
+		if (v == searchByType) {
 			if (db.getCantidadDosis() > 0)
 				showDialog(TYPE_DIALOG_ID);
 			else
@@ -99,9 +102,9 @@ public class Historial extends Activity implements OnClickListener {
 						Toast.LENGTH_LONG).show();
 			db.close();
 		}
-		if (v == searchByVia){
+		if (v == searchByVia) {
 			if (db.getCantidadDosis() > 0)
-			showDialog(VIA_DIALOG_ID);
+				showDialog(VIA_DIALOG_ID);
 			else
 				Toast.makeText(this, "No hay dosis en el historial",
 						Toast.LENGTH_LONG).show();

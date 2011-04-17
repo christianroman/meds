@@ -16,25 +16,24 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 public class HistorialTipo extends Activity {
-	
+
 	DatabaseHelper db;
 	AdaptadorTitulares adaptador;
 	private ListView lv1;
 	private ArrayList<ListItem> datos = new ArrayList<ListItem>();
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.historialvista);
-		
+
 		TextView t = (TextView) findViewById(R.id.tipoTextView);
 		String tipo = this.getIntent().getExtras().getString("tipo_texto");
 		t.setText(tipo);
-		
+
 		db = new DatabaseHelper(this);
-		
+
 		if (db.getCantidadDosis() > 0) {
 			Cursor c = db.getByTipo(tipo);
 
@@ -49,14 +48,15 @@ public class HistorialTipo extends Activity {
 
 				Calendar c_fin = Calendar.getInstance();
 				c_fin.setTimeInMillis(c.getLong(6));
-				
-				String repeticion = c.getString(3) + " cada " + c.getString(2) + " horas";
+
+				String repeticion = c.getString(3) + " cada " + c.getString(2)
+						+ " horas";
 
 				datos.add(new ListItem(c.getString(0), c_inicio.getTime()
 						.toLocaleString(), repeticion, c.getString(4), c
 						.getString(5), c_fin.getTime().toLocaleString(), c
 						.getString(7), c.getString(8), c.getString(9), c
-						.getString(10), false));
+						.getString(10), c.getInt(11), false));
 			}
 
 			db.close();
@@ -129,7 +129,8 @@ public class HistorialTipo extends Activity {
 			if (!farmacia.equals("")) {
 				((LinearLayout) item.findViewById(R.id.farmaciaLayout))
 						.setVisibility(View.VISIBLE);
-				((TextView) item.findViewById(R.id.tvFarmacia)).setText(farmacia);
+				((TextView) item.findViewById(R.id.tvFarmacia))
+						.setText(farmacia);
 			}
 
 			String nota = datos.get(position).getNota();

@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +37,7 @@ public class Consultar extends Activity {
 
 		db = new DatabaseHelper(this);
 
-		if (db.getCantidadDosis() > 0) {
+		if (db.getCantidadDosisActivas() > 0) {
 			Cursor c = db.getConsulta();
 
 			adaptador = new AdaptadorTitulares(this);
@@ -46,22 +51,23 @@ public class Consultar extends Activity {
 
 				Calendar c_fin = Calendar.getInstance();
 				c_fin.setTimeInMillis(c.getLong(6));
-				
-				String repeticion = c.getString(3) + " cada " + c.getString(2) + " horas";
+
+				String repeticion = c.getString(3) + " cada " + c.getString(2)
+						+ " horas";
 
 				datos.add(new ListItem(c.getString(0), c_inicio.getTime()
 						.toLocaleString(), repeticion, c.getString(4), c
 						.getString(5), c_fin.getTime().toLocaleString(), c
 						.getString(7), c.getString(8), c.getString(9), c
-						.getString(10), false));
+						.getString(10), c.getInt(11), false));
 			}
-
-			db.close();
+			c.close();
 
 			lv1.setAdapter(adaptador);
 			lv1.setClickable(true);
 			lv1.setOnItemClickListener(funcionClick);
 		}
+		db.close();
 
 	}
 
@@ -73,39 +79,52 @@ public class Consultar extends Activity {
 		}
 	};
 
-	public void AgregarMedicina(View button) {
-		Intent intent = new Intent(this, AgregarMedicina.class);
-		startActivity(intent);
-	}
+	public void cancelarAlarma(int id) {
+		Cursor c = db.getAlarmas(id);
 
-	public void AgregarDosis(View button) {
-		DatabaseHelper db = new DatabaseHelper(this);
-		if (db.getCantidadMedicamentos() > 0) {
-			db.close();
-			Intent intent = new Intent(this, AgregarDosis.class);
-			startActivity(intent);
-		} else {
-			Toast.makeText(this, "No hay medicamentos agregados",
-					Toast.LENGTH_LONG).show();
+		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+		while (c.moveToNext()) {
+
+			Intent intent = new Intent(this, AlarmReceiver.class);
+			PendingIntent appIntent = PendingIntent.getBroadcast(this,
+					c.getInt(0), intent, PendingIntent.FLAG_ONE_SHOT);
+
+			am.cancel(appIntent);
 		}
+		c.close();
+
+		db.desactivaDosis(id);
+		// db.eliminaMedicamento(id);
+		db.eliminaAlarmas(id);
 		db.close();
+
+		Toast.makeText(this, "Dosis eliminada y alarmas canceladas",
+				Toast.LENGTH_LONG).show();
+
+		Intent intent = new Intent(this, medicinetracker.class);
+		startActivity(intent);
+
 	}
 
 	@SuppressWarnings("rawtypes")
-	class AdaptadorTitulares extends ArrayAdapter {
-		LinearLayout LLExpandir;
+	class AdaptadorTitulares extends ArrayAdapter implements OnClickListener {
+		RelativeLayout LLExpandir;
 		Activity context;
 
 		@SuppressWarnings("unchecked")
 		AdaptadorTitulares(Activity context) {
-			super(context, R.layout.listitem, datos);
+			super(context, R.layout.listitem_delete, datos);
 			this.context = context;
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = context.getLayoutInflater();
-			View item = inflater.inflate(R.layout.listitem, null);
+			View item = inflater.inflate(R.layout.listitem_delete, null);
+
+			Button btn = (Button) item.findViewById(R.id.botonItem);
+			btn.setOnClickListener(new OnItemClickListener(position));
 
 			TextView lblTitulo = (TextView) item.findViewById(R.id.tvNombre);
 			lblTitulo.setText(datos.get(position).getNombre());
@@ -144,7 +163,8 @@ public class Consultar extends Activity {
 			if (!farmacia.equals("")) {
 				((LinearLayout) item.findViewById(R.id.farmaciaLayout))
 						.setVisibility(View.VISIBLE);
-				((TextView) item.findViewById(R.id.tvFarmacia)).setText(farmacia);
+				((TextView) item.findViewById(R.id.tvFarmacia))
+						.setText(farmacia);
 			}
 
 			String nota = datos.get(position).getNota();
@@ -154,7 +174,7 @@ public class Consultar extends Activity {
 				((TextView) item.findViewById(R.id.tvNota)).setText(nota);
 			}
 
-			LLExpandir = (LinearLayout) item.findViewById(R.id.LLExpandir);
+			LLExpandir = (RelativeLayout) item.findViewById(R.id.LLExpandir);
 			LLExpandir
 					.setVisibility(datos.get(position).isVisible() ? View.VISIBLE
 							: View.GONE);
@@ -162,5 +182,26 @@ public class Consultar extends Activity {
 			return (item);
 		}
 
+		class OnItemClickListener implements OnClickListener {
+			int position;
+
+			public OnItemClickListener(int pos) {
+				this.position = pos;
+			}
+
+			public void onClick(View v) {
+				{
+					cancelarAlarma(datos.get(position).getDosisID());
+				}
+			}
+		}
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
+
 }

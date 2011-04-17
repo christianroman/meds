@@ -13,8 +13,8 @@ public class Titular {
 	private boolean visible;
 
 	public Titular(String tit, String sub, String hora, String tipo,
-			String via, String fecha, String doctor, String farmacia, String nota,
-			boolean visible) {
+			String via, String fecha, String doctor, String farmacia,
+			String nota, boolean visible) {
 		titulo = tit;
 		subtitulo = sub;
 		this.hora = hora;
@@ -58,8 +58,8 @@ public class Titular {
 	public String getFarmacia() {
 		return farmacia;
 	}
-	
-	public String getNota(){
+
+	public String getNota() {
 		return nota;
 	}
 

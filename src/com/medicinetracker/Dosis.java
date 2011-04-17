@@ -2,8 +2,6 @@ package com.medicinetracker;
 
 import java.util.Calendar;
 
-import android.util.Log;
-
 public class Dosis {
 
 	private int idmedicamento;

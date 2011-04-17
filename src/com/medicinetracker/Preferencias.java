@@ -22,6 +22,7 @@ public class Preferencias extends Activity {
 	public void Restaurar(View button) {
 		DatabaseHelper db = new DatabaseHelper(this);
 		db.eliminarDB();
+		db.close();
 		Toast.makeText(this, "Base de datos restaurada", Toast.LENGTH_LONG)
 				.show();
 	}

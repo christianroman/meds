@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -94,11 +93,14 @@ public class AgregarDosis extends Activity {
 			fechaComprueba.set(anio, mes, dia, hora, min);
 
 			if (fechaComprueba.getTime().compareTo(new Date()) > 0) {
-				if (!cantidad.equals("") && !dias.equals("") && !repeticion.equals("")) {
+				if (!cantidad.equals("") && !dias.equals("")
+						&& !repeticion.equals("")) {
 					Dosis dosis = new Dosis(idMedicamento, dia, mes, anio,
-							hora, min, Integer.valueOf(repeticion), Integer.valueOf(dias), Integer.valueOf(cantidad));
+							hora, min, Integer.valueOf(repeticion),
+							Integer.valueOf(dias), Integer.valueOf(cantidad));
 					db.AgregaDosis(dosis);
-					programarAlarmas(dosis.getFechaInicio(), Integer.valueOf(dias), Integer.valueOf(repeticion),
+					programarAlarmas(dosis.getFechaInicio(),
+							Integer.valueOf(dias), Integer.valueOf(repeticion),
 							medicina);
 					agregado = true;
 				} else
@@ -140,7 +142,6 @@ public class AgregarDosis extends Activity {
 		while (c.getTime().compareTo(hasta.getTime()) < 0) {
 			c.add(Calendar.HOUR, repeticion);
 			setAlarma(c, medicina);
-			Log.i("programarAlarmas", c.getTime().toLocaleString());
 		}
 
 		/*
