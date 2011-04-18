@@ -131,7 +131,7 @@ public class Consultar extends Activity {
 
 		@SuppressWarnings("unchecked")
 		AdaptadorTitulares(Activity context) {
-			super(context, R.layout.listitem_delete, datos);
+			super(context, R.layout.listitem, datos);
 			this.context = context;
 		}
 
@@ -139,7 +139,7 @@ public class Consultar extends Activity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 
 			LayoutInflater inflater = context.getLayoutInflater();
-			View item = inflater.inflate(R.layout.listitem_delete, null);
+			View item = inflater.inflate(R.layout.listitem, null);
 
 			((Button) item.findViewById(R.id.botonItem)).getBackground()
 					.setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);

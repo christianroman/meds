@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +21,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
 
 public class HistorialVista extends Activity {
 
@@ -35,11 +35,24 @@ public class HistorialVista extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.historialvista);
 
-		TextView t = (TextView) findViewById(R.id.tipoTextView);
+		TextView t = (TextView) findViewById(R.id.textPrincipal);
 		int idVista = this.getIntent().getExtras().getInt("id");
 
 		String title = this.getIntent().getExtras().getString("cabecera");
-		Log.i("onCreate", title);
+
+		ImageView imagen = ((ImageView) findViewById(R.id.imagenVista));
+
+		switch (idVista) {
+		case 0:
+			imagen.setImageResource(R.drawable.tipo);
+			break;
+		case 1:
+			imagen.setImageResource(R.drawable.via);
+			break;
+		case 2:
+			imagen.setImageResource(R.drawable.fecha);
+			break;
+		}
 
 		if (idVista == 2) {
 			Calendar cal = Calendar.getInstance();
@@ -70,31 +83,39 @@ public class HistorialVista extends Activity {
 				break;
 			}
 
-			adaptador = new AdaptadorTitulares(this);
+			if (c.getCount() > 0) {
 
-			lv1 = (ListView) findViewById(R.id.LstOpciones);
+				adaptador = new AdaptadorTitulares(this);
 
-			while (c.moveToNext()) {
+				lv1 = (ListView) findViewById(R.id.LstOpciones);
 
-				Calendar c_inicio = Calendar.getInstance();
-				c_inicio.setTimeInMillis(c.getLong(1));
+				while (c.moveToNext()) {
 
-				Calendar c_fin = Calendar.getInstance();
-				c_fin.setTimeInMillis(c.getLong(6));
+					Calendar c_inicio = Calendar.getInstance();
+					c_inicio.setTimeInMillis(c.getLong(1));
 
-				String repeticion = c.getString(3) + " cada " + c.getString(2)
-						+ " horas";
+					Calendar c_fin = Calendar.getInstance();
+					c_fin.setTimeInMillis(c.getLong(6));
 
-				datos.add(new ListItem(c.getString(0), c_inicio.getTime()
-						.toLocaleString(), repeticion, c.getString(4), c
-						.getString(5), c_fin.getTime().toLocaleString(), c
-						.getString(7), c.getString(8), c.getString(9), c
-						.getString(10), c.getInt(11), false));
+					String repeticion = c.getString(3) + " cada "
+							+ c.getString(2) + " horas";
+
+					datos.add(new ListItem(c.getString(0), c_inicio.getTime()
+							.toLocaleString(), repeticion, c.getString(4), c
+							.getString(5), c_fin.getTime().toLocaleString(), c
+							.getString(7), c.getString(8), c.getString(9), c
+							.getString(10), c.getInt(11), false));
+				}
+				lv1.setAdapter(adaptador);
+				lv1.setClickable(true);
+				lv1.setOnItemClickListener(funcionClick);
+			} else {
+				((ListView) findViewById(R.id.LstOpciones))
+						.setVisibility(View.GONE);
+				((LinearLayout) findViewById(R.id.avisoHistorial))
+						.setVisibility(View.VISIBLE);
 			}
 			c.close();
-			lv1.setAdapter(adaptador);
-			lv1.setClickable(true);
-			lv1.setOnItemClickListener(funcionClick);
 		}
 		db.close();
 
@@ -123,14 +144,14 @@ public class HistorialVista extends Activity {
 
 		@SuppressWarnings("unchecked")
 		AdaptadorTitulares(Activity context) {
-			super(context, R.layout.listitem_delete, datos);
+			super(context, R.layout.listitem, datos);
 			this.context = context;
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = context.getLayoutInflater();
-			View item = inflater.inflate(R.layout.listitem_delete, null);
+			View item = inflater.inflate(R.layout.listitem, null);
 
 			((Button) item.findViewById(R.id.botonItem)).getBackground()
 					.setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);

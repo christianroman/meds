@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/settings" android:orientation="vertical" android:padding="5dp"
+	android:id="@+id/settings" android:orientation="vertical" android:padding="10dp"
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
 	
 	
-	<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:text="Preferencias:" android:textSize="23sp"
-		android:textColor="@color/titlecolor">
-	</TextView>
+	<RelativeLayout android:layout_height="wrap_content"
+		android:gravity="center_horizontal" android:layout_marginBottom="15dp"
+		android:layout_width="fill_parent">
+
+		<ImageView android:layout_width="wrap_content"
+			android:layout_toLeftOf="@id/textPrincipal" android:layout_height="wrap_content"
+			android:src="@drawable/preferencias" android:layout_marginRight="5dp"
+			android:layout_centerVertical="true" />
+
+		<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="Preferencias:" android:textSize="20sp"
+			android:layout_alignParentRight="true" android:textColor="@color/titlecolor" />
+
+	</RelativeLayout>
 	
 	<Button android:text="Restaurar base de datos" android:id="@+id/rbd" 
 		android:textStyle="bold" android:textColor="@color/titlecolor" android:onClick="Restaurar"

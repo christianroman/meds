@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent" android:orientation="vertical" android:padding="3dp"
-  android:layout_height="fill_parent">
-  
-  <TextView android:id="@+id/tipoTextView" android:gravity="center"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:text="Tipo de busqueda:" android:textSize="23sp"
-		android:textColor="@color/titlecolor">
-	</TextView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:orientation="vertical"
+	android:padding="10dp" android:layout_height="fill_parent">
 
-  <ListView android:id="@+id/LstOpciones" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:padding="5dp" android:dividerHeight="1px" android:divider="#FFFFFF" />
-    
+	<RelativeLayout android:layout_height="wrap_content"
+		android:gravity="center_horizontal" android:layout_width="fill_parent">
+
+		<ImageView android:layout_width="wrap_content" android:id="@+id/imagenVista"
+			android:layout_toLeftOf="@id/textPrincipal" android:layout_height="wrap_content"
+			android:src="@drawable/historial_icon" android:layout_marginRight="5dp"
+			android:layout_centerVertical="true" />
+
+		<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="Tipo de busqueda:" android:textSize="20sp"
+			android:layout_alignParentRight="true" android:textColor="@color/titlecolor" />
+
+	</RelativeLayout>
+	
+	<LinearLayout android:id="@+id/avisoHistorial"
+			android:orientation="vertical" android:visibility="gone"
+			android:padding="10dp" android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+
+			<TextView android:layout_height="wrap_content"
+				android:textSize="14sp" android:layout_width="fill_parent"
+				android:id="@+id/NoHistorial" android:gravity="center_horizontal"
+				android:text="No hay dosis en el historial" />
+
+			<TextView android:layout_height="wrap_content"
+				android:textSize="12sp" android:textStyle="italic"
+				android:layout_width="fill_parent" android:id="@+id/NoHistorialMensaje"
+				android:gravity="center_horizontal" android:text="(Solo se muestran las dosis que han sido finalizadas)" />
+
+		</LinearLayout>
+
+	<ListView android:id="@+id/LstOpciones" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:padding="5dp"
+		android:dividerHeight="1px" android:divider="#FFFFFF" />
+
 </LinearLayout>

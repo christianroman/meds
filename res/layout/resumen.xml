@@ -7,9 +7,22 @@
 		android:orientation="vertical" android:padding="5dp" android:id="@+id/resumen_proximas"
 		android:layout_width="fill_parent" android:layout_height="230dp">
 
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="Próximas dosis:"
-			style="@style/header" />
+
+		<RelativeLayout android:layout_height="wrap_content"
+			android:gravity="left"
+			android:layout_width="fill_parent">
+
+			<ImageView android:layout_width="wrap_content" android:id="@+id/imgProxima"
+				android:layout_alignParentLeft="true" android:layout_height="wrap_content"
+				android:src="@drawable/proximas" android:layout_marginRight="5dp"
+				android:layout_centerVertical="true" />
+
+			<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="Próximas dosis:" android:layout_toRightOf="@id/imgProxima"
+			 	style="@style/header" />
+
+		</RelativeLayout>
 
 		<LinearLayout android:id="@+id/avisoDosis"
 			android:orientation="vertical" android:visibility="gone"
@@ -74,9 +87,22 @@
 		<View android:background="@color/hr" android:layout_width="fill_parent"
 			android:layout_height="1dp" android:layout_above="@id/botones_texto"
 			android:layout_margin="5dp" />
+			
+		<RelativeLayout android:layout_height="wrap_content"
+			android:gravity="left"
+			android:layout_width="fill_parent">
 
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="Resumen:" style="@style/header" />
+			<ImageView android:layout_width="wrap_content" android:id="@+id/imgResumen"
+				android:layout_alignParentLeft="true" android:layout_height="wrap_content"
+				android:src="@drawable/resumen" android:layout_marginRight="5dp"
+				android:layout_centerVertical="true" />
+
+			<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="Resumen:" android:layout_toRightOf="@id/imgResumen"
+			 	style="@style/header" />
+
+		</RelativeLayout>
 
 		<RelativeLayout android:id="@+id/resumen_datos"
 			android:paddingLeft="10dp" android:paddingRight="10dp"

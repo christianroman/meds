@@ -26,98 +26,109 @@
 			android:textStyle="italic" android:layout_height="wrap_content" />
 
 	</LinearLayout>
-	<LinearLayout android:id="@+id/LLExpandir"
-		android:orientation="vertical" android:layout_width="wrap_content"
-		android:layout_height="wrap_content">
+	<RelativeLayout android:id="@+id/LLExpandir"
+		android:layout_width="310dp" android:layout_height="fill_parent">
 
-		<LinearLayout android:orientation="horizontal"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
+		<LinearLayout android:layout_width="wrap_content"
+			android:orientation="vertical" android:id="@+id/layoutBoton"
+			android:layout_height="wrap_content">
 
-			<TextView android:text="Tipo: " android:gravity="top"
-				android:textStyle="italic" android:textColor="@color/titlecolor"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/tvTipo" android:text="contenido"
-				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			<LinearLayout android:orientation="horizontal"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+				<TextView android:text="Tipo: " android:gravity="top"
+					android:textStyle="italic" android:textColor="@color/titlecolor"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/tvTipo" android:text="contenido"
+					android:textStyle="italic" android:gravity="top" android:textSize="13sp"
+					android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			</LinearLayout>
+
+			<LinearLayout android:orientation="horizontal"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+				<TextView android:text="Via: " android:gravity="top"
+					android:textStyle="italic" android:textColor="@color/titlecolor"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/tvVia" android:text="contenido"
+					android:textStyle="italic" android:gravity="top" android:textSize="13sp"
+					android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			</LinearLayout>
+
+			<LinearLayout android:orientation="horizontal"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+				<TextView android:text="Finalización: " android:gravity="top"
+					android:textStyle="italic" android:textColor="@color/titlecolor"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/tvFechafin" android:text="contenido"
+					android:textStyle="italic" android:gravity="top" android:textSize="13sp"
+					android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			</LinearLayout>
+
+			<LinearLayout android:orientation="horizontal"
+				android:id="@+id/personaLayout" android:visibility="gone"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+				<TextView android:text="Persona: " android:gravity="top"
+					android:textStyle="italic" android:textColor="@color/titlecolor"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/tvPersona" android:text="contenido"
+					android:textStyle="italic" android:gravity="top" android:textSize="13sp"
+					android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			</LinearLayout>
+
+			<LinearLayout android:orientation="horizontal"
+				android:id="@+id/doctorLayout" android:visibility="gone"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+				<TextView android:text="Doctor: " android:gravity="top"
+					android:textStyle="italic" android:textColor="@color/titlecolor"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/tvDoctor" android:text="contenido"
+					android:textStyle="italic" android:gravity="top" android:textSize="13sp"
+					android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			</LinearLayout>
+
+			<LinearLayout android:orientation="horizontal"
+				android:id="@+id/farmaciaLayout" android:visibility="gone"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+				<TextView android:text="Farmacia: " android:gravity="top"
+					android:textStyle="italic" android:textColor="@color/titlecolor"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/tvFarmacia" android:text="contenido"
+					android:textStyle="italic" android:gravity="top" android:textSize="13sp"
+					android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			</LinearLayout>
+
+			<LinearLayout android:orientation="horizontal"
+				android:id="@+id/notaLayout" android:visibility="gone"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+				<TextView android:text="Nota: " android:gravity="top"
+					android:textStyle="italic" android:textColor="@color/titlecolor"
+					android:textSize="13sp" android:layout_width="wrap_content"
+					android:layout_height="fill_parent" android:layout_weight="1" />
+				<TextView android:id="@+id/tvNota" android:text="contenido"
+					android:textStyle="italic" android:gravity="top" android:textSize="13sp"
+					android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			</LinearLayout>
+
 		</LinearLayout>
 
-		<LinearLayout android:orientation="horizontal"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
+		<Button android:text="Eliminar" android:focusable="false"
+			android:layout_alignParentRight="true" android:textStyle="bold"
+			android:layout_marginRight="5dp" android:textSize="12sp" android:id="@+id/botonItem"
+			android:textColor="@color/titlecolor" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
 
-			<TextView android:text="Via: " android:gravity="top"
-				android:textStyle="italic" android:textColor="@color/titlecolor"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/tvVia" android:text="contenido"
-				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		</LinearLayout>
-
-		<LinearLayout android:orientation="horizontal"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
-
-			<TextView android:text="Finalización: " android:gravity="top"
-				android:textStyle="italic" android:textColor="@color/titlecolor"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/tvFechafin" android:text="contenido"
-				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		</LinearLayout>
-
-		<LinearLayout android:orientation="horizontal"
-			android:id="@+id/personaLayout" android:visibility="gone"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
-
-			<TextView android:text="Persona: " android:gravity="top"
-				android:textStyle="italic" android:textColor="@color/titlecolor"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/tvPersona" android:text="contenido"
-				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		</LinearLayout>
-
-		<LinearLayout android:orientation="horizontal"
-			android:id="@+id/doctorLayout" android:visibility="gone"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
-
-			<TextView android:text="Doctor: " android:gravity="top"
-				android:textStyle="italic" android:textColor="@color/titlecolor"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/tvDoctor" android:text="contenido"
-				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		</LinearLayout>
-
-		<LinearLayout android:orientation="horizontal"
-			android:id="@+id/farmaciaLayout" android:visibility="gone"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
-
-			<TextView android:text="Farmacia: " android:gravity="top"
-				android:textStyle="italic" android:textColor="@color/titlecolor"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/tvFarmacia" android:text="contenido"
-				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		</LinearLayout>
-
-		<LinearLayout android:orientation="horizontal"
-			android:id="@+id/notaLayout" android:visibility="gone"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
-
-			<TextView android:text="Nota: " android:gravity="top"
-				android:textStyle="italic" android:textColor="@color/titlecolor"
-				android:textSize="13sp" android:layout_width="wrap_content"
-				android:layout_height="fill_parent" android:layout_weight="1" />
-			<TextView android:id="@+id/tvNota" android:text="contenido"
-				android:textStyle="italic" android:gravity="top" android:textSize="13sp"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		</LinearLayout>
-
-	</LinearLayout>
+	</RelativeLayout>
 
 </LinearLayout>
