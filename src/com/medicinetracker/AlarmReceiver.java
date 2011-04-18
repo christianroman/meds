@@ -8,12 +8,16 @@ import android.content.Context;
 import android.content.Intent;
 
 public class AlarmReceiver extends BroadcastReceiver {
+	
+	DatabaseHelper db;
 
 	public void onReceiveIntent(Context context, Intent intent) {
 	}
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		
+		db = new DatabaseHelper(context);
 
 		NotificationManager nm = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -21,6 +25,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		Intent contentIntent = new Intent();
 
 		int id = intent.getExtras().getInt("id");
+		int dosis = intent.getExtras().getInt("dosis");
 		CharSequence medicina = intent.getExtras().getCharSequence("medicina");
 		PendingIntent theappIntent = PendingIntent.getBroadcast(context, id,
 				contentIntent, PendingIntent.FLAG_ONE_SHOT);
@@ -36,6 +41,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
 		nm.notify(id, notification);
+		
+		if(System.currentTimeMillis() > db.getFechaFinDosis(dosis) ){
+			db.desactivaDosis(dosis);
+		}
+		db.close();
 
 	}
 

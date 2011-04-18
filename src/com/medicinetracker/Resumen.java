@@ -40,7 +40,7 @@ public class Resumen extends Activity {
 		if (db.getCantidadDosisActivas() > 0) {
 
 			Boolean dosisSiguientes = false;
-			
+
 			adaptador = new AdaptadorTitulares(this);
 
 			lv1 = (ListView) findViewById(R.id.LstOpciones);

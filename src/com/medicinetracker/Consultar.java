@@ -54,7 +54,7 @@ public class Consultar extends Activity {
 				c_fin.setTimeInMillis(c.getLong(6));
 
 				String repeticion = c.getString(3) + " cada " + c.getString(2)
-						+ " horas";
+						+ " hora" +  ((Integer.parseInt(c.getString(2)) == 1) ? "" : "s");
 
 				datos.add(new ListItem(c.getString(0), c_inicio.getTime()
 						.toLocaleString(), repeticion, c.getString(4), c
@@ -115,7 +115,6 @@ public class Consultar extends Activity {
 		c.close();
 
 		db.desactivaDosis(id);
-		// db.eliminaMedicamento(id);
 		db.eliminaAlarmas(id);
 		db.close();
 

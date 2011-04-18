@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -295,6 +296,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		cursor.close();
 		this.getReadableDatabase().close();
 		return count;
+	}
+	
+	public long getFechaFinDosis(int dosis){
+		String[] args = new String[]{String.valueOf(dosis)};
+		Cursor cursor = this.getReadableDatabase().rawQuery("SELECT fechafin FROM dosis WHERE iddosis = ?", args);
+		cursor.moveToNext();
+		long fecha = cursor.getLong(0);
+		cursor.close();
+		Log.i("getFechaFinDosis", String.valueOf(fecha));
+		return fecha;
 	}
 
 	public void AgregaMedicina(Medicina m) {

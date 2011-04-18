@@ -27,6 +27,8 @@ public class HistorialVista extends Activity {
 
 	DatabaseHelper db;
 	AdaptadorTitulares adaptador;
+	private int idVista;
+	private String title;
 	private ListView lv1;
 	private ArrayList<ListItem> datos = new ArrayList<ListItem>();
 
@@ -36,9 +38,9 @@ public class HistorialVista extends Activity {
 		setContentView(R.layout.historialvista);
 
 		TextView t = (TextView) findViewById(R.id.textPrincipal);
-		int idVista = this.getIntent().getExtras().getInt("id");
+		idVista = this.getIntent().getExtras().getInt("id");
 
-		String title = this.getIntent().getExtras().getString("cabecera");
+		title = this.getIntent().getExtras().getString("cabecera");
 
 		ImageView imagen = ((ImageView) findViewById(R.id.imagenVista));
 
@@ -228,6 +230,31 @@ public class HistorialVista extends Activity {
 					cancelarAlarma(datos.get(position).getDosisID());
 					adaptador.remove(adaptador.getItem(position));
 					adaptador.notifyDataSetChanged();
+
+					Cursor c = null;
+					switch (idVista) {
+					case 0:
+						c = db.getByTipo(title);
+						break;
+					case 1:
+						c = db.getByVia(title);
+						break;
+					case 2:
+						c = db.getByFecha(title);
+						break;
+					}
+					db.close();
+
+					if (c.getCount() < 1) {
+
+						((ListView) findViewById(R.id.LstOpciones))
+								.setVisibility(View.GONE);
+						((LinearLayout) findViewById(R.id.avisoHistorial))
+								.setVisibility(View.VISIBLE);
+
+					}
+					c.close();
+
 				}
 			}
 		}

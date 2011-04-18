@@ -1,7 +1,6 @@
 package com.medicinetracker;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -42,19 +41,19 @@ public class AgregarDosis extends Activity {
 		if (db.getCantidadMedicamentos() > 0) {
 			Cursor cursor = db.getMedicamentos();
 			int items = cursor.getCount();
-			
+
 			medicamentos = new String[items];
 			ids = new int[items];
-			
+
 			int i = 0;
-			
-			while(cursor.moveToNext()){
+
+			while (cursor.moveToNext()) {
 				ids[i] = cursor.getInt(0);
 				medicamentos[i] = cursor.getString(1);
 				i++;
 			}
 			cursor.close();
-			
+
 			SpinnerMedicamentos();
 		}
 		db.close();
@@ -66,7 +65,7 @@ public class AgregarDosis extends Activity {
 				android.R.layout.simple_spinner_item, medicamentos);
 
 		s1.setAdapter(adapter);
-		
+
 	}
 
 	public void Cancelar(View button) {
@@ -79,8 +78,9 @@ public class AgregarDosis extends Activity {
 		Boolean agregado = false;
 
 		try {
-			
-			int idMedicamento = ids[((Spinner) findViewById(R.id.spinnerMedicamento)).getSelectedItemPosition()];
+
+			int idMedicamento = ids[((Spinner) findViewById(R.id.spinnerMedicamento))
+					.getSelectedItemPosition()];
 
 			String medicina = (String) ((Spinner) findViewById(R.id.spinnerMedicamento))
 					.getSelectedItem();
@@ -109,7 +109,7 @@ public class AgregarDosis extends Activity {
 			Calendar fechaComprueba = Calendar.getInstance();
 			fechaComprueba.set(anio, mes, dia, hora, min);
 
-			if (fechaComprueba.getTime().compareTo(new Date()) > 0) {
+			if (fechaComprueba.getTimeInMillis() > System.currentTimeMillis()) {
 				if (!cantidad.equals("") && !dias.equals("")
 						&& !repeticion.equals("")) {
 					Dosis dosis = new Dosis(idMedicamento, dia, mes, anio,
@@ -162,8 +162,9 @@ public class AgregarDosis extends Activity {
 		}
 
 		/*
-		 * hasta.add(Calendar.HOUR, dias); for (int i = 0; i < dias; i++) {
-		 * c.add(Calendar.MINUTE, repeticion); setAlarma(c, medicina); }
+		 * hasta.add(Calendar.MINUTE, 10); while
+		 * (c.getTime().compareTo(hasta.getTime()) < 0) { c.add(Calendar.MINUTE,
+		 * repeticion); setAlarma(c, medicina); }
 		 */
 
 	}
@@ -173,9 +174,11 @@ public class AgregarDosis extends Activity {
 		Intent intent = new Intent(AgregarDosis.this, AlarmReceiver.class);
 		final int id = (int) System.currentTimeMillis();
 
-		db.AgregarAlarma(db.getLastDosis(), id, c.getTimeInMillis());
+		int dosis = db.getLastDosis();
+		db.AgregarAlarma(dosis, id, c.getTimeInMillis());
 
 		intent.putExtra("id", id);
+		intent.putExtra("dosis", dosis);
 		intent.putExtra("medicina", medicina);
 		PendingIntent appIntent = PendingIntent.getBroadcast(AgregarDosis.this,
 				id, intent, PendingIntent.FLAG_ONE_SHOT);
