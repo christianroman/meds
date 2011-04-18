@@ -8,6 +8,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ public class AgregarDosis extends Activity {
 
 	DatabaseHelper db;
 	String medicamentos[];
+	int ids[];
 	Spinner s1;
 
 	@Override
@@ -38,7 +40,21 @@ public class AgregarDosis extends Activity {
 		db = new DatabaseHelper(this);
 
 		if (db.getCantidadMedicamentos() > 0) {
-			medicamentos = db.getMedicamentos();
+			Cursor cursor = db.getMedicamentos();
+			int items = cursor.getCount();
+			
+			medicamentos = new String[items];
+			ids = new int[items];
+			
+			int i = 0;
+			
+			while(cursor.moveToNext()){
+				ids[i] = cursor.getInt(0);
+				medicamentos[i] = cursor.getString(1);
+				i++;
+			}
+			cursor.close();
+			
 			SpinnerMedicamentos();
 		}
 		db.close();
@@ -50,6 +66,7 @@ public class AgregarDosis extends Activity {
 				android.R.layout.simple_spinner_item, medicamentos);
 
 		s1.setAdapter(adapter);
+		
 	}
 
 	public void Cancelar(View button) {
@@ -62,8 +79,8 @@ public class AgregarDosis extends Activity {
 		Boolean agregado = false;
 
 		try {
-			int idMedicamento = (int) (((Spinner) findViewById(R.id.spinnerMedicamento))
-					.getSelectedItemId() + 1);
+			
+			int idMedicamento = ids[((Spinner) findViewById(R.id.spinnerMedicamento)).getSelectedItemPosition()];
 
 			String medicina = (String) ((Spinner) findViewById(R.id.spinnerMedicamento))
 					.getSelectedItem();

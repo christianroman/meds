@@ -8,6 +8,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,13 +67,32 @@ public class Consultar extends Activity {
 			lv1.setAdapter(adaptador);
 			lv1.setClickable(true);
 			lv1.setOnItemClickListener(funcionClick);
+		} else {
+			((ListView) findViewById(R.id.LstOpciones))
+					.setVisibility(View.GONE);
+			((LinearLayout) findViewById(R.id.avisoConsultar))
+					.setVisibility(View.VISIBLE);
 		}
+
 		db.close();
 
 	}
 
+	public void AgregarDosis(View button) {
+		DatabaseHelper db = new DatabaseHelper(this);
+		if (db.getCantidadMedicamentos() > 0) {
+			db.close();
+			Intent intent = new Intent(this, AgregarDosis.class);
+			startActivity(intent);
+		} else {
+			Toast.makeText(this, "No hay medicamentos agregados",
+					Toast.LENGTH_LONG).show();
+		}
+		db.close();
+	}
+
 	private OnItemClickListener funcionClick = new OnItemClickListener() {
-		public void onItemClick(AdapterView parent, View v, int position,
+		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
 			datos.get(position).setVisible(!datos.get(position).isVisible());
 			lv1.setAdapter(adaptador);
@@ -102,9 +122,6 @@ public class Consultar extends Activity {
 		Toast.makeText(this, "Dosis eliminada y alarmas canceladas",
 				Toast.LENGTH_LONG).show();
 
-		Intent intent = new Intent(this, medicinetracker.class);
-		startActivity(intent);
-
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -120,8 +137,12 @@ public class Consultar extends Activity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+
 			LayoutInflater inflater = context.getLayoutInflater();
 			View item = inflater.inflate(R.layout.listitem_delete, null);
+
+			((Button) item.findViewById(R.id.botonItem)).getBackground()
+					.setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
 
 			Button btn = (Button) item.findViewById(R.id.botonItem);
 			btn.setOnClickListener(new OnItemClickListener(position));
@@ -189,9 +210,21 @@ public class Consultar extends Activity {
 				this.position = pos;
 			}
 
+			@SuppressWarnings("unchecked")
 			public void onClick(View v) {
 				{
 					cancelarAlarma(datos.get(position).getDosisID());
+					adaptador.remove(adaptador.getItem(position));
+					adaptador.notifyDataSetChanged();
+
+					if (db.getCantidadDosisActivas() < 1) {
+						((ListView) findViewById(R.id.LstOpciones))
+								.setVisibility(View.GONE);
+						((LinearLayout) findViewById(R.id.avisoConsultar))
+								.setVisibility(View.VISIBLE);
+					}
+					db.close();
+
 				}
 			}
 		}

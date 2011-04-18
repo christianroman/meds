@@ -79,8 +79,9 @@ public class Historial extends Activity implements OnClickListener {
 			Calendar c = Calendar.getInstance();
 			c.set(anio, mes, dia);
 
-			Intent intent = new Intent(Historial.this, HistorialFecha.class);
-			intent.putExtra("fecha_texto", c.getTimeInMillis());
+			Intent intent = new Intent(Historial.this, HistorialVista.class);
+			intent.putExtra("cabecera", String.valueOf(c.getTimeInMillis()));
+			intent.putExtra("id", 2);
 			startActivity(intent);
 		}
 	};
@@ -124,8 +125,9 @@ public class Historial extends Activity implements OnClickListener {
 						Toast.LENGTH_SHORT).show();
 				String tipo = (String) items[item];
 
-				Intent intent = new Intent(Historial.this, HistorialTipo.class);
-				intent.putExtra("tipo_texto", tipo);
+				Intent intent = new Intent(Historial.this, HistorialVista.class);
+				intent.putExtra("cabecera", tipo);
+				intent.putExtra("id", 0);
 				startActivity(intent);
 
 			}
@@ -146,8 +148,9 @@ public class Historial extends Activity implements OnClickListener {
 						Toast.LENGTH_SHORT).show();
 				String via = (String) items[item];
 
-				Intent intent = new Intent(Historial.this, HistorialVia.class);
-				intent.putExtra("via_texto", via);
+				Intent intent = new Intent(Historial.this, HistorialVista.class);
+				intent.putExtra("cabecera", via);
+				intent.putExtra("id", 1);
 				startActivity(intent);
 			}
 		});

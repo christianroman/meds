@@ -48,6 +48,7 @@ public class Resumen extends Activity {
 			long actual = System.currentTimeMillis();
 
 			Cursor c = db.getResumen();
+			db.close();
 			while (c.moveToNext()) {
 
 				long sig = c.getLong(1);
@@ -98,7 +99,7 @@ public class Resumen extends Activity {
 	}
 
 	private OnItemClickListener funcionClick = new OnItemClickListener() {
-		public void onItemClick(AdapterView parent, View v, int position,
+		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
 			datos.get(position).setVisible(!datos.get(position).getVisible());
 			lv1.setAdapter(adaptador);

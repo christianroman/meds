@@ -1,22 +1,29 @@
 package com.medicinetracker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class HistorialTipo extends Activity {
+public class HistorialVista extends Activity {
 
 	DatabaseHelper db;
 	AdaptadorTitulares adaptador;
@@ -29,13 +36,39 @@ public class HistorialTipo extends Activity {
 		setContentView(R.layout.historialvista);
 
 		TextView t = (TextView) findViewById(R.id.tipoTextView);
-		String tipo = this.getIntent().getExtras().getString("tipo_texto");
-		t.setText(tipo);
+		int idVista = this.getIntent().getExtras().getInt("id");
+
+		String title = this.getIntent().getExtras().getString("cabecera");
+		Log.i("onCreate", title);
+
+		if (idVista == 2) {
+			Calendar cal = Calendar.getInstance();
+			long time = Long.parseLong(title);
+			cal.setTimeInMillis(time);
+			SimpleDateFormat postFormater = new SimpleDateFormat(
+					"dd MMMM, yyyy");
+			title = postFormater.format(cal.getTime());
+			t.setText(title);
+			title = String.valueOf(time);
+		} else
+			t.setText(title);
 
 		db = new DatabaseHelper(this);
 
 		if (db.getCantidadDosis() > 0) {
-			Cursor c = db.getByTipo(tipo);
+
+			Cursor c = null;
+			switch (idVista) {
+			case 0:
+				c = db.getByTipo(title);
+				break;
+			case 1:
+				c = db.getByVia(title);
+				break;
+			case 2:
+				c = db.getByFecha(title);
+				break;
+			}
 
 			adaptador = new AdaptadorTitulares(this);
 
@@ -58,39 +91,52 @@ public class HistorialTipo extends Activity {
 						.getString(7), c.getString(8), c.getString(9), c
 						.getString(10), c.getInt(11), false));
 			}
-
-			db.close();
-
+			c.close();
 			lv1.setAdapter(adaptador);
 			lv1.setClickable(true);
 			lv1.setOnItemClickListener(funcionClick);
 		}
+		db.close();
 
 	}
 
 	private OnItemClickListener funcionClick = new OnItemClickListener() {
-		public void onItemClick(AdapterView parent, View v, int position,
+		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
 			datos.get(position).setVisible(!datos.get(position).isVisible());
 			lv1.setAdapter(adaptador);
 		}
 	};
 
+	public void cancelarAlarma(int id) {
+		db.eliminaMedicamento(id);
+		db.eliminarDosis(id);
+		db.close();
+
+		Toast.makeText(this, "Dosis eliminada", Toast.LENGTH_LONG).show();
+	}
+
 	@SuppressWarnings("rawtypes")
-	class AdaptadorTitulares extends ArrayAdapter {
-		LinearLayout LLExpandir;
+	class AdaptadorTitulares extends ArrayAdapter implements OnClickListener {
+		RelativeLayout LLExpandir;
 		Activity context;
 
 		@SuppressWarnings("unchecked")
 		AdaptadorTitulares(Activity context) {
-			super(context, R.layout.listitem, datos);
+			super(context, R.layout.listitem_delete, datos);
 			this.context = context;
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = context.getLayoutInflater();
-			View item = inflater.inflate(R.layout.listitem, null);
+			View item = inflater.inflate(R.layout.listitem_delete, null);
+
+			((Button) item.findViewById(R.id.botonItem)).getBackground()
+					.setColorFilter(0xFFFFE25B, PorterDuff.Mode.MULTIPLY);
+
+			Button btn = (Button) item.findViewById(R.id.botonItem);
+			btn.setOnClickListener(new OnItemClickListener(position));
 
 			TextView lblTitulo = (TextView) item.findViewById(R.id.tvNombre);
 			lblTitulo.setText(datos.get(position).getNombre());
@@ -140,12 +186,35 @@ public class HistorialTipo extends Activity {
 				((TextView) item.findViewById(R.id.tvNota)).setText(nota);
 			}
 
-			LLExpandir = (LinearLayout) item.findViewById(R.id.LLExpandir);
+			LLExpandir = (RelativeLayout) item.findViewById(R.id.LLExpandir);
 			LLExpandir
 					.setVisibility(datos.get(position).isVisible() ? View.VISIBLE
 							: View.GONE);
 
 			return (item);
+		}
+
+		class OnItemClickListener implements OnClickListener {
+			int position;
+
+			public OnItemClickListener(int pos) {
+				this.position = pos;
+			}
+
+			@SuppressWarnings("unchecked")
+			public void onClick(View v) {
+				{
+					cancelarAlarma(datos.get(position).getDosisID());
+					adaptador.remove(adaptador.getItem(position));
+					adaptador.notifyDataSetChanged();
+				}
+			}
+		}
+
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+
 		}
 
 	}

@@ -77,7 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ " repeticion, dosis.cantidad, tipos.nombre, vias.nombre, fechafin, persona, doctor, "
 			+ "farmacia, nota, dosis.iddosis FROM dosis, medicamento, vias, tipos where"
 			+ " dosis.idmedicamento = medicamento.idmedicamento AND medicamento.via = vias.idvias"
-			+ " AND medicamento.tipo = tipos.idtipos AND dosis.fechainicio <= ? AND dosis.estado = 0 ORDER BY fechainicio DESC";
+			+ " AND medicamento.tipo = tipos.idtipos AND dosis.fechainicio < ? AND dosis.estado = 0 ORDER BY fechainicio DESC";
 
 	static final String queryConsulta = "SELECT medicamento.nombre, fechainicio, "
 			+ " repeticion, dosis.cantidad, tipos.nombre, vias.nombre, fechafin, persona, doctor, "
@@ -256,23 +256,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return cursor;
 	}
 
-	public String[] getMedicamentos() {
+	public Cursor getAllAlarmas() {
+		Cursor cursor = this.getReadableDatabase().query(tablaAlarmas,
+				new String[] { colAlarmaID }, null, null, null, null, null);
+		return cursor;
+	}
+
+	public Cursor getMedicamentos() {
 		Cursor cursor = this.getReadableDatabase().query(tablaMedicamento,
-				null, null, null, null, null, null);
-
-		if (cursor.getCount() > 0) {
-			String[] str = new String[cursor.getCount()];
-			int i = 0;
-
-			while (cursor.moveToNext()) {
-				str[i] = cursor.getString(cursor.getColumnIndex(colNombre));
-				i++;
-			}
-			cursor.close();
-			return str;
-		} else {
-			return new String[] {};
-		}
+				null, null, null, null, null, colID + " DESC");
+		return cursor;
 	}
 
 	public int getCantidadMedicamentos() {
@@ -387,6 +380,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(tablaMedicamento, colID + "=?",
 				new String[] { String.valueOf(idmedicamento) });
+		db.close();
+	}
+
+	public void eliminarDosis(int id) {
+		String args[] = new String[] { String.valueOf(id) };
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(tablaDosis, colDosisID + "=?", args);
 		db.close();
 	}
 

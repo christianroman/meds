@@ -123,9 +123,11 @@
 
 		</LinearLayout>
 
-		<Button android:text="Eliminar" android:focusable="false" android:layout_alignParentRight="true"
+		<Button android:text="Eliminar" android:focusable="false"
+			android:layout_alignParentRight="true" android:textStyle="bold"
 			android:layout_marginRight="5dp" android:textSize="12sp" android:id="@+id/botonItem"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			android:textColor="@color/titlecolor" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
 
 	</RelativeLayout>
 

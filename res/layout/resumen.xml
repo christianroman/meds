@@ -24,7 +24,7 @@
 			<TextView android:layout_height="wrap_content"
 				android:textSize="12sp" android:textStyle="italic"
 				android:layout_width="fill_parent" android:id="@+id/NoDosisMensaje"
-				android:gravity="center_horizontal" android:text="(Añade una nueva dosis en el boton inferior)" />
+				android:gravity="center_horizontal" android:text="(Añade nuevas dosis con los iconos inferiores)" />
 
 		</LinearLayout>
 
@@ -36,12 +36,11 @@
 
 	<LinearLayout android:id="@+id/resumen"
 		android:orientation="vertical" android:layout_width="fill_parent"
-		android:paddingLeft="5dp" android:paddingRight="5dp" android:paddingBottom="5dp"
-		android:layout_height="wrap_content">
+		android:paddingLeft="5dp" android:paddingRight="5dp"
+		android:paddingBottom="5dp" android:layout_height="wrap_content">
 
 		<View android:background="@color/hr" android:layout_width="fill_parent"
-			android:layout_height="1dp" android:layout_below="@+id/botones"
-			 />
+			android:layout_height="1dp" android:layout_below="@+id/botones" />
 
 		<RelativeLayout android:id="@+id/botones"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
