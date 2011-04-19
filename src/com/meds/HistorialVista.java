@@ -26,6 +26,7 @@ import android.widget.ImageView;
 public class HistorialVista extends Activity {
 
 	DatabaseHelper db;
+	private Cursor c;
 	AdaptadorTitulares adaptador;
 	private int idVista;
 	private String title;
@@ -72,62 +73,78 @@ public class HistorialVista extends Activity {
 
 		if (db.getCantidadDosis() > 0) {
 
-			Cursor c = null;
-			switch (idVista) {
-			case 0:
-				c = db.getByTipo(title);
-				break;
-			case 1:
-				c = db.getByVia(title);
-				break;
-			case 2:
-				c = db.getByFecha(title);
-				break;
-			}
-
-			if (c.getCount() > 0) {
-
-				adaptador = new AdaptadorTitulares(this);
-
-				lv1 = (ListView) findViewById(R.id.LstOpciones);
-
-				while (c.moveToNext()) {
-
-					Calendar c_inicio = Calendar.getInstance();
-					c_inicio.setTimeInMillis(c.getLong(1));
-
-					Calendar c_fin = Calendar.getInstance();
-					c_fin.setTimeInMillis(c.getLong(6));
-
-					String repeticion = c.getString(3)
-							+ " "
-							+ this.getString(R.string.Cada)
-							+ " "
-							+ c.getString(2)
-							+ " "
-							+ this.getString(R.string.Hora)
-							+ ((Integer.parseInt(c.getString(2)) == 1) ? ""
-									: "s");
-
-					datos.add(new ListItem(c.getString(0), c_inicio.getTime()
-							.toLocaleString(), repeticion, c.getString(4), c
-							.getString(5), c_fin.getTime().toLocaleString(), c
-							.getString(7), c.getString(8), c.getString(9), c
-							.getString(10), c.getInt(11), false));
+			try {
+				switch (idVista) {
+				case 0:
+					c = db.getByTipo(title);
+					break;
+				case 1:
+					c = db.getByVia(title);
+					break;
+				case 2:
+					c = db.getByFecha(title);
+					break;
 				}
-				lv1.setAdapter(adaptador);
-				lv1.setClickable(true);
-				lv1.setOnItemClickListener(funcionClick);
-			} else {
-				((ListView) findViewById(R.id.LstOpciones))
-						.setVisibility(View.GONE);
-				((LinearLayout) findViewById(R.id.avisoHistorial))
-						.setVisibility(View.VISIBLE);
+
+				if (c.getCount() > 0) {
+
+					adaptador = new AdaptadorTitulares(this);
+
+					lv1 = (ListView) findViewById(R.id.LstOpciones);
+
+					while (c.moveToNext()) {
+
+						Calendar c_inicio = Calendar.getInstance();
+						c_inicio.setTimeInMillis(c.getLong(1));
+
+						Calendar c_fin = Calendar.getInstance();
+						c_fin.setTimeInMillis(c.getLong(6));
+
+						String repeticion = c.getString(3)
+								+ " "
+								+ this.getString(R.string.Cada)
+								+ " "
+								+ c.getString(2)
+								+ " "
+								+ this.getString(R.string.Hora)
+								+ ((Integer.parseInt(c.getString(2)) == 1) ? ""
+										: "s");
+
+						datos.add(new ListItem(c.getString(0), c_inicio
+								.getTime().toLocaleString(), repeticion, c
+								.getString(4), c.getString(5), c_fin.getTime()
+								.toLocaleString(), c.getString(7), c
+								.getString(8), c.getString(9), c.getString(10),
+								c.getInt(11), false));
+					}
+					lv1.setAdapter(adaptador);
+					lv1.setClickable(true);
+					lv1.setOnItemClickListener(funcionClick);
+				} else {
+					((ListView) findViewById(R.id.LstOpciones))
+							.setVisibility(View.GONE);
+					((LinearLayout) findViewById(R.id.avisoHistorial))
+							.setVisibility(View.VISIBLE);
+				}
+			} finally {
+				if (c != null) {
+					c.close();
+				}
+				db.getReadableDatabase().close();
 			}
+		}
+
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (c != null) {
 			c.close();
 		}
-		db.close();
-
+		if (db != null) {
+			db.close();
+		}
 	}
 
 	private OnItemClickListener funcionClick = new OnItemClickListener() {
@@ -143,7 +160,8 @@ public class HistorialVista extends Activity {
 		db.eliminarDosis(id);
 		db.close();
 
-		Toast.makeText(this, this.getString(R.string.dosisEliminada), Toast.LENGTH_LONG).show();
+		Toast.makeText(this, this.getString(R.string.dosisEliminada),
+				Toast.LENGTH_LONG).show();
 	}
 
 	@SuppressWarnings("rawtypes")

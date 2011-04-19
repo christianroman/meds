@@ -1,5 +1,7 @@
 package com.meds;
 
+import java.util.Locale;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -146,11 +148,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private void insertarTipos(SQLiteDatabase db) {
 		ContentValues cv = new ContentValues();
-		String tipos[] = { "Pastilla", "Capsulas", "Jarabe", "Emulsión",
-				"Polvo", "Parche", "Supositorio", "Ovulo", "Gragea",
-				"Inyección", "Suspensión", "Aerosol", "Solución", "Crema",
-				"Pasta", "Liposoma", "Ungüentos", "Comprimido", "Píldora",
-				"Loción", "Gel", "Gotas", "Inhalador" };
+		String tipos[];
+		String lenguaje = Locale.getDefault().getLanguage();
+		if (lenguaje.equals("es")) {
+			tipos = new String[] { "Pastilla", "Capsulas", "Jarabe",
+					"Emulsión", "Polvo", "Parche", "Supositorio", "Ovulo",
+					"Gragea", "Inyección", "Suspensión", "Aerosol", "Solución",
+					"Crema", "Liposoma", "Ungüentos", "Comprimido", "Loción",
+					"Gel", "Gotas", "Inhalador" };
+		} else {
+			tipos = new String[] { "Pills", "Capsules", "Syrup", "Emulsion",
+					"Powder", "Patch", "Suppository", "Ovule", "Dragee",
+					"Injection", "Suspension", "Spray", "Solution", "Cream",
+					"Liposome", "Ointments", "Compressed", "Lotion", "Gel",
+					"Drops", "Inhaler" };
+		}
 
 		for (String v : tipos) {
 			cv.put(colTiposNombre, v);
@@ -160,9 +172,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private void insertarVias(SQLiteDatabase db) {
 		ContentValues cv = new ContentValues();
-		String vias[] = { "Oral", "Sublingual", "Gastroentérica", "Oftálmica",
-				"Nasal", "Tópica", "Parental", "Rectal", "Vaginal",
-				"Subcutánea", "Transdermica", "Intramuscular", "Endevenosa" };
+		String vias[];
+		String lenguaje = Locale.getDefault().getLanguage();
+		if (lenguaje.equals("es")) {
+			vias = new String[] { "Oral", "Sublingual", "Gastroentérica",
+					"Oftálmica", "Nasal", "Tópica", "Parental", "Rectal",
+					"Vaginal", "Ocular", "Subcutánea", "Transdermica",
+					"Intramuscular", "Endevenosa" };
+		} else {
+			vias = new String[] { "Oral", "Sublingual", "Gastroenteric",
+					"Ophthalmic", "Nasal", "Topical", "Parental", "Rectal",
+					"Vaginal", "Ocular", "Subcutaneous", "Transdermal",
+					"Intramuscular", "Intravenous" };
+		}
 
 		for (String v : vias) {
 			cv.put(colViasNombre, v);
@@ -227,8 +249,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public Cursor getConsulta() {
 		String args[] = new String[] { "1" };
-		return (Cursor) this.getReadableDatabase()
+		Cursor cursor = this.getReadableDatabase()
 				.rawQuery(queryConsulta, args);
+		return cursor;
 	}
 
 	public Cursor getByTipo(String tipo) {
@@ -421,5 +444,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + tablaAlarmas);
 		onCreate(db);
 	}
-
 }

@@ -21,6 +21,7 @@ import android.widget.Toast;
 public class Resumen extends Activity {
 
 	DatabaseHelper db;
+	Cursor c;
 	AdaptadorTitulares adaptador;
 	private ListView lv1;
 	private ArrayList<Titular> datos = new ArrayList<Titular>();
@@ -32,11 +33,13 @@ public class Resumen extends Activity {
 
 		db = new DatabaseHelper(this);
 
-		((TextView) findViewById(R.id.TextViewDosisActivas))
-				.setText(this.getString(R.string.dosisActivas) + db.getCantidadDosisActivas());
-		((TextView) findViewById(R.id.TextViewMedicamentos))
-				.setText(this.getString(R.string.medicamentosActivos) + db.getCantidadMedicamentos());
-		
+		((TextView) findViewById(R.id.TextViewDosisActivas)).setText(this
+				.getString(R.string.dosisActivas)
+				+ db.getCantidadDosisActivas());
+		((TextView) findViewById(R.id.TextViewMedicamentos)).setText(this
+				.getString(R.string.medicamentosActivos)
+				+ db.getCantidadMedicamentos());
+
 		if (db.getCantidadDosisActivas() > 0) {
 
 			Boolean dosisSiguientes = false;
@@ -46,47 +49,53 @@ public class Resumen extends Activity {
 			lv1 = (ListView) findViewById(R.id.LstOpciones);
 
 			long actual = System.currentTimeMillis();
-			
-			Cursor c = db.getResumen();
-			while (c.moveToNext()) {
 
-				long sig = c.getLong(1);
+			try {
+				c = db.getResumen();
+				while (c.moveToNext()) {
 
-				if (sig > actual) {
+					long sig = c.getLong(1);
 
-					Calendar ca = Calendar.getInstance();
-					ca.setTimeInMillis(c.getLong(1));
+					if (sig > actual) {
 
-					Calendar c_horas = Calendar.getInstance();
-					c_horas.setTimeInMillis(c.getLong(2));
-					int dias = (int) (c_horas.getTimeInMillis() - actual)
-							/ (24 * 60 * 60 * 1000);
+						Calendar ca = Calendar.getInstance();
+						ca.setTimeInMillis(c.getLong(1));
 
-					Calendar c_inicio = Calendar.getInstance();
-					c_inicio.setTimeInMillis(c.getLong(5));
+						Calendar c_horas = Calendar.getInstance();
+						c_horas.setTimeInMillis(c.getLong(2));
+						int dias = (int) (c_horas.getTimeInMillis() - actual)
+								/ (24 * 60 * 60 * 1000);
 
-					datos.add(new Titular(c.getString(0), ca.getTime()
-							.toLocaleString(), String.valueOf(dias), c
-							.getString(3), c.getString(4), c_inicio.getTime()
-							.toLocaleString(), c.getString(6), c.getString(7),
-							c.getString(8), c.getString(9), false));
-					dosisSiguientes = true;
+						Calendar c_inicio = Calendar.getInstance();
+						c_inicio.setTimeInMillis(c.getLong(5));
+
+						datos.add(new Titular(c.getString(0), ca.getTime()
+								.toLocaleString(), String.valueOf(dias), c
+								.getString(3), c.getString(4), c_inicio
+								.getTime().toLocaleString(), c.getString(6), c
+								.getString(7), c.getString(8), c.getString(9),
+								false));
+						dosisSiguientes = true;
+					}
+
 				}
-
+			} finally {
+				if (c != null) {
+					c.close();
+				}
+				db.getReadableDatabase().close();
 			}
-			c.close();
 
 			lv1.setAdapter(adaptador);
 			lv1.setClickable(true);
 			lv1.setOnItemClickListener(funcionClick);
-			
+
 			if (!dosisSiguientes) {
 				((ListView) findViewById(R.id.LstOpciones))
 						.setVisibility(View.GONE);
 				((LinearLayout) findViewById(R.id.avisoDosis))
 						.setVisibility(View.VISIBLE);
 			}
-			
 
 		} else {
 			((ListView) findViewById(R.id.LstOpciones))
@@ -94,7 +103,18 @@ public class Resumen extends Activity {
 			((LinearLayout) findViewById(R.id.avisoDosis))
 					.setVisibility(View.VISIBLE);
 		}
-		db.close();
+		
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (c!=null){
+		    c.close();
+		}
+		if (db!=null){
+		    db.close();
+		}
 	}
 
 	private OnItemClickListener funcionClick = new OnItemClickListener() {
@@ -157,7 +177,7 @@ public class Resumen extends Activity {
 
 			TextView fecha = (TextView) item.findViewById(R.id.fechaIni);
 			fecha.setText(datos.get(position).getFecha());
-			
+
 			String persona = datos.get(position).getPersona();
 			if (!persona.equals("")) {
 				((LinearLayout) item.findViewById(R.id.personaLayout))

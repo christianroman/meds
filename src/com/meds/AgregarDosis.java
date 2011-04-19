@@ -161,12 +161,6 @@ public class AgregarDosis extends Activity {
 			setAlarma(c, medicina);
 		}
 
-		/*
-		 * hasta.add(Calendar.MINUTE, 10); while
-		 * (c.getTime().compareTo(hasta.getTime()) < 0) { c.add(Calendar.MINUTE,
-		 * repeticion); setAlarma(c, medicina); }
-		 */
-
 	}
 
 	public void setAlarma(Calendar c, String medicina) {

@@ -27,6 +27,7 @@ import android.widget.Toast;
 public class Consultar extends Activity {
 
 	DatabaseHelper db;
+	Cursor c;
 	AdaptadorTitulares adaptador;
 	private ListView lv1;
 	private ArrayList<ListItem> datos = new ArrayList<ListItem>();
@@ -39,33 +40,42 @@ public class Consultar extends Activity {
 		db = new DatabaseHelper(this);
 
 		if (db.getCantidadDosisActivas() > 0) {
-			Cursor c = db.getConsulta();
 
 			adaptador = new AdaptadorTitulares(this);
 
 			lv1 = (ListView) findViewById(R.id.LstOpciones);
 
-			while (c.moveToNext()) {
+			try {
+				c = db.getConsulta();
+				while (c.moveToNext()) {
 
-				Calendar c_inicio = Calendar.getInstance();
-				c_inicio.setTimeInMillis(c.getLong(1));
+					Calendar c_inicio = Calendar.getInstance();
+					c_inicio.setTimeInMillis(c.getLong(1));
 
-				Calendar c_fin = Calendar.getInstance();
-				c_fin.setTimeInMillis(c.getLong(6));
+					Calendar c_fin = Calendar.getInstance();
+					c_fin.setTimeInMillis(c.getLong(6));
 
-				String repeticion = c.getString(3) + " "
-						+ this.getString(R.string.Cada) + " " + c.getString(2)
-						+ " " + this.getString(R.string.Hora)
-						+ ((Integer.parseInt(c.getString(2)) == 1) ? "" : "s");
+					String repeticion = c.getString(3)
+							+ " "
+							+ this.getString(R.string.Cada)
+							+ " "
+							+ c.getString(2)
+							+ " "
+							+ this.getString(R.string.Hora)
+							+ ((Integer.parseInt(c.getString(2)) == 1) ? ""
+									: "s");
 
-				datos.add(new ListItem(c.getString(0), c_inicio.getTime()
-						.toLocaleString(), repeticion, c.getString(4), c
-						.getString(5), c_fin.getTime().toLocaleString(), c
-						.getString(7), c.getString(8), c.getString(9), c
-						.getString(10), c.getInt(11), false));
-			}
-			if (c != null) {
-				c.close();
+					datos.add(new ListItem(c.getString(0), c_inicio.getTime()
+							.toLocaleString(), repeticion, c.getString(4), c
+							.getString(5), c_fin.getTime().toLocaleString(), c
+							.getString(7), c.getString(8), c.getString(9), c
+							.getString(10), c.getInt(11), false));
+				}
+			} finally {
+				if (c != null) {
+					c.close();
+				}
+				db.getReadableDatabase().close();
 			}
 
 			lv1.setAdapter(adaptador);
@@ -78,8 +88,17 @@ public class Consultar extends Activity {
 					.setVisibility(View.VISIBLE);
 		}
 
-		db.close();
+	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (c != null) {
+			c.close();
+		}
+		if (db != null) {
+			db.close();
+		}
 	}
 
 	public void AgregarDosis(View button) {
