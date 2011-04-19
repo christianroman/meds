@@ -146,10 +146,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private void insertarTipos(SQLiteDatabase db) {
 		ContentValues cv = new ContentValues();
-		String tipos[] = { "Pastilla", "Capsulas", "Jarabe", "Emulsion",
+		String tipos[] = { "Pastilla", "Capsulas", "Jarabe", "Emulsión",
 				"Polvo", "Parche", "Supositorio", "Ovulo", "Gragea",
-				"Inyeccion", "Suspension", "Aerosol", "Solucion", "Crema",
-				"Pasta", "Liposoma", "Unguentos", "Comprimido", "Pildora",
+				"Inyección", "Suspensión", "Aerosol", "Solución", "Crema",
+				"Pasta", "Liposoma", "Ungüentos", "Comprimido", "Píldora",
 				"Loción", "Gel", "Gotas", "Inhalador" };
 
 		for (String v : tipos) {
@@ -162,7 +162,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		ContentValues cv = new ContentValues();
 		String vias[] = { "Oral", "Sublingual", "Gastroentérica", "Oftálmica",
 				"Nasal", "Tópica", "Parental", "Rectal", "Vaginal",
-				"Subcutanea", "Transdermica", "Intramuscular", "Endevenosa" };
+				"Subcutánea", "Transdermica", "Intramuscular", "Endevenosa" };
 
 		for (String v : vias) {
 			cv.put(colViasNombre, v);
@@ -297,10 +297,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		this.getReadableDatabase().close();
 		return count;
 	}
-	
-	public long getFechaFinDosis(int dosis){
-		String[] args = new String[]{String.valueOf(dosis)};
-		Cursor cursor = this.getReadableDatabase().rawQuery("SELECT fechafin FROM dosis WHERE iddosis = ?", args);
+
+	public long getFechaFinDosis(int dosis) {
+		String[] args = new String[] { String.valueOf(dosis) };
+		Cursor cursor = this.getReadableDatabase().rawQuery(
+				"SELECT fechafin FROM dosis WHERE iddosis = ?", args);
 		cursor.moveToNext();
 		long fecha = cursor.getLong(0);
 		cursor.close();
