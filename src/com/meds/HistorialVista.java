@@ -99,8 +99,15 @@ public class HistorialVista extends Activity {
 					Calendar c_fin = Calendar.getInstance();
 					c_fin.setTimeInMillis(c.getLong(6));
 
-					String repeticion = c.getString(3) + " cada "
-							+ c.getString(2) + " horas";
+					String repeticion = c.getString(3)
+							+ " "
+							+ this.getString(R.string.Cada)
+							+ " "
+							+ c.getString(2)
+							+ " "
+							+ this.getString(R.string.Hora)
+							+ ((Integer.parseInt(c.getString(2)) == 1) ? ""
+									: "s");
 
 					datos.add(new ListItem(c.getString(0), c_inicio.getTime()
 							.toLocaleString(), repeticion, c.getString(4), c
@@ -136,7 +143,7 @@ public class HistorialVista extends Activity {
 		db.eliminarDosis(id);
 		db.close();
 
-		Toast.makeText(this, "Dosis eliminada", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, this.getString(R.string.dosisEliminada), Toast.LENGTH_LONG).show();
 	}
 
 	@SuppressWarnings("rawtypes")

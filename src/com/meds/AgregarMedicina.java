@@ -86,7 +86,7 @@ public class AgregarMedicina extends Activity {
 				db.AgregaMedicina(m);
 				agregado = true;
 			} else
-				Toast.makeText(this, "El nombre no puede estar vacio",
+				Toast.makeText(this, this.getString(R.string.nombreVacio),
 						Toast.LENGTH_LONG).show();
 
 		}
@@ -104,7 +104,7 @@ public class AgregarMedicina extends Activity {
 	}
 
 	public void notificaAgregado() {
-		Toast.makeText(this, "Medicina agregada", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, this.getString(R.string.medicinaAgregada), Toast.LENGTH_LONG).show();
 	}
 
 }

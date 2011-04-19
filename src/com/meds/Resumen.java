@@ -33,10 +33,10 @@ public class Resumen extends Activity {
 		db = new DatabaseHelper(this);
 
 		((TextView) findViewById(R.id.TextViewDosisActivas))
-				.setText("Dosis Activas: " + db.getCantidadDosisActivas());
+				.setText(this.getString(R.string.dosisActivas) + db.getCantidadDosisActivas());
 		((TextView) findViewById(R.id.TextViewMedicamentos))
-				.setText("Medicamentos: " + db.getCantidadMedicamentos());
-
+				.setText(this.getString(R.string.medicamentosActivos) + db.getCantidadMedicamentos());
+		
 		if (db.getCantidadDosisActivas() > 0) {
 
 			Boolean dosisSiguientes = false;
@@ -46,9 +46,8 @@ public class Resumen extends Activity {
 			lv1 = (ListView) findViewById(R.id.LstOpciones);
 
 			long actual = System.currentTimeMillis();
-
+			
 			Cursor c = db.getResumen();
-			db.close();
 			while (c.moveToNext()) {
 
 				long sig = c.getLong(1);
@@ -70,7 +69,7 @@ public class Resumen extends Activity {
 							.toLocaleString(), String.valueOf(dias), c
 							.getString(3), c.getString(4), c_inicio.getTime()
 							.toLocaleString(), c.getString(6), c.getString(7),
-							c.getString(8), false));
+							c.getString(8), c.getString(9), false));
 					dosisSiguientes = true;
 				}
 
@@ -80,13 +79,14 @@ public class Resumen extends Activity {
 			lv1.setAdapter(adaptador);
 			lv1.setClickable(true);
 			lv1.setOnItemClickListener(funcionClick);
-
+			
 			if (!dosisSiguientes) {
 				((ListView) findViewById(R.id.LstOpciones))
 						.setVisibility(View.GONE);
 				((LinearLayout) findViewById(R.id.avisoDosis))
 						.setVisibility(View.VISIBLE);
 			}
+			
 
 		} else {
 			((ListView) findViewById(R.id.LstOpciones))
@@ -95,7 +95,6 @@ public class Resumen extends Activity {
 					.setVisibility(View.VISIBLE);
 		}
 		db.close();
-
 	}
 
 	private OnItemClickListener funcionClick = new OnItemClickListener() {
@@ -118,7 +117,7 @@ public class Resumen extends Activity {
 			Intent intent = new Intent(this, AgregarDosis.class);
 			startActivity(intent);
 		} else {
-			Toast.makeText(this, "No hay medicamentos agregados",
+			Toast.makeText(this, this.getString(R.string.noMedicamentos),
 					Toast.LENGTH_LONG).show();
 		}
 		db.close();
@@ -158,6 +157,13 @@ public class Resumen extends Activity {
 
 			TextView fecha = (TextView) item.findViewById(R.id.fechaIni);
 			fecha.setText(datos.get(position).getFecha());
+			
+			String persona = datos.get(position).getPersona();
+			if (!persona.equals("")) {
+				((LinearLayout) item.findViewById(R.id.personaLayout))
+						.setVisibility(View.VISIBLE);
+				((TextView) item.findViewById(R.id.tvPersona)).setText(persona);
+			}
 
 			String doctor = datos.get(position).getDoctor();
 			if (!doctor.equals("")) {

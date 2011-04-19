@@ -12,12 +12,12 @@
 		<TextView android:layout_height="wrap_content"
 			android:textSize="14sp" android:layout_width="fill_parent"
 			android:id="@+id/NoConsultar" android:gravity="center_horizontal"
-			android:text="No hay dosis activas" />
+			android:text="@string/noDosisActivas" />
 
 		<TextView android:layout_height="wrap_content"
 			android:textSize="12sp" android:textStyle="italic"
 			android:layout_width="fill_parent" android:id="@+id/NoConsultarMensaje"
-			android:gravity="center_horizontal" android:text="(Añade una nueva dosis con el icono inferior)" />
+			android:gravity="center_horizontal" android:text="@string/agregaDosis" />
 
 		<RelativeLayout android:layout_width="fill_parent"
 			android:layout_marginTop="10dp" android:layout_height="fill_parent">

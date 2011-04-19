@@ -7,13 +7,14 @@ public class Titular {
 	private String tipo;
 	private String via;
 	private String fecha;
+	private String persona;
 	private String doctor;
 	private String farmacia;
 	private String nota;
 	private boolean visible;
 
 	public Titular(String tit, String sub, String hora, String tipo,
-			String via, String fecha, String doctor, String farmacia,
+			String via, String fecha, String persona, String doctor, String farmacia,
 			String nota, boolean visible) {
 		titulo = tit;
 		subtitulo = sub;
@@ -22,6 +23,7 @@ public class Titular {
 		this.tipo = tipo;
 		this.via = via;
 		this.fecha = fecha;
+		this.persona = persona;
 		this.doctor = doctor;
 		this.farmacia = farmacia;
 		this.nota = nota;
@@ -49,6 +51,10 @@ public class Titular {
 
 	public String getFecha() {
 		return fecha;
+	}
+	
+	public String getPersona(){
+		return persona;
 	}
 
 	public String getDoctor() {

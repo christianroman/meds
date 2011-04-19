@@ -17,12 +17,12 @@
 
 		<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="Preferencias:" android:textSize="20sp"
+			android:text="@string/tituloPreferencias" android:textSize="20sp"
 			android:layout_alignParentRight="true" android:textColor="@color/titlecolor" />
 
 	</RelativeLayout>
 
-	<Button android:text="Restaurar base de datos" android:id="@+id/rbd"
+	<Button android:text="@string/Restaurar" android:id="@+id/rbd"
 		android:textStyle="bold" android:textColor="@color/titlecolor"
 		android:onClick="Restaurar" android:layout_height="wrap_content"
 		android:layout_marginBottom="15dp" android:layout_width="fill_parent"></Button>
@@ -30,6 +30,6 @@
 	<TextView android:layout_height="wrap_content"
 		android:textSize="12sp" android:textStyle="italic"
 		android:layout_width="fill_parent" android:gravity="center_horizontal"
-		android:text="(Al restaurar la base de datos se eliminan TODAS las alarmas creadas)" />
+		android:text="@string/mensajeRestaurar" />
 
 </LinearLayout>

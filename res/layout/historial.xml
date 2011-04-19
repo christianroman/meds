@@ -4,7 +4,7 @@
 	android:padding="10dp" xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<RelativeLayout android:layout_height="wrap_content"
-		android:gravity="center_horizontal" android:layout_marginBottom="15dp"
+		android:gravity="center_horizontal" android:layout_marginBottom="5dp"
 		android:layout_width="fill_parent">
 
 		<ImageView android:layout_width="wrap_content"
@@ -14,23 +14,28 @@
 
 		<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="Tipo de busqueda:" android:textSize="20sp"
+			android:text="@string/tipoBusqueda" android:textSize="20sp"
 			android:layout_alignParentRight="true" android:textColor="@color/titlecolor" />
 
 	</RelativeLayout>
 
-	<Button android:text="Por Tipo" android:id="@+id/searchByType"
+	<TextView android:layout_height="wrap_content"
+		android:textSize="14sp" android:layout_marginBottom="10dp"
+		android:layout_width="fill_parent" android:gravity="center_horizontal"
+		android:text="@string/buscarPor" />
+
+	<Button android:text="@string/porTipo" android:id="@+id/searchByType"
 		android:textStyle="bold" android:textColor="@color/titlecolor"
 		android:layout_height="wrap_content" android:layout_marginBottom="15dp"
 		android:layout_width="fill_parent"></Button>
 
 	<Button android:id="@+id/searchByVia" android:layout_height="wrap_content"
-		android:textStyle="bold" android:text="Por Via"
+		android:textStyle="bold" android:text="@string/porVia"
 		android:layout_marginBottom="15dp" android:textColor="@color/titlecolor"
 		android:layout_width="fill_parent"></Button>
 
 	<Button android:layout_width="fill_parent" android:textColor="@color/titlecolor"
 		android:textStyle="bold" android:layout_height="wrap_content"
-		android:text="Por Fecha" android:id="@+id/searchByDate"></Button>
+		android:text="@string/porFecha" android:id="@+id/searchByDate"></Button>
 
 </LinearLayout>

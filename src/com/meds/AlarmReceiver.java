@@ -29,7 +29,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		CharSequence medicina = intent.getExtras().getCharSequence("medicina");
 		PendingIntent theappIntent = PendingIntent.getBroadcast(context, id,
 				contentIntent, PendingIntent.FLAG_ONE_SHOT);
-		CharSequence message = "Tomar dosis pendiente";
+		CharSequence message = context.getString(R.string.tomarDosis);
 
 		Notification notification = new Notification(R.drawable.icon, medicina,
 				System.currentTimeMillis());

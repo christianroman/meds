@@ -53,8 +53,10 @@ public class Consultar extends Activity {
 				Calendar c_fin = Calendar.getInstance();
 				c_fin.setTimeInMillis(c.getLong(6));
 
-				String repeticion = c.getString(3) + " cada " + c.getString(2)
-						+ " hora" +  ((Integer.parseInt(c.getString(2)) == 1) ? "" : "s");
+				String repeticion = c.getString(3) + " "
+						+ this.getString(R.string.Cada) + " " + c.getString(2)
+						+ " " + this.getString(R.string.Hora)
+						+ ((Integer.parseInt(c.getString(2)) == 1) ? "" : "s");
 
 				datos.add(new ListItem(c.getString(0), c_inicio.getTime()
 						.toLocaleString(), repeticion, c.getString(4), c
@@ -62,7 +64,9 @@ public class Consultar extends Activity {
 						.getString(7), c.getString(8), c.getString(9), c
 						.getString(10), c.getInt(11), false));
 			}
-			c.close();
+			if (c != null) {
+				c.close();
+			}
 
 			lv1.setAdapter(adaptador);
 			lv1.setClickable(true);
@@ -85,7 +89,7 @@ public class Consultar extends Activity {
 			Intent intent = new Intent(this, AgregarDosis.class);
 			startActivity(intent);
 		} else {
-			Toast.makeText(this, "No hay medicamentos agregados",
+			Toast.makeText(this, this.getString(R.string.noMedicamentos),
 					Toast.LENGTH_LONG).show();
 		}
 		db.close();
@@ -118,7 +122,7 @@ public class Consultar extends Activity {
 		db.eliminaAlarmas(id);
 		db.close();
 
-		Toast.makeText(this, "Dosis eliminada y alarmas canceladas",
+		Toast.makeText(this, this.getString(R.string.dosisAlarmasCanceladas),
 				Toast.LENGTH_LONG).show();
 
 	}

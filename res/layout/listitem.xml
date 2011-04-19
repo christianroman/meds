@@ -17,8 +17,8 @@
 
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<TextView android:text="Fecha de inicio:  " android:gravity="top"
-			android:textSize="13sp" android:layout_width="wrap_content"
+		<TextView android:text="@string/itemFechaInicio"
+			android:gravity="top" android:textSize="13sp" android:layout_width="wrap_content"
 			android:textStyle="italic" android:textColor="@color/titlecolor"
 			android:layout_height="fill_parent" android:layout_weight="1" />
 		<TextView android:id="@+id/tvFechaInicio" android:gravity="top"
@@ -36,7 +36,7 @@
 			<LinearLayout android:orientation="horizontal"
 				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-				<TextView android:text="Tipo: " android:gravity="top"
+				<TextView android:text="@string/itemTipo" android:gravity="top"
 					android:textStyle="italic" android:textColor="@color/titlecolor"
 					android:textSize="13sp" android:layout_width="wrap_content"
 					android:layout_height="fill_parent" android:layout_weight="1" />
@@ -48,7 +48,7 @@
 			<LinearLayout android:orientation="horizontal"
 				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-				<TextView android:text="Via: " android:gravity="top"
+				<TextView android:text="@string/itemVia" android:gravity="top"
 					android:textStyle="italic" android:textColor="@color/titlecolor"
 					android:textSize="13sp" android:layout_width="wrap_content"
 					android:layout_height="fill_parent" android:layout_weight="1" />
@@ -60,8 +60,8 @@
 			<LinearLayout android:orientation="horizontal"
 				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-				<TextView android:text="Finalización: " android:gravity="top"
-					android:textStyle="italic" android:textColor="@color/titlecolor"
+				<TextView android:text="@string/Finalizacion"
+					android:gravity="top" android:textStyle="italic" android:textColor="@color/titlecolor"
 					android:textSize="13sp" android:layout_width="wrap_content"
 					android:layout_height="fill_parent" android:layout_weight="1" />
 				<TextView android:id="@+id/tvFechafin" android:text="contenido"
@@ -73,8 +73,8 @@
 				android:id="@+id/personaLayout" android:visibility="gone"
 				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-				<TextView android:text="Persona: " android:gravity="top"
-					android:textStyle="italic" android:textColor="@color/titlecolor"
+				<TextView android:text="@string/itemPersona"
+					android:gravity="top" android:textStyle="italic" android:textColor="@color/titlecolor"
 					android:textSize="13sp" android:layout_width="wrap_content"
 					android:layout_height="fill_parent" android:layout_weight="1" />
 				<TextView android:id="@+id/tvPersona" android:text="contenido"
@@ -86,8 +86,8 @@
 				android:id="@+id/doctorLayout" android:visibility="gone"
 				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-				<TextView android:text="Doctor: " android:gravity="top"
-					android:textStyle="italic" android:textColor="@color/titlecolor"
+				<TextView android:text="@string/itemDoctor"
+					android:gravity="top" android:textStyle="italic" android:textColor="@color/titlecolor"
 					android:textSize="13sp" android:layout_width="wrap_content"
 					android:layout_height="fill_parent" android:layout_weight="1" />
 				<TextView android:id="@+id/tvDoctor" android:text="contenido"
@@ -99,8 +99,8 @@
 				android:id="@+id/farmaciaLayout" android:visibility="gone"
 				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-				<TextView android:text="Farmacia: " android:gravity="top"
-					android:textStyle="italic" android:textColor="@color/titlecolor"
+				<TextView android:text="@string/itemFarmacia"
+					android:gravity="top" android:textStyle="italic" android:textColor="@color/titlecolor"
 					android:textSize="13sp" android:layout_width="wrap_content"
 					android:layout_height="fill_parent" android:layout_weight="1" />
 				<TextView android:id="@+id/tvFarmacia" android:text="contenido"
@@ -112,7 +112,7 @@
 				android:id="@+id/notaLayout" android:visibility="gone"
 				android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-				<TextView android:text="Nota: " android:gravity="top"
+				<TextView android:text="@string/itemNota" android:gravity="top"
 					android:textStyle="italic" android:textColor="@color/titlecolor"
 					android:textSize="13sp" android:layout_width="wrap_content"
 					android:layout_height="fill_parent" android:layout_weight="1" />
@@ -123,7 +123,7 @@
 
 		</LinearLayout>
 
-		<Button android:text="Eliminar" android:focusable="false"
+		<Button android:text="@string/Eliminar" android:focusable="false"
 			android:layout_alignParentRight="true" android:textStyle="bold"
 			android:layout_marginRight="5dp" android:textSize="12sp" android:id="@+id/botonItem"
 			android:textColor="@color/titlecolor" android:layout_width="wrap_content"

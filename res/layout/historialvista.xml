@@ -15,8 +15,8 @@
 
 		<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="Tipo de busqueda:" android:textSize="20sp"
-			android:layout_alignParentRight="true" android:textColor="@color/titlecolor" />
+			android:textSize="20sp" android:layout_alignParentRight="true"
+			android:textColor="@color/titlecolor" />
 
 	</RelativeLayout>
 
@@ -28,13 +28,12 @@
 		<TextView android:layout_height="wrap_content"
 			android:textSize="14sp" android:layout_width="fill_parent"
 			android:id="@+id/NoHistorial" android:gravity="center_horizontal"
-			android:text="No hay resultados que coincidan" />
+			android:text="@string/noResultados" />
 
 		<TextView android:layout_height="wrap_content"
 			android:textSize="12sp" android:textStyle="italic"
 			android:layout_width="fill_parent" android:id="@+id/NoHistorialMensaje"
-			android:gravity="center_horizontal"
-			android:text="(Solo se muestran las dosis que han sido finalizadas)" />
+			android:gravity="center_horizontal" android:text="@string/historialMensaje" />
 
 	</LinearLayout>
 

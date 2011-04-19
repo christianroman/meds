@@ -18,7 +18,7 @@
 
 			<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:text="Próximas dosis:" android:layout_toRightOf="@id/imgProxima"
+				android:text="@string/proximasDosis" android:layout_toRightOf="@id/imgProxima"
 				style="@style/header" />
 
 		</RelativeLayout>
@@ -31,12 +31,12 @@
 			<TextView android:layout_height="wrap_content"
 				android:textSize="14sp" android:layout_width="fill_parent"
 				android:id="@+id/NoDosis" android:gravity="center_horizontal"
-				android:text="No hay dosis pendientes" />
+				android:text="@string/noDosisPendientes" />
 
 			<TextView android:layout_height="wrap_content"
 				android:textSize="12sp" android:textStyle="italic"
 				android:layout_width="fill_parent" android:id="@+id/NoDosisMensaje"
-				android:gravity="center_horizontal" android:text="(Añade nuevas dosis con los iconos inferiores)" />
+				android:gravity="center_horizontal" android:text="@string/mensajeNoPendientes" />
 
 		</LinearLayout>
 
@@ -75,11 +75,11 @@
 
 			<TextView android:layout_height="wrap_content"
 				android:layout_width="wrap_content" android:id="@+id/NMTextView"
-				android:layout_alignParentLeft="true" android:text="Nuevo Medicamento" />
+				android:layout_alignParentLeft="true" android:text="@string/agregaMedicamento" />
 
 			<TextView android:layout_height="wrap_content"
 				android:layout_width="wrap_content" android:id="@+id/NDTextView"
-				android:layout_alignParentRight="true" android:text="Nueva Dosis" />
+				android:layout_alignParentRight="true" android:text="@string/nuevaDosis" />
 
 		</RelativeLayout>
 
@@ -97,7 +97,7 @@
 
 			<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:text="Resumen:" android:layout_toRightOf="@id/imgResumen"
+				android:text="@string/tituloResumen" android:layout_toRightOf="@id/imgResumen"
 				style="@style/header" />
 
 		</RelativeLayout>
@@ -107,11 +107,11 @@
 			android:layout_width="fill_parent" android:layout_height="fill_parent">
 
 			<TextView android:id="@+id/TextViewMedicamentos"
-				android:text="Medicamentos: 0" android:layout_width="wrap_content"
+				android:text="@string/resumenMedicamentos" android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:layout_alignParentLeft="true" />
 
 			<TextView android:id="@+id/TextViewDosisActivas"
-				android:text="Dosis Activas: 0" android:layout_width="wrap_content"
+				android:text="@string/resumenDosisActivas" android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_alignParentRight="true" />
 

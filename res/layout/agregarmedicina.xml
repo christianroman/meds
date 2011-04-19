@@ -11,49 +11,49 @@
 
 			<TextView android:id="@+id/textPrincipal" android:textStyle="bold"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:text="Nuevo medicamento:" android:gravity="center_horizontal"
+				android:text="@string/nuevoMedicamento" android:gravity="center_horizontal"
 				android:textSize="23sp" android:textColor="@color/titlecolor">
 			</TextView>
 
-			<TextView android:text="Nombre:" android:id="@+id/TextViewNombre"
+			<TextView android:text="@string/Nombre" android:id="@+id/TextViewNombre"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 			<EditText android:id="@+id/EditTextNombre"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
-			<TextView android:text="Vía:" android:id="@+id/TextViewVia"
+			<TextView android:text="@string/Via" android:id="@+id/TextViewVia"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 
 			<Spinner android:id="@+id/spinner1" android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
 
-			<TextView android:text="Tipo:" android:id="@+id/TextViewTipo"
+			<TextView android:text="@string/Tipo" android:id="@+id/TextViewTipo"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 
 			<Spinner android:id="@+id/spinner2" android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
 
-			<TextView android:text="Persona: (Para quien)" android:id="@+id/TextViewPersona"
+			<TextView android:text="@string/Persona" android:id="@+id/TextViewPersona"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 			<EditText android:id="@+id/EditTextPersona"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
-			<TextView android:text="Farmacia: (Opcional)" android:id="@+id/TextViewFarmacia"
+			<TextView android:text="@string/Farmacia" android:id="@+id/TextViewFarmacia"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 			<EditText android:id="@+id/EditTextFarmacia"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
-			<TextView android:text="Doctor: (Opcional)" android:id="@+id/TextViewDoctor"
+			<TextView android:text="@string/Doctor" android:id="@+id/TextViewDoctor"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 			<EditText android:id="@+id/EditTextDoctor"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
-			<TextView android:text="Nota: (Opcional)" android:id="@+id/TextViewNota"
+			<TextView android:text="@string/Nota" android:id="@+id/TextViewNota"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 
@@ -62,12 +62,12 @@
 
 			<LinearLayout android:orientation="horizontal"
 				android:layout_width="fill_parent" android:layout_height="wrap_content">
-				<Button android:id="@+id/Button01" android:text="Agregar"
+				<Button android:id="@+id/Button01" android:text="@string/Agregar"
 					android:textStyle="bold" android:textColor="@color/titlecolor"
 					android:layout_width="wrap_content" android:layout_height="fill_parent"
 					android:layout_weight="1" android:onClick="Aceptar" />
 
-				<Button android:id="@+id/Button02" android:text="Cancelar"
+				<Button android:id="@+id/Button02" android:text="@string/Cancelar"
 					android:textStyle="bold" android:textColor="@color/titlecolor"
 					android:layout_width="wrap_content" android:layout_height="fill_parent"
 					android:layout_weight="1" android:onClick="Cancelar" />

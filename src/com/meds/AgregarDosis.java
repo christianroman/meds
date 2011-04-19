@@ -122,12 +122,12 @@ public class AgregarDosis extends Activity {
 					agregado = true;
 				} else
 					Toast.makeText(this,
-							"Es necesario llenar todos los campos",
+							this.getString(R.string.camposNecesarios),
 							Toast.LENGTH_LONG).show();
 
 			} else {
 				agregado = false;
-				Toast.makeText(this, "La fecha debe de ser mayor a la actual",
+				Toast.makeText(this, this.getString(R.string.fechaMayorActual),
 						Toast.LENGTH_LONG).show();
 			}
 
@@ -189,7 +189,7 @@ public class AgregarDosis extends Activity {
 	}
 
 	public void notificaAgregado() {
-		Toast.makeText(this, "Dosis agregada", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, this.getString(R.string.dosisAgregada), Toast.LENGTH_LONG).show();
 	}
 
 }

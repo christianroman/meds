@@ -1,8 +1,105 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 	<string name="app_name">Meds</string>
-	<string name="consultar">Consultar</string>
-	<string name="historial">Historial</string>
-	<string name="preferencias">Preferencias</string>
-	<string name="resumen">Resumen</string>
+	<string name="consultar">Doses</string>
+	<string name="historial">History</string>
+	<string name="preferencias">Preferences</string>
+	<string name="resumen">Summary</string>
+
+	<!-- Agregar dosis -->
+
+	<string name="nuevaDosisTitulo">New dose</string>
+	<string name="Medicamento">Medicine:</string>
+	<string name="FechaInicio">Start date:</string>
+	<string name="HoraInicio">Start time:</string>
+	<string name="Cantidad">Quantity (how many you need to take?):</string>
+	<string name="Dias">Days (for how many days?):</string>
+	<string name="Repeticion">Frequency (in hours):</string>
+
+	<string name="Agregar">Add</string>
+	<string name="Cancelar">Cancel</string>
+
+	<!-- Agregar Medicina -->
+
+	<string name="nuevoMedicamento">New medicine</string>
+	<string name="Nombre">Name:</string>
+	<string name="Via">Route:</string>
+	<string name="Tipo">Type:</string>
+	<string name="Persona">Person (for who?):</string>
+	<string name="Farmacia">Drugstore (optional):</string>
+	<string name="Doctor">Doctor (optional):</string>
+	<string name="Nota">Note (optional):</string>
+
+	<!-- Consultar -->
+
+	<string name="noDosisActivas">There are no active doses</string>
+	<string name="agregaDosis">(Add a new dose with the icon below)</string>
+
+	<!-- Historial -->
+
+	<string name="tipoBusqueda">Dose history</string>
+	<string name="buscarPor">Search by:</string>
+	<string name="porTipo">Type</string>
+	<string name="porVia">Route</string>
+	<string name="porFecha">Date</string>
+
+	<!-- HistorialVista -->
+
+	<string name="noResultados">No matching results</string>
+	<string name="historialMensaje">(Only are displayed doses that have been finished)
+	</string>
+
+	<!-- ListItem Titular -->
+
+	<string name="diasRestantes">Remaining days:\u0020</string>
+	<string name="proximaDosis">Next dose:\u0020</string>
+	<string name="itemPersona">Person:\u0020</string>
+	<string name="itemTipo">Type:\u0020</string>
+	<string name="itemVia">Route:\u0020</string>
+	<string name="itemFechaInicio">Starting date:\u0020</string>
+	<string name="itemDoctor">Doctor:\u0020</string>
+	<string name="itemFarmacia">Drugstore:\u0020</string>
+	<string name="itemNota">Note:\u0020</string>
+	<string name="Finalizacion">Ending date:\u0020</string>
+	<string name="Eliminar">Delete</string>
+
+	<!-- Preferencias -->
+
+	<string name="tituloPreferencias">Preferences:</string>
+	<string name="Restaurar">Restore database</string>
+	<string name="mensajeRestaurar">Restoring the database deletes ALL set up alarms
+	</string>
+
+	<!-- Resumen -->
+
+	<string name="proximasDosis">Next doses:</string>
+	<string name="noDosisPendientes">There are not pending doses</string>
+	<string name="mensajeNoPendientes">Add new doses with the below icons</string>
+	<string name="agregaMedicamento">New medicine</string>
+	<string name="nuevaDosis">New dose</string>
+	<string name="tituloResumen">Summary:</string>
+	<string name="resumenMedicamentos">Medicines: 0</string>
+	<string name="resumenDosisActivas">Active doses: 0</string>
+
+	<!-- Intents -->
+
+	<string name="camposNecesarios">It is necessary to fill ALL the fields</string>
+	<string name="fechaMayorActual">The selected date and time must be higher than the
+		current</string>
+	<string name="dosisAgregada">Dose added</string>
+	<string name="nombreVacio">The name can not be empty</string>
+	<string name="medicinaAgregada">Medicine added</string>
+	<string name="tomarDosis">Take your pending dose</string>
+	<string name="Cada">each</string>
+	<string name="Hora">hour</string>
+	<string name="noMedicamentos">No medicines added</string>
+	<string name="dosisAlarmasCanceladas">Dose eliminated and alarms cancelled</string>
+	<string name="noDosisHistorial">No dose records in the history</string>
+	<string name="seleccionaTipo">Select type</string>
+	<string name="seleccionaVia">Select route</string>
+	<string name="dosisEliminada">Dose deleted</string>
+	<string name="baseRestaurada">Database restored</string>
+	<string name="dosisActivas">Active doses:\u0020</string>
+	<string name="medicamentosActivos">Medicines:\u0020</string>
+
 </resources>

@@ -56,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String colAlarmaFecha = "alarmafecha";
 
 	static final String queryResumen = "SELECT medicamento.nombre, alarmafecha, "
-			+ "fechafin,  tipos.nombre, vias.nombre, fechainicio, doctor, farmacia,"
+			+ "fechafin,  tipos.nombre, vias.nombre, fechainicio, persona, doctor, farmacia,"
 			+ " nota FROM medicamento, tipos, vias, dosis, alarmas WHERE "
 			+ "medicamento.tipo = tipos.idtipos AND medicamento.via = vias.idvias "
 			+ "AND medicamento.idmedicamento = dosis.idmedicamento AND alarmas.iddosis = dosis.iddosis"
@@ -221,7 +221,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public Cursor getResumen() {
 		String args[] = new String[] { "1" };
-		return (Cursor) this.getReadableDatabase().rawQuery(queryResumen, args);
+		Cursor cursor = this.getReadableDatabase().rawQuery(queryResumen, args);
+		return cursor;
 	}
 
 	public Cursor getConsulta() {

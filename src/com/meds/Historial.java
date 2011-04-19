@@ -91,7 +91,7 @@ public class Historial extends Activity implements OnClickListener {
 			if (db.getCantidadDosis() > 0)
 				showDialog(DATE_DIALOG_ID);
 			else
-				Toast.makeText(this, "No hay dosis en el historial",
+				Toast.makeText(this, this.getString(R.string.noDosisHistorial),
 						Toast.LENGTH_LONG).show();
 			db.close();
 		}
@@ -99,7 +99,7 @@ public class Historial extends Activity implements OnClickListener {
 			if (db.getCantidadDosis() > 0)
 				showDialog(TYPE_DIALOG_ID);
 			else
-				Toast.makeText(this, "No hay dosis en el historial",
+				Toast.makeText(this, this.getString(R.string.noDosisHistorial),
 						Toast.LENGTH_LONG).show();
 			db.close();
 		}
@@ -107,7 +107,7 @@ public class Historial extends Activity implements OnClickListener {
 			if (db.getCantidadDosis() > 0)
 				showDialog(VIA_DIALOG_ID);
 			else
-				Toast.makeText(this, "No hay dosis en el historial",
+				Toast.makeText(this, this.getString(R.string.noDosisHistorial),
 						Toast.LENGTH_LONG).show();
 			db.close();
 		}
@@ -117,7 +117,7 @@ public class Historial extends Activity implements OnClickListener {
 		final CharSequence[] items = db.getAllTipos();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Selecciona Tipo");
+		builder.setTitle(this.getString(R.string.seleccionaTipo));
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int item) {
@@ -141,7 +141,7 @@ public class Historial extends Activity implements OnClickListener {
 		final CharSequence[] items = db.getAllVias();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Selecciona Vía");
+		builder.setTitle(this.getString(R.string.seleccionaVia));
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int item) {
 				Toast.makeText(getApplicationContext(), items[item],
