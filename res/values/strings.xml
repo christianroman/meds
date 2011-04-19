@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">Meds</string>
-    <string name="consultar">Consultar</string>
-    <string name="historial">Historial</string>
-    <string name="preferencias">Preferencias</string>
-    <string name="resumen">Resumen</string>
+	<string name="app_name">Meds</string>
+	<string name="consultar">Consultar</string>
+	<string name="historial">Historial</string>
+	<string name="preferencias">Preferencias</string>
+	<string name="resumen">Resumen</string>
 </resources>

@@ -9,8 +9,7 @@
 
 
 		<RelativeLayout android:layout_height="wrap_content"
-			android:gravity="left"
-			android:layout_width="fill_parent">
+			android:gravity="left" android:layout_width="fill_parent">
 
 			<ImageView android:layout_width="wrap_content" android:id="@+id/imgProxima"
 				android:layout_alignParentLeft="true" android:layout_height="wrap_content"
@@ -20,7 +19,7 @@
 			<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:text="Próximas dosis:" android:layout_toRightOf="@id/imgProxima"
-			 	style="@style/header" />
+				style="@style/header" />
 
 		</RelativeLayout>
 
@@ -87,10 +86,9 @@
 		<View android:background="@color/hr" android:layout_width="fill_parent"
 			android:layout_height="1dp" android:layout_above="@id/botones_texto"
 			android:layout_margin="5dp" />
-			
+
 		<RelativeLayout android:layout_height="wrap_content"
-			android:gravity="left"
-			android:layout_width="fill_parent">
+			android:gravity="left" android:layout_width="fill_parent">
 
 			<ImageView android:layout_width="wrap_content" android:id="@+id/imgResumen"
 				android:layout_alignParentLeft="true" android:layout_height="wrap_content"
@@ -100,7 +98,7 @@
 			<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:text="Resumen:" android:layout_toRightOf="@id/imgResumen"
-			 	style="@style/header" />
+				style="@style/header" />
 
 		</RelativeLayout>
 

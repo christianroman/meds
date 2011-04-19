@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/settings" android:orientation="vertical" android:padding="10dp"
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
-	
-	
+	android:id="@+id/settings" android:orientation="vertical"
+	android:padding="10dp" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+
 	<RelativeLayout android:layout_height="wrap_content"
 		android:gravity="center_horizontal" android:layout_marginBottom="15dp"
 		android:layout_width="fill_parent">
@@ -20,15 +21,15 @@
 			android:layout_alignParentRight="true" android:textColor="@color/titlecolor" />
 
 	</RelativeLayout>
-	
-	<Button android:text="Restaurar base de datos" android:id="@+id/rbd" 
-		android:textStyle="bold" android:textColor="@color/titlecolor" android:onClick="Restaurar"
-		android:layout_height="wrap_content" android:layout_marginBottom="15dp"
-		android:layout_width="fill_parent"></Button>
-		
+
+	<Button android:text="Restaurar base de datos" android:id="@+id/rbd"
+		android:textStyle="bold" android:textColor="@color/titlecolor"
+		android:onClick="Restaurar" android:layout_height="wrap_content"
+		android:layout_marginBottom="15dp" android:layout_width="fill_parent"></Button>
+
 	<TextView android:layout_height="wrap_content"
-			android:textSize="12sp" android:textStyle="italic"
-			android:layout_width="fill_parent"
-			android:gravity="center_horizontal" android:text="(Al restaurar la base de datos se eliminan TODAS las alarmas creadas)" />
-	
+		android:textSize="12sp" android:textStyle="italic"
+		android:layout_width="fill_parent" android:gravity="center_horizontal"
+		android:text="(Al restaurar la base de datos se eliminan TODAS las alarmas creadas)" />
+
 </LinearLayout>
