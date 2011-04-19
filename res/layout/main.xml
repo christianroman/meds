@@ -27,6 +27,10 @@
 			<TabWidget android:id="@android:id/tabs"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
 				android:layout_alignParentBottom="true" />
+
+			<View android:layout_width="fill_parent" android:layout_height="3dp" android:layout_alignParentBottom="true"
+				android:background="@color/titlebackgroundcolor" />
+
 		</RelativeLayout>
 
 	</LinearLayout>

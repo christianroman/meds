@@ -1,4 +1,4 @@
-package com.medicinetracker;
+package com.meds;
 
 import java.util.Calendar;
 
@@ -52,8 +52,8 @@ public class Historial extends Activity implements OnClickListener {
 
 	}
 
-	@Override
 	protected Dialog onCreateDialog(int id) {
+		Dialog dialog = null;
 		Calendar c = Calendar.getInstance();
 		int cyear = c.get(Calendar.YEAR);
 		int cmonth = c.get(Calendar.MONTH);
@@ -63,14 +63,14 @@ public class Historial extends Activity implements OnClickListener {
 			return new DatePickerDialog(this, mDateSetListener, cyear, cmonth,
 					cday);
 		case TYPE_DIALOG_ID:
-			typeActions();
+			dialog = typeActions();
 			break;
 		case VIA_DIALOG_ID:
-			viaActions();
+			dialog = viaActions();
 			break;
 		}
 		db.close();
-		return null;
+		return dialog;
 	}
 
 	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -113,7 +113,7 @@ public class Historial extends Activity implements OnClickListener {
 		}
 	}
 
-	public void typeActions() {
+	public Dialog typeActions() {
 		final CharSequence[] items = db.getAllTipos();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -134,10 +134,10 @@ public class Historial extends Activity implements OnClickListener {
 
 		});
 		AlertDialog alert = builder.create();
-		alert.show();
+		return alert;
 	}
 
-	public void viaActions() {
+	public Dialog viaActions() {
 		final CharSequence[] items = db.getAllVias();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -155,7 +155,7 @@ public class Historial extends Activity implements OnClickListener {
 			}
 		});
 		AlertDialog alert = builder.create();
-		alert.show();
+		return alert;
 	}
 
 }

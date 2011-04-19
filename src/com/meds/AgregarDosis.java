@@ -1,4 +1,4 @@
-package com.medicinetracker;
+package com.meds;
 
 import java.util.Calendar;
 
@@ -69,7 +69,7 @@ public class AgregarDosis extends Activity {
 	}
 
 	public void Cancelar(View button) {
-		Intent intent = new Intent(this, medicinetracker.class);
+		Intent intent = new Intent(this, Meds.class);
 		startActivity(intent);
 	}
 
@@ -139,7 +139,7 @@ public class AgregarDosis extends Activity {
 		} finally {
 			if (agregado == true) {
 				notificaAgregado();
-				Intent intent = new Intent(this, medicinetracker.class);
+				Intent intent = new Intent(this, Meds.class);
 				startActivity(intent);
 			}
 		}

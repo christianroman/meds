@@ -1,12 +1,10 @@
-package com.medicinetracker;
+package com.meds;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -23,72 +21,106 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
 
-public class Consultar extends Activity {
+public class HistorialVista extends Activity {
 
 	DatabaseHelper db;
 	AdaptadorTitulares adaptador;
+	private int idVista;
+	private String title;
 	private ListView lv1;
 	private ArrayList<ListItem> datos = new ArrayList<ListItem>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.consultar);
+		setContentView(R.layout.historialvista);
+
+		TextView t = (TextView) findViewById(R.id.textPrincipal);
+		idVista = this.getIntent().getExtras().getInt("id");
+
+		title = this.getIntent().getExtras().getString("cabecera");
+
+		ImageView imagen = ((ImageView) findViewById(R.id.imagenVista));
+
+		switch (idVista) {
+		case 0:
+			imagen.setImageResource(R.drawable.tipo);
+			break;
+		case 1:
+			imagen.setImageResource(R.drawable.via);
+			break;
+		case 2:
+			imagen.setImageResource(R.drawable.fecha);
+			break;
+		}
+
+		if (idVista == 2) {
+			Calendar cal = Calendar.getInstance();
+			long time = Long.parseLong(title);
+			cal.setTimeInMillis(time);
+			SimpleDateFormat postFormater = new SimpleDateFormat(
+					"dd MMMM, yyyy");
+			title = postFormater.format(cal.getTime());
+			t.setText(title);
+			title = String.valueOf(time);
+		} else
+			t.setText(title);
 
 		db = new DatabaseHelper(this);
 
-		if (db.getCantidadDosisActivas() > 0) {
-			Cursor c = db.getConsulta();
+		if (db.getCantidadDosis() > 0) {
 
-			adaptador = new AdaptadorTitulares(this);
+			Cursor c = null;
+			switch (idVista) {
+			case 0:
+				c = db.getByTipo(title);
+				break;
+			case 1:
+				c = db.getByVia(title);
+				break;
+			case 2:
+				c = db.getByFecha(title);
+				break;
+			}
 
-			lv1 = (ListView) findViewById(R.id.LstOpciones);
+			if (c.getCount() > 0) {
 
-			while (c.moveToNext()) {
+				adaptador = new AdaptadorTitulares(this);
 
-				Calendar c_inicio = Calendar.getInstance();
-				c_inicio.setTimeInMillis(c.getLong(1));
+				lv1 = (ListView) findViewById(R.id.LstOpciones);
 
-				Calendar c_fin = Calendar.getInstance();
-				c_fin.setTimeInMillis(c.getLong(6));
+				while (c.moveToNext()) {
 
-				String repeticion = c.getString(3) + " cada " + c.getString(2)
-						+ " hora" +  ((Integer.parseInt(c.getString(2)) == 1) ? "" : "s");
+					Calendar c_inicio = Calendar.getInstance();
+					c_inicio.setTimeInMillis(c.getLong(1));
 
-				datos.add(new ListItem(c.getString(0), c_inicio.getTime()
-						.toLocaleString(), repeticion, c.getString(4), c
-						.getString(5), c_fin.getTime().toLocaleString(), c
-						.getString(7), c.getString(8), c.getString(9), c
-						.getString(10), c.getInt(11), false));
+					Calendar c_fin = Calendar.getInstance();
+					c_fin.setTimeInMillis(c.getLong(6));
+
+					String repeticion = c.getString(3) + " cada "
+							+ c.getString(2) + " horas";
+
+					datos.add(new ListItem(c.getString(0), c_inicio.getTime()
+							.toLocaleString(), repeticion, c.getString(4), c
+							.getString(5), c_fin.getTime().toLocaleString(), c
+							.getString(7), c.getString(8), c.getString(9), c
+							.getString(10), c.getInt(11), false));
+				}
+				lv1.setAdapter(adaptador);
+				lv1.setClickable(true);
+				lv1.setOnItemClickListener(funcionClick);
+			} else {
+				((ListView) findViewById(R.id.LstOpciones))
+						.setVisibility(View.GONE);
+				((LinearLayout) findViewById(R.id.avisoHistorial))
+						.setVisibility(View.VISIBLE);
 			}
 			c.close();
-
-			lv1.setAdapter(adaptador);
-			lv1.setClickable(true);
-			lv1.setOnItemClickListener(funcionClick);
-		} else {
-			((ListView) findViewById(R.id.LstOpciones))
-					.setVisibility(View.GONE);
-			((LinearLayout) findViewById(R.id.avisoConsultar))
-					.setVisibility(View.VISIBLE);
-		}
-
-		db.close();
-
-	}
-
-	public void AgregarDosis(View button) {
-		DatabaseHelper db = new DatabaseHelper(this);
-		if (db.getCantidadMedicamentos() > 0) {
-			db.close();
-			Intent intent = new Intent(this, AgregarDosis.class);
-			startActivity(intent);
-		} else {
-			Toast.makeText(this, "No hay medicamentos agregados",
-					Toast.LENGTH_LONG).show();
 		}
 		db.close();
+
 	}
 
 	private OnItemClickListener funcionClick = new OnItemClickListener() {
@@ -100,27 +132,11 @@ public class Consultar extends Activity {
 	};
 
 	public void cancelarAlarma(int id) {
-		Cursor c = db.getAlarmas(id);
-
-		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-		while (c.moveToNext()) {
-
-			Intent intent = new Intent(this, AlarmReceiver.class);
-			PendingIntent appIntent = PendingIntent.getBroadcast(this,
-					c.getInt(0), intent, PendingIntent.FLAG_ONE_SHOT);
-
-			am.cancel(appIntent);
-		}
-		c.close();
-
-		db.desactivaDosis(id);
-		db.eliminaAlarmas(id);
+		db.eliminaMedicamento(id);
+		db.eliminarDosis(id);
 		db.close();
 
-		Toast.makeText(this, "Dosis eliminada y alarmas canceladas",
-				Toast.LENGTH_LONG).show();
-
+		Toast.makeText(this, "Dosis eliminada", Toast.LENGTH_LONG).show();
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -136,7 +152,6 @@ public class Consultar extends Activity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-
 			LayoutInflater inflater = context.getLayoutInflater();
 			View item = inflater.inflate(R.layout.listitem, null);
 
@@ -216,20 +231,36 @@ public class Consultar extends Activity {
 					adaptador.remove(adaptador.getItem(position));
 					adaptador.notifyDataSetChanged();
 
-					if (db.getCantidadDosisActivas() < 1) {
-						((ListView) findViewById(R.id.LstOpciones))
-								.setVisibility(View.GONE);
-						((LinearLayout) findViewById(R.id.avisoConsultar))
-								.setVisibility(View.VISIBLE);
+					Cursor c = null;
+					switch (idVista) {
+					case 0:
+						c = db.getByTipo(title);
+						break;
+					case 1:
+						c = db.getByVia(title);
+						break;
+					case 2:
+						c = db.getByFecha(title);
+						break;
 					}
 					db.close();
+
+					if (c.getCount() < 1) {
+
+						((ListView) findViewById(R.id.LstOpciones))
+								.setVisibility(View.GONE);
+						((LinearLayout) findViewById(R.id.avisoHistorial))
+								.setVisibility(View.VISIBLE);
+
+					}
+					c.close();
 
 				}
 			}
 		}
 
 		@Override
-		public void onClick(View v) {
+		public void onClick(View arg0) {
 			// TODO Auto-generated method stub
 
 		}

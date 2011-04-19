@@ -1,4 +1,4 @@
-package com.medicinetracker;
+package com.meds;
 
 import android.content.ContentValues;
 import android.content.Context;

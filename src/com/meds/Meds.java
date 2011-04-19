@@ -1,4 +1,4 @@
-package com.medicinetracker;
+package com.meds;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-public class medicinetracker extends TabActivity implements OnTabChangeListener {
+public class Meds extends TabActivity implements OnTabChangeListener {
 
 	DatabaseHelper dbHelper;
 	private TabHost mTabHost;

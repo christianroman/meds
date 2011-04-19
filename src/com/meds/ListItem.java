@@ -1,4 +1,4 @@
-package com.medicinetracker;
+package com.meds;
 
 public class ListItem {
 	private String nombre;

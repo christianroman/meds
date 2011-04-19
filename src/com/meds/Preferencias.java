@@ -1,4 +1,4 @@
-package com.medicinetracker;
+package com.meds;
 
 import android.app.Activity;
 import android.app.AlarmManager;

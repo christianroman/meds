@@ -1,4 +1,4 @@
-package com.medicinetracker;
+package com.meds;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -56,7 +56,7 @@ public class AgregarMedicina extends Activity {
 	}
 
 	public void Cancelar(View button) {
-		Intent intent = new Intent(this, medicinetracker.class);
+		Intent intent = new Intent(this, Meds.class);
 		startActivity(intent);
 	}
 
@@ -97,7 +97,7 @@ public class AgregarMedicina extends Activity {
 		} finally {
 			if (agregado == true) {
 				notificaAgregado();
-				Intent intent = new Intent(this, medicinetracker.class);
+				Intent intent = new Intent(this, Meds.class);
 				startActivity(intent);
 			}
 		}

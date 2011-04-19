@@ -1,4 +1,4 @@
-package com.medicinetracker;
+package com.meds;
 
 import java.util.ArrayList;
 import java.util.Calendar;

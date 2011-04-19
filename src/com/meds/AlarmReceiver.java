@@ -1,4 +1,4 @@
-package com.medicinetracker;
+package com.meds;
 
 import android.app.Notification;
 import android.app.NotificationManager;
