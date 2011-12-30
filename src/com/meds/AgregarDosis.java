@@ -107,6 +107,8 @@ public class AgregarDosis extends Activity {
 					.getCurrentMinute();
 
 			Calendar fechaComprueba = Calendar.getInstance();
+			fechaComprueba.set(Calendar.SECOND, 0);
+			fechaComprueba.set(Calendar.MILLISECOND, 0);
 			fechaComprueba.set(anio, mes, dia, hora, min);
 
 			if (fechaComprueba.getTimeInMillis() > System.currentTimeMillis()) {
@@ -149,6 +151,7 @@ public class AgregarDosis extends Activity {
 			String medicina) {
 
 		Calendar c = Calendar.getInstance();
+
 		c.setTimeInMillis(fechaInicio);
 
 		setAlarma(c, medicina);
@@ -183,7 +186,8 @@ public class AgregarDosis extends Activity {
 	}
 
 	public void notificaAgregado() {
-		Toast.makeText(this, this.getString(R.string.dosisAgregada), Toast.LENGTH_LONG).show();
+		Toast.makeText(this, this.getString(R.string.dosisAgregada),
+				Toast.LENGTH_LONG).show();
 	}
 
 }

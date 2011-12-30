@@ -41,18 +41,20 @@ public class AgregarMedicina extends Activity {
 
 	public void SpinnerVias() {
 		s1 = (Spinner) findViewById(R.id.spinner1);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, vias);
-
-		s1.setAdapter(adapter);
+		dataAdapter
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		s1.setAdapter(dataAdapter);
 	}
 
 	public void SpinnerTipos() {
 		s2 = (Spinner) findViewById(R.id.spinner2);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, tipos);
-
-		s2.setAdapter(adapter);
+		dataAdapter
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		s2.setAdapter(dataAdapter);
 	}
 
 	public void Cancelar(View button) {
@@ -104,7 +106,8 @@ public class AgregarMedicina extends Activity {
 	}
 
 	public void notificaAgregado() {
-		Toast.makeText(this, this.getString(R.string.medicinaAgregada), Toast.LENGTH_LONG).show();
+		Toast.makeText(this, this.getString(R.string.medicinaAgregada),
+				Toast.LENGTH_LONG).show();
 	}
 
 }

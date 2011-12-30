@@ -32,6 +32,6 @@
 
 	<ListView android:id="@+id/LstOpciones" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" android:padding="5dp"
-		android:dividerHeight="1px" android:divider="#FFFFFF" />
+		android:dividerHeight="1dp" android:divider="#FFFFFF" />
 
 </LinearLayout>

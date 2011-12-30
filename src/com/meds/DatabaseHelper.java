@@ -210,6 +210,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				i++;
 			}
 			cursor.close();
+			this.getReadableDatabase().close();
 			return str;
 		} else {
 			return new String[] {};
@@ -235,6 +236,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				i++;
 			}
 			cursor.close();
+			this.getReadableDatabase().close();
 			return str;
 		} else {
 			return new String[] {};
@@ -329,7 +331,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		cursor.moveToNext();
 		long fecha = cursor.getLong(0);
 		cursor.close();
-		Log.i("getFechaFinDosis", String.valueOf(fecha));
+		this.getReadableDatabase().close();
 		return fecha;
 	}
 

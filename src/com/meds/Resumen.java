@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Resumen extends Activity {
-
+	
 	DatabaseHelper db;
 	Cursor c;
 	AdaptadorTitulares adaptador;

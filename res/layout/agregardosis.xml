@@ -5,7 +5,7 @@
 	<ScrollView android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 		<LinearLayout android:orientation="vertical"
-			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:padding="7dp">
 
 			<TextView android:id="@+id/textPrincipal" android:textStyle="bold"
@@ -32,7 +32,7 @@
 				android:layout_height="wrap_content"></DatePicker>
 
 			<TextView android:text="@string/HoraInicio"
-				android:textSize="20px" android:textColor="@color/titlecolor"
+				android:textSize="20sp" android:textColor="@color/titlecolor"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:id="@+id/TextViewHoraInicio"></TextView>
 			<TimePicker android:id="@+id/timePickerHoraInicio"
@@ -42,14 +42,14 @@
 			<TextView android:text="@string/Cantidad" android:textSize="20sp"
 				android:textColor="@color/titlecolor" android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:id="@+id/TextViewCantidad"></TextView>
-			<EditText android:id="@+id/EditTextCantidad"
+			<EditText android:id="@+id/EditTextCantidad" android:inputType="number"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
 				android:numeric="integer"></EditText>
 
 			<TextView android:text="@string/Dias" android:textSize="20sp"
 				android:textColor="@color/titlecolor" android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:id="@+id/TextViewDias"></TextView>
-			<EditText android:id="@+id/EditTextDias"
+			<EditText android:id="@+id/EditTextDias" android:inputType="number"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
 				android:numeric="integer"></EditText>
 
@@ -57,7 +57,7 @@
 				android:textColor="@color/titlecolor" android:id="@+id/TextViewRepeticion"
 				android:textSize="20sp" android:layout_width="wrap_content"
 				android:layout_height="wrap_content"></TextView>
-			<EditText android:id="@+id/EditTextRepeticion"
+			<EditText android:id="@+id/EditTextRepeticion" android:inputType="number"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
 				android:numeric="integer"></EditText>
 			<LinearLayout android:orientation="horizontal"

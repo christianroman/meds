@@ -28,7 +28,7 @@ public class Meds extends TabActivity implements OnTabChangeListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		mTabHost = getTabHost();
 		mResources = getResources();
 
@@ -47,7 +47,9 @@ public class Meds extends TabActivity implements OnTabChangeListener {
 		for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
 			mTabHost.getTabWidget().getChildAt(i)
 					.setBackgroundColor(R.color.titlecolor);
-			mTabHost.getTabWidget().getChildAt(i).getLayoutParams().height = 55;
+			final float scale = getResources().getDisplayMetrics().density;
+			int pixels = (int) (50 * scale + 0.5f);
+			mTabHost.getTabWidget().getChildAt(i).getLayoutParams().height = pixels;
 		}
 
 		// mTabHost.getTabWidget().setCurrentTab(1);

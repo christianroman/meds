@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_height="wrap_content"
+	android:orientation="vertical" android:layout_height="wrap_content" android:baselineAligned="false"
 	android:layout_width="fill_parent">
 
 	<LinearLayout android:layout_weight="1"
@@ -11,7 +11,7 @@
 		<RelativeLayout android:layout_height="wrap_content"
 			android:gravity="left" android:layout_width="fill_parent">
 
-			<ImageView android:layout_width="wrap_content" android:id="@+id/imgProxima"
+			<ImageView android:layout_width="wrap_content" android:id="@+id/imgProxima" android:contentDescription="imgProxima"
 				android:layout_alignParentLeft="true" android:layout_height="wrap_content"
 				android:src="@drawable/proximas" android:layout_marginRight="5dp"
 				android:layout_centerVertical="true" />
@@ -42,7 +42,7 @@
 
 		<ListView android:id="@+id/LstOpciones" android:layout_width="fill_parent"
 			android:layout_height="fill_parent" android:padding="5dp"
-			android:dividerHeight="1px" android:divider="#FFFFFF" />
+			android:dividerHeight="1dp" android:divider="#FFFFFF" />
 
 	</LinearLayout>
 
@@ -90,12 +90,12 @@
 		<RelativeLayout android:layout_height="wrap_content"
 			android:gravity="left" android:layout_width="fill_parent">
 
-			<ImageView android:layout_width="wrap_content" android:id="@+id/imgResumen"
+			<ImageView android:layout_width="wrap_content" android:id="@+id/imgResumen" android:contentDescription="imgResumen"
 				android:layout_alignParentLeft="true" android:layout_height="wrap_content"
 				android:src="@drawable/resumen" android:layout_marginRight="5dp"
 				android:layout_centerVertical="true" />
 
-			<TextView android:id="@+id/textPrincipal" android:gravity="center_horizontal"
+			<TextView android:id="@+id/textPrincipal2" android:gravity="center_horizontal"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:text="@string/tituloResumen" android:layout_toRightOf="@id/imgResumen"
 				style="@style/header" />

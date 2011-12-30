@@ -8,7 +8,7 @@
 	<RelativeLayout android:layout_height="wrap_content"
 		android:gravity="center_horizontal" android:layout_width="fill_parent">
 
-		<ImageView android:layout_width="wrap_content" android:id="@+id/imagenVista"
+		<ImageView android:layout_width="wrap_content" android:id="@+id/imagenVista" android:contentDescription="historial_icon"
 			android:layout_toLeftOf="@id/textPrincipal" android:layout_height="wrap_content"
 			android:src="@drawable/historial_icon" android:layout_marginRight="5dp"
 			android:layout_centerVertical="true" />
@@ -39,6 +39,6 @@
 
 	<ListView android:id="@+id/LstOpciones" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" android:padding="5dp"
-		android:dividerHeight="1px" android:divider="#FFFFFF" />
+		android:dividerHeight="1dp" android:divider="#FFFFFF" />
 
 </LinearLayout>

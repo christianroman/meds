@@ -6,7 +6,7 @@
 	<ScrollView android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 		<LinearLayout android:orientation="vertical"
-			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:padding="7dp">
 
 			<TextView android:id="@+id/textPrincipal" android:textStyle="bold"
@@ -18,7 +18,7 @@
 			<TextView android:text="@string/Nombre" android:id="@+id/TextViewNombre"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-			<EditText android:id="@+id/EditTextNombre"
+			<EditText android:id="@+id/EditTextNombre" android:inputType="text"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
 			<TextView android:text="@string/Via" android:id="@+id/TextViewVia"
@@ -38,26 +38,26 @@
 			<TextView android:text="@string/Persona" android:id="@+id/TextViewPersona"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-			<EditText android:id="@+id/EditTextPersona"
+			<EditText android:id="@+id/EditTextPersona" android:inputType="text"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
 			<TextView android:text="@string/Farmacia" android:id="@+id/TextViewFarmacia"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-			<EditText android:id="@+id/EditTextFarmacia"
+			<EditText android:id="@+id/EditTextFarmacia" android:inputType="text"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
 			<TextView android:text="@string/Doctor" android:id="@+id/TextViewDoctor"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-			<EditText android:id="@+id/EditTextDoctor"
+			<EditText android:id="@+id/EditTextDoctor" android:inputType="text"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
 			<TextView android:text="@string/Nota" android:id="@+id/TextViewNota"
 				android:textColor="@color/titlecolor" android:textSize="20sp"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 
-			<EditText android:id="@+id/EditTextNota"
+			<EditText android:id="@+id/EditTextNota" android:inputType="text"
 				android:layout_height="wrap_content" android:layout_width="fill_parent"></EditText>
 
 			<LinearLayout android:orientation="horizontal"

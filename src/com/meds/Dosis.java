@@ -124,6 +124,8 @@ public class Dosis {
 	public void CalcularFechaFin() {
 
 		Calendar c = Calendar.getInstance();
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.MILLISECOND, 0);
 		c.set(anio, mes, dia, hora, minuto);
 		fechaInicio = c.getTimeInMillis();
 		c.add(Calendar.DAY_OF_MONTH, +dias);
